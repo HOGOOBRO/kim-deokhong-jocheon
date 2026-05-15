@@ -6,7 +6,8 @@ import SnapScroll from "./components/SnapScroll";
 
 const imgHero = "/images/hero.png";
 const imgHeroMo = "/images/hero-mo.png";
-const imgQuoteBg = "/images/quote-bg.png";
+const imgQuoteMo = "/images/quote2-mo.png";
+const imgQuotePc = "/images/quote2-pc.png";
 const imgPost1 = "/images/post1.png";
 const imgPost2 = "/images/post2.png";
 const imgPost3 = "/images/post3.png";
@@ -272,23 +273,33 @@ export default function Home() {
       </section>
 
       {/* ── 03 Quote ── */}
+      {/* Mobile (Figma 209:3317): quote + bottom CTA. Desktop (Figma 209:3385): CTA only. */}
       <section
         id="quote"
-        className="relative w-full overflow-hidden h-screen min-h-[640px] md:h-[56vw] md:min-h-[480px] md:max-h-[810px]"
+        className="relative w-full overflow-hidden bg-black h-screen min-h-[640px] md:h-[800px] md:min-h-0"
       >
+        {/* Mobile bg + 40% overlay */}
         <img
-          src={imgQuoteBg}
+          src={imgQuoteMo}
           alt=""
           aria-hidden
-          className="absolute inset-0 w-full h-full object-cover object-[70%_center] md:object-center"
+          className="md:hidden absolute inset-0 w-full h-full object-cover object-center"
         />
-        {/* Mobile: light overlay; Desktop: 40% black overlay */}
-        <div className="absolute inset-0 bg-black/[0.04] md:bg-black/40" />
+        <div className="md:hidden absolute inset-0 bg-black/40" />
+        {/* Desktop bg at 80% opacity (Figma 209:3386 — image opacity-80, bg-black behind) */}
+        <img
+          src={imgQuotePc}
+          alt=""
+          aria-hidden
+          className="hidden md:block absolute inset-0 w-full h-full object-cover object-center opacity-80"
+        />
+
         <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[1440px]">
-          <div className="absolute left-4 md:left-8 lg:left-[60px] top-[32px] md:top-[80px] w-[min(760px,calc(100%-32px))] md:w-[min(760px,90vw)] flex flex-col gap-6 md:gap-6 text-white">
-            <div className="flex flex-col gap-3 md:gap-6 font-bold">
+          {/* Mobile: quote text top (Figma 209:3319) */}
+          <div className="md:hidden absolute left-4 top-[32px] w-[358px] flex flex-col gap-6 text-white">
+            <div className="flex flex-col gap-3 font-bold">
               <p
-                className="text-[24px] md:text-[clamp(22px,2.8vw,40px)]"
+                className="text-[24px]"
                 style={{
                   fontFamily: "Pretendard, sans-serif",
                   letterSpacing: "-0.02em",
@@ -298,7 +309,7 @@ export default function Home() {
                 &ldquo;같이 일할 땐 힘들었죠&rdquo;
               </p>
               <div
-                className="opacity-70 md:opacity-50 text-[14px] md:text-[clamp(16px,2.2vw,32px)]"
+                className="opacity-70 text-[14px]"
                 style={{
                   fontFamily: "Pretendard, sans-serif",
                   letterSpacing: "-0.02em",
@@ -311,15 +322,64 @@ export default function Home() {
               </div>
             </div>
             <p
-              className="text-[12px] md:text-[clamp(14px,1.25vw,18px)]"
+              className="text-[12px] font-bold"
               style={{
                 fontFamily: "Pretendard, sans-serif",
                 letterSpacing: "-0.02em",
                 lineHeight: "1.5",
               }}
             >
-              ○○○ 前 제주시 공직 동료
+              - 前 제주시 공직 동료
             </p>
+          </div>
+
+          {/* Mobile: bottom CTA (Figma 209:3384 — left:49 top:666 w:292) */}
+          <div className="md:hidden absolute left-1/2 -translate-x-1/2 bottom-[138px] w-[292px] flex flex-col gap-4 items-center">
+            <p
+              className="text-white font-bold text-[32px] text-center"
+              style={{
+                fontFamily: "Pretendard, sans-serif",
+                letterSpacing: "-0.02em",
+                lineHeight: "1.25",
+              }}
+            >
+              덕홍과 읍민이
+              <br />
+              함께 그리는 조천의 미래
+            </p>
+            <a
+              href="#posts"
+              className="bg-white text-[#1c1c1c] text-[12px] font-bold px-3 py-2 rounded-full hover:bg-[#ddd] transition-colors whitespace-nowrap"
+              style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.01em" }}
+            >
+              자세히보기
+            </a>
+          </div>
+
+          {/* Desktop: centered CTA (Figma 209:3387 — top:50%+161 w:760) */}
+          <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] flex-col gap-6 items-center"
+            style={{ top: "calc(50% + 161px)" }}
+          >
+            <p
+              className="text-white font-bold text-center whitespace-nowrap"
+              style={{
+                fontFamily: "Pretendard, sans-serif",
+                fontSize: "clamp(40px, 5vw, 72px)",
+                letterSpacing: "-0.02em",
+                lineHeight: "1.25",
+              }}
+            >
+              덕홍과 읍민이
+              <br />
+              함께 그리는 조천의 미래
+            </p>
+            <a
+              href="#posts"
+              className="bg-white text-[#1c1c1c] text-[16px] px-6 py-3 rounded-full hover:bg-[#ddd] transition-colors whitespace-nowrap"
+              style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.01em" }}
+            >
+              자세히보기
+            </a>
           </div>
         </div>
       </section>
