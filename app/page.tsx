@@ -333,8 +333,8 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Mobile: bottom CTA (Figma 209:3384 — left:49 top:666 w:292) */}
-          <div className="md:hidden absolute left-1/2 -translate-x-1/2 bottom-[138px] w-[292px] flex flex-col gap-4 items-center">
+          {/* Mobile: bottom CTA (Figma 213:3417 — x:49 y:666 w:292 h:130 → 48px from section bottom) */}
+          <div className="md:hidden absolute left-1/2 -translate-x-1/2 bottom-[48px] w-[292px] flex flex-col gap-4 items-center">
             <p
               className="text-white font-bold text-[32px] text-center"
               style={{
@@ -348,7 +348,7 @@ export default function Home() {
               함께 그리는 조천의 미래
             </p>
             <a
-              href="#posts"
+              href="#policies"
               className="bg-white text-[#1c1c1c] text-[12px] font-bold px-3 py-2 rounded-full hover:bg-[#ddd] transition-colors whitespace-nowrap"
               style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.01em" }}
             >
@@ -374,7 +374,7 @@ export default function Home() {
               함께 그리는 조천의 미래
             </p>
             <a
-              href="#posts"
+              href="#policies"
               className="bg-white text-[#1c1c1c] text-[16px] px-6 py-3 rounded-full hover:bg-[#ddd] transition-colors whitespace-nowrap"
               style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.01em" }}
             >
