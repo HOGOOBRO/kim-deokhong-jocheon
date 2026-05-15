@@ -6,8 +6,8 @@ const imgPolicy2 = "/images/policy2.png";
 const imgPolicy2Mo = "/images/policy2-mo.png";
 const imgPolicy3 = "/images/policy3.png";
 const imgPolicy3Mo = "/images/policy3-mo.png";
-const imgPolicy4 = "/images/policy4.jpg";
-const imgPolicy4Mo = "/images/policy4-mo.png";
+const imgPolicy4 = "/images/policy4.png";
+const imgPolicy4Mo = "/images/policy4.png";
 
 type IconKey = "policy1" | "policy2" | "policy3";
 
@@ -181,10 +181,11 @@ function Section04() {
 }
 
 const SECTIONS = [
-  { img: imgPolicy1, imgMo: imgPolicy1, content: <Section01 /> },
-  { img: imgPolicy2, imgMo: imgPolicy2Mo, content: <Section02 /> },
-  { img: imgPolicy3, imgMo: imgPolicy3Mo, content: <Section03 /> },
-  { img: imgPolicy4, imgMo: imgPolicy4Mo, content: <Section04 /> },
+  { img: imgPolicy1, imgMo: imgPolicy1, objClass: "object-center", content: <Section01 /> },
+  { img: imgPolicy2, imgMo: imgPolicy2Mo, objClass: "object-center", content: <Section02 /> },
+  { img: imgPolicy3, imgMo: imgPolicy3Mo, objClass: "object-center", content: <Section03 /> },
+  // Policy 4: mobile centered, desktop bottom-anchored (Figma 209:3351 — image bottom edge at section bottom)
+  { img: imgPolicy4, imgMo: imgPolicy4Mo, objClass: "object-center md:object-bottom", content: <Section04 /> },
 ];
 
 export default function PolicySections() {
@@ -219,7 +220,7 @@ export default function PolicySections() {
               <img
                 src={section.imgMo}
                 alt=""
-                className="absolute inset-0 w-full h-full object-cover object-center"
+                className={`absolute inset-0 w-full h-full object-cover ${section.objClass}`}
               />
             </picture>
             <div className="absolute inset-0 bg-black/50" />
