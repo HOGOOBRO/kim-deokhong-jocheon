@@ -194,10 +194,24 @@ export default function Home() {
       {/* ── 02 Overview (yellow full-bleed bg) ── */}
       <section id="overview" className="bg-[#ffcd00] w-full overflow-hidden">
         <div className="max-w-[1440px] mx-auto flex flex-col gap-0 md:gap-[60px] lg:gap-[180px] items-stretch md:items-center pt-[32px] md:pt-[100px] lg:pt-[160px] pb-0">
-          {/* Text — mobile 24px padding 16/24, desktop 40px centered */}
+          {/* Text — mobile 24px no-explicit-breaks, desktop 40px with intentional breaks */}
           <div className="px-4 md:px-8 lg:px-0 py-6 md:py-0">
+            {/* Mobile: single sentences per paragraph, let browser wrap */}
+            <div
+              className="md:hidden font-bold text-[#1c1c1c] w-full text-[24px] flex flex-col gap-[1.6em]"
+              style={{
+                fontFamily: "Pretendard, sans-serif",
+                letterSpacing: "-0.02em",
+                lineHeight: "1.6",
+              }}
+            >
+              <p>38년 공직 경험, 행정은 책상이 아니라 현장에서 배웠습니다.</p>
+              <p>절물자연휴양림, 한라산국립공원, 아라동, 조천읍까지. 주민 가까이에서 듣고, 직접 해결해 왔습니다.</p>
+              <p>이제 그 경험을 조천의 변화로 이어가겠습니다.</p>
+            </div>
+            {/* Desktop: explicit line breaks for visual layout */}
             <p
-              className="font-bold text-[#1c1c1c] w-full lg:w-[870px] whitespace-pre-wrap text-[24px] md:text-[clamp(18px,2.8vw,40px)]"
+              className="hidden md:block font-bold text-[#1c1c1c] w-full lg:w-[870px] whitespace-pre-wrap text-[clamp(18px,2.8vw,40px)]"
               style={{
                 fontFamily: "Pretendard, sans-serif",
                 letterSpacing: "-0.02em",
@@ -266,9 +280,9 @@ export default function Home() {
           src={imgQuoteBg}
           alt=""
           aria-hidden
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover object-[70%_center] md:object-center"
         />
-        {/* Mobile: very light overlay; Desktop: 40% black overlay */}
+        {/* Mobile: light overlay; Desktop: 40% black overlay */}
         <div className="absolute inset-0 bg-black/[0.04] md:bg-black/40" />
         <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[1440px]">
           <div className="absolute left-4 md:left-8 lg:left-[60px] top-[32px] md:top-[80px] w-[min(760px,calc(100%-32px))] md:w-[min(760px,90vw)] flex flex-col gap-6 md:gap-6 text-white">
@@ -354,24 +368,8 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Social icons — Figma 189:1920 desktop (IG+FB), 196:3122 mobile (Kakao+IG+FB) */}
+          {/* Social icons — IG + FB only */}
           <div className="flex gap-4 items-start">
-            {/* Kakao Talk Channel — mobile only */}
-            <a
-              href="#"
-              aria-label="카카오톡 채널"
-              className="md:hidden bg-[#fee500] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#fbcc01] transition-colors"
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="#3c1e1e"
-                aria-hidden="true"
-              >
-                <path d="M12 3C6.48 3 2 6.48 2 10.8c0 2.84 1.94 5.32 4.83 6.72L6 21l3.46-2.04c.83.11 1.68.18 2.54.18 5.52 0 10-3.48 10-7.8S17.52 3 12 3z" />
-              </svg>
-            </a>
             <a
               href={SNS_LINKS.instagram}
               target="_blank"

@@ -72,7 +72,7 @@ export default function PostsCarousel({ posts }: { posts: Post[] }) {
       {/* Scrollable card track (aligned to 1440 content area) */}
       <div
         ref={trackRef}
-        className="max-w-[1440px] mx-auto flex gap-4 md:gap-6 overflow-x-auto pl-4 md:pl-8 lg:pl-[60px] pr-4 md:pr-8 lg:pr-[60px] no-scrollbar"
+        className="max-w-[1440px] mx-auto flex gap-4 md:gap-6 overflow-x-auto pl-4 md:pl-8 lg:pl-[60px] pr-4 md:pr-8 lg:pr-[60px] scroll-pl-4 md:scroll-pl-8 lg:scroll-pl-[60px] no-scrollbar"
         style={{ scrollSnapType: "x mandatory" }}
       >
         {posts.map((post, i) => (
