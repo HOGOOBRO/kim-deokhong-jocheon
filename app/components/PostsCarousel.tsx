@@ -48,11 +48,11 @@ export default function PostsCarousel({ posts }: { posts: Post[] }) {
 
   return (
     <section className="bg-white w-full">
-      {/* Header (1440 max-width centered) — Figma: pt:120, pb:60 (cards start at y=245) */}
+      {/* Header (1440 max-width centered) — Mobile: title only pt:32 / Desktop: title+button pt:120 */}
       <div className="max-w-[1440px] mx-auto">
-        <div className="flex items-start justify-between gap-4 px-4 sm:px-8 lg:px-[60px] pt-[80px] lg:pt-[120px] pb-[40px] lg:pb-[60px]">
+        <div className="flex items-start justify-between gap-4 px-4 md:px-8 lg:px-[60px] pt-[32px] md:pt-[80px] lg:pt-[120px] pb-[16px] md:pb-[40px] lg:pb-[60px]">
           <h2
-            className="font-bold text-[#1c1c1c] text-[28px] sm:text-[40px] lg:text-[52px] leading-[1.25]"
+            className="font-bold text-[#1c1c1c] text-[24px] md:text-[40px] lg:text-[52px] leading-[1.25]"
             style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.02em" }}
           >
             듣고, 기록하고, 약속합니다
@@ -61,7 +61,7 @@ export default function PostsCarousel({ posts }: { posts: Post[] }) {
             href={INSTAGRAM_CHANNEL_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-block bg-black text-white text-[14px] lg:text-[18px] px-5 lg:px-6 py-2.5 lg:py-3 rounded-full whitespace-nowrap hover:bg-[#333] transition-colors shrink-0"
+            className="hidden md:inline-block bg-black text-white text-[14px] lg:text-[18px] px-5 lg:px-6 py-2.5 lg:py-3 rounded-full whitespace-nowrap hover:bg-[#333] transition-colors shrink-0"
             style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.01em" }}
           >
             포스팅 전체보기
@@ -72,16 +72,16 @@ export default function PostsCarousel({ posts }: { posts: Post[] }) {
       {/* Scrollable card track (aligned to 1440 content area) */}
       <div
         ref={trackRef}
-        className="max-w-[1440px] mx-auto flex gap-4 sm:gap-6 overflow-x-auto pl-4 sm:pl-8 lg:pl-[60px] pr-4 sm:pr-8 lg:pr-[60px] no-scrollbar"
+        className="max-w-[1440px] mx-auto flex gap-4 md:gap-6 overflow-x-auto pl-4 md:pl-8 lg:pl-[60px] pr-4 md:pr-8 lg:pr-[60px] no-scrollbar"
         style={{ scrollSnapType: "x mandatory" }}
       >
         {posts.map((post, i) => (
           <div
             key={i}
             data-card
-            className="flex flex-col gap-6 lg:gap-10 shrink-0 group"
+            className="flex flex-col gap-4 md:gap-6 lg:gap-10 shrink-0 group"
             style={{
-              width: "clamp(280px, 78vw, 424px)",
+              width: "clamp(265px, 68vw, 424px)",
               scrollSnapAlign: "start",
             }}
           >
@@ -93,7 +93,7 @@ export default function PostsCarousel({ posts }: { posts: Post[] }) {
               aria-label={post.title.replace(/\n/g, " ")}
               className="bg-[#242424] overflow-hidden relative w-full block"
               style={{
-                height: `clamp(${Math.round(post.imgH * 0.55)}px, ${(post.imgH / 1440) * 100}vw, ${post.imgH}px)`,
+                height: `clamp(${Math.round(post.imgH * 0.625)}px, ${(post.imgH / 1440) * 100}vw, ${post.imgH}px)`,
               }}
             >
               <img
@@ -103,9 +103,9 @@ export default function PostsCarousel({ posts }: { posts: Post[] }) {
               />
             </a>
             <div className="flex flex-col gap-2 text-black">
-              <div className="flex flex-col gap-2 lg:gap-3">
+              <div className="flex flex-col gap-1 lg:gap-3">
                 <p
-                  className="text-[15px] lg:text-[18px] leading-[1.5]"
+                  className="text-[12px] md:text-[15px] lg:text-[18px] leading-[1.5]"
                   style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.01em" }}
                 >
                   {post.category}
@@ -115,17 +115,17 @@ export default function PostsCarousel({ posts }: { posts: Post[] }) {
                   href={post.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold text-[22px] lg:text-[28px] leading-[1.25] whitespace-pre-line hover:underline underline-offset-4 decoration-2"
+                  className="font-bold text-[20px] md:text-[22px] lg:text-[28px] leading-[1.25] whitespace-pre-line hover:underline underline-offset-4 decoration-2"
                   style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.02em" }}
                 >
                   {post.title}
                 </a>
               </div>
-              <div className="flex gap-[8px] lg:gap-[10px] items-center flex-wrap">
+              <div className="flex gap-[6.75px] md:gap-[10px] items-center flex-wrap">
                 {post.tags.map((tag) => (
                   <p
                     key={tag}
-                    className="text-[14px] lg:text-[18px] leading-[1.5] whitespace-nowrap"
+                    className="text-[12px] md:text-[14px] lg:text-[18px] leading-[1.5] whitespace-nowrap"
                     style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.01em" }}
                   >
                     {tag}
@@ -137,22 +137,24 @@ export default function PostsCarousel({ posts }: { posts: Post[] }) {
         ))}
       </div>
 
-      {/* Mobile "전체보기" button */}
-      <div className="flex justify-center mt-8 sm:hidden px-4">
-        <a
-          href={INSTAGRAM_CHANNEL_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-black text-white text-[16px] px-6 py-3 rounded-full w-full text-center hover:bg-[#333] transition-colors"
-          style={{ fontFamily: "Pretendard, sans-serif" }}
-        >
-          포스팅 전체보기
-        </a>
+      {/* Mobile "전체보기" button — full width 358x51 (Figma 196:3108) */}
+      <div className="max-w-[1440px] mx-auto md:hidden">
+        <div className="px-4 mt-8">
+          <a
+            href={INSTAGRAM_CHANNEL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-black text-white text-[18px] px-6 py-3 rounded-full w-full text-center block hover:bg-[#333] transition-colors"
+            style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.01em" }}
+          >
+            포스팅 전체보기
+          </a>
+        </div>
       </div>
 
       {/* Single progress bar (1440 max-width centered, Figma style) */}
       <div className="max-w-[1440px] mx-auto">
-        <div className="px-4 sm:px-8 lg:px-[60px] pt-12 lg:pt-[120px] pb-[60px] lg:pb-[120px]">
+        <div className="px-4 md:px-8 lg:px-[60px] pt-8 md:pt-12 lg:pt-[120px] pb-[32px] md:pb-[60px] lg:pb-[120px]">
           <div className="relative w-full h-1 bg-[#ddd] rounded-full overflow-hidden">
             <div
               className="absolute top-0 left-0 h-1 bg-black rounded-full transition-[width] duration-150"

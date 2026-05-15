@@ -5,6 +5,7 @@ import ScrollHint from "./components/ScrollHint";
 import SnapScroll from "./components/SnapScroll";
 
 const imgHero = "/images/hero.png";
+const imgHeroMo = "/images/hero-mo.png";
 const imgQuoteBg = "/images/quote-bg.png";
 const imgPost1 = "/images/post1.png";
 const imgPost2 = "/images/post2.png";
@@ -54,23 +55,45 @@ export default function Home() {
   return (
     <main className="w-full bg-white">
       <SnapScroll />
-      {/* ── 01 Hero / Key Visual (full viewport height — Figma 187:1830) ── */}
+      {/* ── 01 Hero / Key Visual ── */}
       <section
         id="hero"
-        className="relative w-full h-screen min-h-[560px] overflow-hidden bg-black snap-section"
+        className="relative w-full h-screen min-h-[640px] overflow-hidden bg-black snap-section"
       >
-        <img
-          src={imgHero}
-          alt="김덕홍 후보"
-          className="absolute inset-0 w-full h-full object-cover object-[73%_center]"
-        />
-        {/* Left-side gradient overlay (Figma 187:1831 — blur on left 1044) */}
-        <div className="absolute inset-y-0 left-0 w-[72.5%] bg-gradient-to-r from-black/60 to-transparent" />
+        {/* Image: mobile vs desktop (Figma uses different photos) */}
+        <picture>
+          <source media="(min-width: 768px)" srcSet={imgHero} />
+          <img
+            src={imgHeroMo}
+            alt="김덕홍 후보"
+            className="absolute inset-0 w-full h-full object-cover object-center md:object-[73%_center]"
+          />
+        </picture>
+
+        {/* Mobile: top gradient (Figma 192:2329 — 266px black/50 fade) */}
+        <div className="md:hidden absolute inset-x-0 top-0 h-[266px] bg-gradient-to-b from-black/50 to-transparent pointer-events-none" />
+        {/* Desktop: left-side gradient */}
+        <div className="hidden md:block absolute inset-y-0 left-0 w-[72.5%] bg-gradient-to-r from-black/60 to-transparent pointer-events-none" />
 
         {/* 1440 content container */}
         <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[1440px]">
-          {/* Caption — Figma 60px desktop, 24px mobile minimum */}
-          <div className="absolute left-4 sm:left-8 lg:left-[60px] top-5 sm:top-8 lg:top-[40px] w-[min(648px,90%)]">
+          {/* Mobile caption — centered 32px (Figma 194:2836) */}
+          <div className="md:hidden absolute top-[40px] left-1/2 -translate-x-1/2 w-[min(358px,calc(100%-32px))] text-center">
+            <p
+              className="text-white font-bold opacity-90"
+              style={{
+                fontFamily: "Pretendard, sans-serif",
+                fontSize: "32px",
+                letterSpacing: "-0.02em",
+                lineHeight: "1.6",
+              }}
+            >
+              말보다 실천 !<br />
+              조천읍을 <span className="text-[#fcd100]">확</span> 바꾸겠습니다.
+            </p>
+          </div>
+          {/* Desktop caption — left-aligned 60px */}
+          <div className="hidden md:block absolute left-4 sm:left-8 lg:left-[60px] top-5 sm:top-8 lg:top-[40px] w-[min(648px,90%)]">
             <p
               className="text-white font-bold leading-[1.6] opacity-90"
               style={{
@@ -84,8 +107,47 @@ export default function Home() {
             </p>
           </div>
 
-          {/* "5" + 김덕홍 at bottom-left — Figma bottom:60, left:60 */}
-          <div className="absolute left-4 sm:left-8 lg:left-[60px] bottom-[100px] sm:bottom-[110px] lg:bottom-[120px] flex items-center gap-2 lg:gap-[10px]">
+          {/* Mobile "5" + 김덕홍 — Figma 192:2322 (left:16, top:631, gap-1, "5":160, 김덕홍:88) */}
+          <div className="md:hidden absolute left-4 bottom-[53px] flex items-center gap-1">
+            <p
+              className="text-[#fcd100] font-bold leading-none"
+              style={{
+                fontFamily: "Pretendard, sans-serif",
+                fontSize: "160px",
+                letterSpacing: "-0.05em",
+              }}
+            >
+              5
+            </p>
+            <div className="flex flex-col gap-1 items-start">
+              <div className="px-[6px]">
+                <p
+                  className="text-white font-bold whitespace-nowrap"
+                  style={{
+                    fontFamily: "Pretendard, sans-serif",
+                    fontSize: "20px",
+                    letterSpacing: "-0.02em",
+                    lineHeight: "1.25",
+                  }}
+                >
+                  준비된 <span className="text-[#fcd100]">진짜 일꾼</span>, 기호 5번
+                </p>
+              </div>
+              <p
+                className="text-white font-bold whitespace-nowrap"
+                style={{
+                  fontFamily: "Pretendard, sans-serif",
+                  fontSize: "88px",
+                  letterSpacing: "-0.05em",
+                  lineHeight: "normal",
+                }}
+              >
+                김덕홍
+              </p>
+            </div>
+          </div>
+          {/* Desktop "5" + 김덕홍 */}
+          <div className="hidden md:flex absolute left-4 sm:left-8 lg:left-[60px] items-center gap-2 lg:gap-[10px] bottom-[100px] sm:bottom-[110px] lg:bottom-[120px]">
             <p
               className="text-[#fcd100] font-bold leading-none"
               style={{
@@ -131,29 +193,36 @@ export default function Home() {
 
       {/* ── 02 Overview (yellow full-bleed bg) ── */}
       <section id="overview" className="bg-[#ffcd00] w-full overflow-hidden">
-        <div className="max-w-[1440px] mx-auto flex flex-col gap-[60px] sm:gap-[100px] lg:gap-[180px] items-center pt-[60px] sm:pt-[100px] lg:pt-[160px] pb-0">
-          <p
-            className="font-bold text-[#1c1c1c] px-4 sm:px-8 lg:px-0 w-full lg:w-[870px] whitespace-pre-wrap"
-            style={{
-              fontFamily: "Pretendard, sans-serif",
-              fontSize: "clamp(18px, 2.8vw, 40px)",
-              letterSpacing: "-0.02em",
-              lineHeight: "1.6",
-            }}
-          >
-            38년 공직 경험,{"\n"}
-            행정은 책상이 아니라 현장에서 배웠습니다.{"\n"}
-            {"​"}{"\n"}
-            절물자연휴양림, 한라산국립공원, 아라동, 조천읍까지.{"\n"}
-            주민 가까이에서 듣고, 직접 해결해 왔습니다.{"\n"}
-            {"​"}{"\n"}
-            이제 그 경험을 조천의 변화로 이어가겠습니다.
-          </p>
+        <div className="max-w-[1440px] mx-auto flex flex-col gap-0 md:gap-[60px] lg:gap-[180px] items-stretch md:items-center pt-[32px] md:pt-[100px] lg:pt-[160px] pb-0">
+          {/* Text — mobile 24px padding 16/24, desktop 40px centered */}
+          <div className="px-4 md:px-8 lg:px-0 py-6 md:py-0">
+            <p
+              className="font-bold text-[#1c1c1c] w-full lg:w-[870px] whitespace-pre-wrap text-[24px] md:text-[clamp(18px,2.8vw,40px)]"
+              style={{
+                fontFamily: "Pretendard, sans-serif",
+                letterSpacing: "-0.02em",
+                lineHeight: "1.6",
+              }}
+            >
+              38년 공직 경험,{"\n"}
+              행정은 책상이 아니라 현장에서 배웠습니다.{"\n"}
+              {"​"}{"\n"}
+              절물자연휴양림, 한라산국립공원, 아라동, 조천읍까지.{"\n"}
+              주민 가까이에서 듣고, 직접 해결해 왔습니다.{"\n"}
+              {"​"}{"\n"}
+              이제 그 경험을 조천의 변화로 이어가겠습니다.
+            </p>
+          </div>
+
+          {/* Mobile divider full-width */}
+          <div className="md:hidden h-[1px] w-full bg-[#1c1c1c]/20" />
 
           {/* Career timeline */}
           <div className="w-full">
-            <div className="h-[1px] bg-[#1c1c1c]/20 mx-[10px]" />
-            <div className="flex items-center justify-between px-4 sm:px-8 lg:px-[60px] py-[24px] lg:py-[32px] gap-2 sm:gap-4">
+            {/* Desktop divider */}
+            <div className="hidden md:block h-[1px] bg-[#1c1c1c]/20 mx-[10px]" />
+            {/* Mobile: vertical timeline w/ vertical dividers. Desktop: horizontal row */}
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between px-6 md:px-8 lg:px-[60px] py-6 md:py-[24px] lg:py-[32px] gap-6 md:gap-2 lg:gap-4">
               {[
                 { year: "2009", title: "절물자연휴양림 관리생태소장" },
                 { year: "2012", title: "한라산국립공원 탐방안내소관리팀장" },
@@ -163,13 +232,13 @@ export default function Home() {
                 <React.Fragment key={item.year}>
                   <div className="flex flex-col items-start text-[#1c1c1c] min-w-0">
                     <p
-                      className="font-bold leading-[1.5] w-full text-[10px] sm:text-[12px] lg:text-[14px]"
+                      className="font-bold leading-[1.5] w-full text-[16px] md:text-[12px] lg:text-[14px]"
                       style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.01em" }}
                     >
                       {item.title}
                     </p>
                     <p
-                      className="font-bold text-[24px] sm:text-[32px] lg:text-[40px] leading-[1.25] w-full"
+                      className="font-bold text-[40px] md:text-[32px] lg:text-[40px] leading-[1.25] w-full"
                       style={{
                         fontFamily: "var(--font-jetbrains-mono), monospace",
                         letterSpacing: "-0.02em",
@@ -179,7 +248,7 @@ export default function Home() {
                     </p>
                   </div>
                   {i < 3 && (
-                    <div className="w-px h-[50px] sm:h-[60px] lg:h-[71px] bg-[#1c1c1c]/30 shrink-0" />
+                    <div className="w-px h-[71px] md:h-[60px] lg:h-[71px] bg-[#1c1c1c]/30 shrink-0" />
                   )}
                 </React.Fragment>
               ))}
@@ -191,8 +260,7 @@ export default function Home() {
       {/* ── 03 Quote ── */}
       <section
         id="quote"
-        className="relative w-full overflow-hidden"
-        style={{ height: "clamp(480px, 56vw, 810px)" }}
+        className="relative w-full overflow-hidden h-screen min-h-[640px] md:h-[56vw] md:min-h-[480px] md:max-h-[810px]"
       >
         <img
           src={imgQuoteBg}
@@ -200,14 +268,15 @@ export default function Home() {
           aria-hidden
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-black/40" />
+        {/* Mobile: very light overlay; Desktop: 40% black overlay */}
+        <div className="absolute inset-0 bg-black/[0.04] md:bg-black/40" />
         <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[1440px]">
-          <div className="absolute left-4 sm:left-8 lg:left-[60px] top-[60px] sm:top-[80px] w-[min(760px,90vw)] flex flex-col gap-4 sm:gap-6 text-white">
-            <div className="flex flex-col gap-4 sm:gap-6 font-bold">
+          <div className="absolute left-4 md:left-8 lg:left-[60px] top-[32px] md:top-[80px] w-[min(760px,calc(100%-32px))] md:w-[min(760px,90vw)] flex flex-col gap-6 md:gap-6 text-white">
+            <div className="flex flex-col gap-3 md:gap-6 font-bold">
               <p
+                className="text-[24px] md:text-[clamp(22px,2.8vw,40px)]"
                 style={{
                   fontFamily: "Pretendard, sans-serif",
-                  fontSize: "clamp(22px, 2.8vw, 40px)",
                   letterSpacing: "-0.02em",
                   lineHeight: "1.3",
                 }}
@@ -215,12 +284,11 @@ export default function Home() {
                 &ldquo;같이 일할 땐 힘들었죠&rdquo;
               </p>
               <div
-                className="opacity-50"
+                className="opacity-70 md:opacity-50 text-[14px] md:text-[clamp(16px,2.2vw,32px)]"
                 style={{
                   fontFamily: "Pretendard, sans-serif",
-                  fontSize: "clamp(16px, 2.2vw, 32px)",
                   letterSpacing: "-0.02em",
-                  lineHeight: "1.3",
+                  lineHeight: "1.6",
                 }}
               >
                 <p>적당히 넘어가는 걸 못 봤습니다.</p>
@@ -229,9 +297,9 @@ export default function Home() {
               </div>
             </div>
             <p
+              className="text-[12px] md:text-[clamp(14px,1.25vw,18px)]"
               style={{
                 fontFamily: "Pretendard, sans-serif",
-                fontSize: "clamp(14px, 1.25vw, 18px)",
                 letterSpacing: "-0.02em",
                 lineHeight: "1.5",
               }}
@@ -286,8 +354,24 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Social icons — Figma 189:1920 (gap=16, size=40, bg=#555) */}
+          {/* Social icons — Figma 189:1920 desktop (IG+FB), 196:3122 mobile (Kakao+IG+FB) */}
           <div className="flex gap-4 items-start">
+            {/* Kakao Talk Channel — mobile only */}
+            <a
+              href="#"
+              aria-label="카카오톡 채널"
+              className="md:hidden bg-[#fee500] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#fbcc01] transition-colors"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="#3c1e1e"
+                aria-hidden="true"
+              >
+                <path d="M12 3C6.48 3 2 6.48 2 10.8c0 2.84 1.94 5.32 4.83 6.72L6 21l3.46-2.04c.83.11 1.68.18 2.54.18 5.52 0 10-3.48 10-7.8S17.52 3 12 3z" />
+              </svg>
+            </a>
             <a
               href={SNS_LINKS.instagram}
               target="_blank"
