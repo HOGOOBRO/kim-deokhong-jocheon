@@ -194,7 +194,7 @@ export default function Home() {
 
       {/* ── 02 Overview (yellow full-bleed bg) ── */}
       <section id="overview" className="bg-[#ffcd00] w-full overflow-hidden">
-        <div className="max-w-[1440px] mx-auto flex flex-col gap-0 md:gap-[60px] lg:gap-[180px] items-stretch md:items-center pt-[32px] md:pt-[100px] lg:pt-[160px] pb-0">
+        <div className="max-w-[1440px] mx-auto flex flex-col gap-8 md:gap-[60px] lg:gap-[180px] items-stretch md:items-center pt-[32px] md:pt-[100px] lg:pt-[160px] pb-0">
           {/* Text — mobile 24px no-explicit-breaks, desktop 40px with intentional breaks */}
           <div className="px-4 md:px-8 lg:px-0 py-6 md:py-0">
             {/* Mobile: single sentences per paragraph, let browser wrap */}
@@ -229,15 +229,15 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Mobile divider full-width */}
-          <div className="md:hidden h-[1px] w-full bg-[#1c1c1c]/20" />
+          {/* Mobile divider (Figma 205:3261 — within content x:16, w:358) */}
+          <div className="md:hidden h-[1px] mx-4 bg-[#1c1c1c]/20" />
 
           {/* Career timeline */}
           <div className="w-full">
             {/* Desktop divider */}
             <div className="hidden md:block h-[1px] bg-[#1c1c1c]/20 mx-[10px]" />
             {/* Mobile: vertical timeline w/ vertical dividers. Desktop: horizontal row */}
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between px-6 md:px-8 lg:px-[60px] py-6 md:py-[24px] lg:py-[32px] gap-6 md:gap-2 lg:gap-4">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between px-10 md:px-8 lg:px-[60px] py-0 md:py-[24px] lg:py-[32px] gap-6 md:gap-2 lg:gap-4">
               {[
                 { year: "2009", title: "절물자연휴양림 관리생태소장" },
                 { year: "2012", title: "한라산국립공원 탐방안내소관리팀장" },
@@ -253,7 +253,7 @@ export default function Home() {
                       {item.title}
                     </p>
                     <p
-                      className="font-bold text-[40px] md:text-[32px] lg:text-[40px] leading-[1.25] w-full"
+                      className="font-bold text-[32px] lg:text-[40px] leading-[1.25] w-full"
                       style={{
                         fontFamily: "var(--font-jetbrains-mono), monospace",
                         letterSpacing: "-0.02em",
@@ -263,7 +263,7 @@ export default function Home() {
                     </p>
                   </div>
                   {i < 3 && (
-                    <div className="w-px h-[71px] md:h-[60px] lg:h-[71px] bg-[#1c1c1c]/30 shrink-0" />
+                    <div className="w-px h-[32px] md:h-[60px] lg:h-[71px] bg-[#1c1c1c]/30 shrink-0" />
                   )}
                 </React.Fragment>
               ))}
@@ -416,7 +416,7 @@ export default function Home() {
                 className="leading-[1.6]"
                 style={{ fontFamily: "Pretendard, sans-serif" }}
               >
-                무소속 조천읍 도의원 예비후보
+                무소속 조천읍 도의원 후보
               </p>
             </div>
             <p
