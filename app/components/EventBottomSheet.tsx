@@ -21,6 +21,12 @@ const SHARE_DATA = {
 
 const PRETENDARD = "Pretendard, sans-serif";
 
+// 행사 종료 처리: 2026-05-22 00:00 KST부터 시트·FAB 자동 비표시
+// (행사 당일 5.21까지 노출, 다음 날부터 사라짐). 절대시각 비교라 타임존 무관.
+// 모듈 로드(=페이지 로드) 시점에 1회 평가 → 렌더는 순수 상수만 읽음.
+const EVENT_CUTOFF_MS = Date.parse("2026-05-22T00:00:00+09:00");
+const EVENT_OVER = Date.now() >= EVENT_CUTOFF_MS;
+
 export default function EventBottomSheet() {
   // open=true부터 시작 → SSR HTML에 포함되어 첫 페인트에 바로 보임(깜빡임 방지).
   const [open, setOpen] = useState(true);
@@ -112,6 +118,9 @@ export default function EventBottomSheet() {
     await copyLink();
     flashToast("공유를 지원하지 않아 링크를 복사했습니다");
   }, [copyLink, flashToast]);
+
+  // 행사 당일까지만 노출 — 마감 시점 이후엔 시트/FAB 모두 표시 안 함
+  if (EVENT_OVER) return null;
 
   // 시트가 닫혀 있을 땐 재호출용 FAB 노출 — Figma 246:857 (출정식 초대장)
   if (!open) {
