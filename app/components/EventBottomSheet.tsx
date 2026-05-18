@@ -7,7 +7,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
  * Figma: Korail-schedule node 241:684 (Bottom sheet).
  *
  * - 진입하자마자 표시(SSR부터 open=true → 깜빡임 없음), slide-up 애니메이션.
- * - 닫기: 스크림 탭 / 드래그 핸들 / Esc. 열려 있는 동안 body 스크롤 잠금.
+ * - 닫기: 스크림 탭 / 드래그 핸들 / Esc / 시트 아래로 스와이프(모바일).
+ *   열려 있는 동안 body 스크롤 잠금.
  * - "공유하기": 시스템 공유(Web Share API), 미지원 시 링크 복사로 폴백.
  * - "링크 복사하기": https://deokhong.com/ 클립보드 복사.
  */
@@ -31,8 +32,12 @@ export default function EventBottomSheet() {
   // open=true부터 시작 → SSR HTML에 포함되어 첫 페인트에 바로 보임(깜빡임 방지).
   const [open, setOpen] = useState(true);
   const [closing, setClosing] = useState(false);
+  const [enterDone, setEnterDone] = useState(false);
+  const [dragY, setDragY] = useState<number | null>(null);
+  const [snapBack, setSnapBack] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
+  const dragYRef = useRef(0);
   const toastTimer = useRef<number | null>(null);
 
   const close = useCallback(() => {
@@ -40,11 +45,22 @@ export default function EventBottomSheet() {
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
+      setDragY(null);
       setOpen(false);
       return;
     }
+    setDragY(null);
     setClosing(true);
     window.setTimeout(() => setOpen(false), 280);
+  }, []);
+
+  const reopen = useCallback(() => {
+    setClosing(false);
+    setEnterDone(false);
+    setSnapBack(false);
+    setDragY(null);
+    dragYRef.current = 0;
+    setOpen(true);
   }, []);
 
   // body 스크롤 잠금 + SnapScroll 비활성 플래그 + Esc 닫기.
@@ -64,6 +80,70 @@ export default function EventBottomSheet() {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
       delete root.dataset.modalOpen;
+    };
+  }, [open, close]);
+
+  // 시트 아래로 스와이프 → 닫기 (모바일). 시트가 맨 위(스크롤 0)일 때만
+  // 드래그로 전환, 그 외엔 내부 콘텐츠 스크롤을 방해하지 않음.
+  useEffect(() => {
+    if (!open) return;
+    const el = sheetRef.current;
+    if (!el) return;
+    let startY = 0;
+    let engaged = false;
+    let canDrag = false;
+    const SLOP = 8;
+
+    const onStart = (e: TouchEvent) => {
+      if (e.touches.length !== 1) return;
+      startY = e.touches[0].clientY;
+      canDrag = el.scrollTop <= 0;
+      engaged = false;
+    };
+    const onMove = (e: TouchEvent) => {
+      if (!canDrag) return;
+      const dy = e.touches[0].clientY - startY;
+      if (dy <= 0) {
+        if (engaged) {
+          engaged = false;
+          dragYRef.current = 0;
+          setDragY(null);
+        }
+        return;
+      }
+      if (!engaged) {
+        if (dy < SLOP) return;
+        engaged = true;
+        setEnterDone(true); // 입장 애니메이션 중이면 인라인 제어로 전환
+      }
+      e.preventDefault(); // 시트 드래그 중 내부/페이지 스크롤 차단
+      dragYRef.current = dy;
+      setDragY(dy);
+    };
+    const onEnd = () => {
+      if (!engaged) return;
+      engaged = false;
+      const h = el.offsetHeight || 600;
+      const dy = dragYRef.current;
+      dragYRef.current = 0;
+      if (dy > Math.min(140, h * 0.28)) {
+        close(); // 임계 초과 → 현재 위치에서 이어서 닫힘
+      } else {
+        setSnapBack(true); // 원위치 복귀
+        setDragY(null);
+        window.setTimeout(() => setSnapBack(false), 240);
+      }
+    };
+
+    el.addEventListener("touchstart", onStart, { passive: true });
+    el.addEventListener("touchmove", onMove, { passive: false });
+    el.addEventListener("touchend", onEnd);
+    el.addEventListener("touchcancel", onEnd);
+    return () => {
+      el.removeEventListener("touchstart", onStart);
+      el.removeEventListener("touchmove", onMove);
+      el.removeEventListener("touchend", onEnd);
+      el.removeEventListener("touchcancel", onEnd);
     };
   }, [open, close]);
 
@@ -128,10 +208,7 @@ export default function EventBottomSheet() {
       <button
         type="button"
         aria-label="출정식 초대장 다시 보기"
-        onClick={() => {
-          setClosing(false);
-          setOpen(true);
-        }}
+        onClick={reopen}
         className="fab-anim fixed right-[16px] z-[90] flex size-[73px] flex-col items-center justify-center rounded-full bg-[#fcd100] transition-transform hover:scale-105 active:scale-95"
         style={{
           bottom: "max(24px, env(safe-area-inset-bottom))",
@@ -177,12 +254,27 @@ export default function EventBottomSheet() {
       <div
         ref={sheetRef}
         tabIndex={-1}
+        onAnimationEnd={(e) => {
+          if (e.target === e.currentTarget) setEnterDone(true);
+        }}
         className={`relative z-[1] w-[min(358px,calc(100vw-32px))] max-h-[92vh] overflow-y-auto no-scrollbar rounded-t-[24px] bg-white outline-none ${
-          closing
-            ? "translate-y-full transition-transform duration-300 ease-in"
-            : "sheet-anim"
+          !enterDone && !closing && dragY === null ? "sheet-anim" : ""
         }`}
-        style={{ paddingBottom: "max(8px, env(safe-area-inset-bottom))" }}
+        style={{
+          paddingBottom: "max(8px, env(safe-area-inset-bottom))",
+          transform: closing
+            ? "translateY(100%)"
+            : dragY !== null
+              ? `translateY(${dragY}px)`
+              : "translateY(0)",
+          transition: closing
+            ? "transform 280ms ease-in"
+            : dragY !== null
+              ? "none"
+              : snapBack
+                ? "transform 240ms cubic-bezier(0.22,1,0.36,1)"
+                : "none",
+        }}
       >
         {/* Header + Drag handle — Figma 241:690/241:691 (tap to close) */}
         <div className="flex items-center justify-center p-[14px]">
