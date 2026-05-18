@@ -78,6 +78,7 @@ export default function SnapScroll() {
     };
 
     const onWheel = (e: WheelEvent) => {
+      if (document.documentElement.dataset.modalOpen) return;
       if (animatingRef.current) {
         e.preventDefault();
         return;
@@ -94,6 +95,7 @@ export default function SnapScroll() {
     };
 
     const onTouchMove = (e: TouchEvent) => {
+      if (document.documentElement.dataset.modalOpen) return;
       if (animatingRef.current) {
         e.preventDefault();
         return;
@@ -111,6 +113,7 @@ export default function SnapScroll() {
     };
 
     const onKey = (e: KeyboardEvent) => {
+      if (document.documentElement.dataset.modalOpen) return;
       if (animatingRef.current) return;
       const isDown = e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ";
       const isUp = e.key === "ArrowUp" || e.key === "PageUp";

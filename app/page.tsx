@@ -3,6 +3,7 @@ import PolicySections from "./components/PolicySections";
 import PostsCarousel, { Post } from "./components/PostsCarousel";
 import ScrollHint from "./components/ScrollHint";
 import SnapScroll from "./components/SnapScroll";
+import EventBottomSheet from "./components/EventBottomSheet";
 
 const imgHero = "/images/hero.png";
 const imgHeroMo = "/images/hero-mo.png";
@@ -56,6 +57,7 @@ export default function Home() {
   return (
     <main className="w-full bg-white">
       <SnapScroll />
+      <EventBottomSheet />
       {/* ── 01 Hero / Key Visual ── */}
       <section
         id="hero"
