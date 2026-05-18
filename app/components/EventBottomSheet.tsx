@@ -305,45 +305,19 @@ export default function EventBottomSheet() {
         </div>
 
         <div className="flex flex-col gap-[24px] px-[16px] pb-[20px]">
-          {/* Event card — Figma 250:909/250:910. 인물 레이어가 Figma export
-              불가라 사진은 250:911 합성 렌더를 쓰되, 날짜는 라이브 텍스트로
-              올려 고해상도(레티나) 화면에서 또렷하게 보이도록 함. */}
+          {/* Event card — Figma 252:927 (3.5x 고해상도 단일 렌더, 날짜 포함).
+              컨테이너 rounded-[24px]로 클립해 JPEG 평탄화된 모서리 흰끝 제거. */}
           <div
-            className="relative w-full overflow-hidden rounded-[22px] bg-[#0a1429]"
+            className="relative w-full overflow-hidden rounded-[24px] bg-[#0a1429]"
             style={{ aspectRatio: "326 / 300" }}
           >
             <img
-              src="/images/event-card.png"
-              alt="조천읍민과 함께하는 출정식 — 김덕홍 후보, 조천 만세동산"
-              width={326}
-              height={300}
+              src="/images/event-card.jpg"
+              alt="조천읍민과 함께하는 출정식 — 김덕홍 후보 · 5.21 목요일 오후 7시 · 조천 만세동산"
+              width={1000}
+              height={920}
               className="absolute inset-0 h-full w-full object-cover"
             />
-            {/* 상단 가독성 그라데이션 — Figma 250:918 */}
-            <div
-              className="pointer-events-none absolute inset-x-0 top-0 h-[80px]"
-              style={{
-                background:
-                  "linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0))",
-              }}
-            />
-            {/* 날짜 — Figma 250:919 (라이브 텍스트, 비트맵 아님) */}
-            <div className="absolute left-[20px] top-[20px] flex flex-col gap-[8px]">
-              {["5.21 목요일, 오후 7시", "조천 만세동산"].map((line) => (
-                <p
-                  key={line}
-                  className="whitespace-nowrap font-extrabold text-white"
-                  style={{
-                    fontFamily: PRETENDARD,
-                    fontSize: "24px",
-                    letterSpacing: "-0.72px",
-                    lineHeight: "normal",
-                  }}
-                >
-                  {line}
-                </p>
-              ))}
-            </div>
           </div>
 
           {/* Title row — Figma 242:809 */}
