@@ -341,25 +341,28 @@ export default function EventBottomSheet() {
             </h2>
           </div>
 
-          {/* Body — Figma 241:714 / 242:808 justify-end: 240px block, right-aligned */}
+          {/* Body — Figma 250:896 (full width, left-aligned, 18px, 3 lines) */}
           <p
-            className="w-[240px] self-end font-semibold text-[#1c1c1c]"
+            className="w-full font-semibold text-[#1c1c1c]"
             style={{
               fontFamily: PRETENDARD,
-              fontSize: "15px",
-              letterSpacing: "-0.45px",
+              fontSize: "18px",
+              letterSpacing: "-0.54px",
               lineHeight: "28px",
             }}
           >
-            당의 이름이 아닌 조천읍의 이름으로 나섭니다. 저 김덕홍의 첫 걸음,
+            당의 이름이 아닌 조천읍의 이름으로 나섭니다.
+            <br />
+            저 김덕홍의 첫 걸음,
+            <br />
             여러분의 발걸음으로 완성해 주십시오!
           </p>
 
           {/* Divider — Figma 242:810 */}
           <div className="h-px w-full bg-[#dddddd]" />
 
-          {/* Actions — Figma 242:826 (share | copy-link) */}
-          <div className="flex items-stretch gap-[16px]">
+          {/* Actions — Figma 250:898 (share flex-1 | copy-link auto, row px-20) */}
+          <div className="flex items-center gap-[16px] px-[20px]">
             <button
               type="button"
               onClick={share}
@@ -387,7 +390,7 @@ export default function EventBottomSheet() {
             <button
               type="button"
               onClick={copyLink}
-              className="flex flex-1 items-center gap-[12px] overflow-hidden rounded-[8px] px-[4px] py-[6px] transition-colors hover:bg-black/[0.04] active:bg-black/[0.06]"
+              className="flex shrink-0 items-center gap-[12px] overflow-hidden rounded-[8px] px-[4px] py-[6px] transition-colors hover:bg-black/[0.04] active:bg-black/[0.06]"
             >
               <img
                 src="/icons/link.svg"
@@ -396,7 +399,7 @@ export default function EventBottomSheet() {
                 className="block h-[24px] w-[24px] shrink-0"
               />
               <span
-                className="font-semibold text-[#666666]"
+                className="whitespace-nowrap font-semibold text-[#666666]"
                 style={{
                   fontFamily: PRETENDARD,
                   fontSize: "15px",
