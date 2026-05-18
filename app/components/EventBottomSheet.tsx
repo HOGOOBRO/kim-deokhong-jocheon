@@ -9,6 +9,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
  * - 진입하자마자 표시(SSR부터 open=true → 깜빡임 없음), slide-up 애니메이션.
  * - 닫기: 스크림 탭 / 드래그 핸들 / Esc / 시트 아래로 스와이프(모바일).
  *   열려 있는 동안 body 스크롤 잠금.
+ * - PC(>=768px)에서는 시트·FAB 모두 미표시(스크롤 잠금 효과도 미적용).
  * - "공유하기": 시스템 공유(Web Share API), 미지원 시 링크 복사로 폴백.
  * - "링크 복사하기": https://deokhong.com/ 클립보드 복사.
  */
@@ -21,6 +22,9 @@ const SHARE_DATA = {
 };
 
 const PRETENDARD = "Pretendard, sans-serif";
+
+// 프로젝트 공통 모바일/데스크톱 경계 (Tailwind 기본 md). PC에선 기능 전체 비활성.
+const DESKTOP_MQ = "(min-width: 768px)";
 
 // 행사 종료 처리: 2026-05-22 00:00 KST부터 시트·FAB 자동 비표시
 // (행사 당일 5.21까지 노출, 다음 날부터 사라짐). 절대시각 비교라 타임존 무관.
@@ -63,9 +67,20 @@ export default function EventBottomSheet() {
     setOpen(true);
   }, []);
 
-  // body 스크롤 잠금 + SnapScroll 비활성 플래그 + Esc 닫기.
+  // 뷰포트가 PC/모바일 경계를 넘으면 잠금/드래그 효과를 재평가하기 위한 트리거.
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(DESKTOP_MQ);
+    const sync = () => setIsDesktop(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  // body 스크롤 잠금 + SnapScroll 비활성 플래그 + Esc 닫기. (PC에선 미적용)
   useEffect(() => {
     if (!open) return;
+    if (window.matchMedia(DESKTOP_MQ).matches) return;
     const root = document.documentElement;
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -81,12 +96,13 @@ export default function EventBottomSheet() {
       document.body.style.overflow = prevOverflow;
       delete root.dataset.modalOpen;
     };
-  }, [open, close]);
+  }, [open, close, isDesktop]);
 
   // 시트 아래로 스와이프 → 닫기 (모바일). 시트가 맨 위(스크롤 0)일 때만
   // 드래그로 전환, 그 외엔 내부 콘텐츠 스크롤을 방해하지 않음.
   useEffect(() => {
     if (!open) return;
+    if (window.matchMedia(DESKTOP_MQ).matches) return;
     const el = sheetRef.current;
     if (!el) return;
     let startY = 0;
@@ -145,7 +161,7 @@ export default function EventBottomSheet() {
       el.removeEventListener("touchend", onEnd);
       el.removeEventListener("touchcancel", onEnd);
     };
-  }, [open, close]);
+  }, [open, close, isDesktop]);
 
   useEffect(() => {
     return () => {
@@ -209,7 +225,7 @@ export default function EventBottomSheet() {
         type="button"
         aria-label="출정식 초대장 다시 보기"
         onClick={reopen}
-        className="fab-anim fixed right-[16px] z-[90] flex size-[73px] flex-col items-center justify-center rounded-full bg-[#fcd100] transition-transform hover:scale-105 active:scale-95"
+        className="fab-anim fixed right-[16px] z-[90] flex size-[73px] flex-col items-center justify-center rounded-full bg-[#fcd100] transition-transform hover:scale-105 active:scale-95 md:hidden"
         style={{
           bottom: "max(24px, env(safe-area-inset-bottom))",
           boxShadow:
@@ -238,7 +254,7 @@ export default function EventBottomSheet() {
       role="dialog"
       aria-modal="true"
       aria-label="조천읍민과 함께하는 출정식 안내"
-      className="fixed inset-0 z-[100] flex items-end justify-center"
+      className="fixed inset-0 z-[100] flex items-end justify-center md:hidden"
     >
       {/* Scrim — Figma 241:685 (black, opacity 32%) */}
       <button
