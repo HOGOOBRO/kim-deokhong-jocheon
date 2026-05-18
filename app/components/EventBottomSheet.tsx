@@ -113,7 +113,39 @@ export default function EventBottomSheet() {
     flashToast("공유를 지원하지 않아 링크를 복사했습니다");
   }, [copyLink, flashToast]);
 
-  if (!open) return null;
+  // 시트가 닫혀 있을 땐 재호출용 FAB 노출 — Figma 246:857 (출정식 초대장)
+  if (!open) {
+    return (
+      <button
+        type="button"
+        aria-label="출정식 초대장 다시 보기"
+        onClick={() => {
+          setClosing(false);
+          setOpen(true);
+        }}
+        className="fab-anim fixed right-[16px] z-[90] flex size-[73px] flex-col items-center justify-center rounded-full bg-[#fcd100] transition-transform hover:scale-105 active:scale-95"
+        style={{
+          bottom: "max(24px, env(safe-area-inset-bottom))",
+          boxShadow:
+            "0px 18px 24px rgba(0,0,0,0.18), 0px 4px 6px rgba(0,0,0,0.08)",
+        }}
+      >
+        <span
+          className="text-center font-bold text-black"
+          style={{
+            fontFamily: PRETENDARD,
+            fontSize: "16px",
+            lineHeight: "20px",
+            letterSpacing: "-0.48px",
+          }}
+        >
+          출정식
+          <br />
+          초대장
+        </span>
+      </button>
+    );
+  }
 
   return (
     <div
@@ -192,9 +224,9 @@ export default function EventBottomSheet() {
             </h2>
           </div>
 
-          {/* Body — Figma 241:714 (w-240) */}
+          {/* Body — Figma 241:714 / 242:808 justify-end: 240px block, right-aligned */}
           <p
-            className="w-[240px] font-semibold text-[#1c1c1c]"
+            className="w-[240px] self-end font-semibold text-[#1c1c1c]"
             style={{
               fontFamily: PRETENDARD,
               fontSize: "15px",
