@@ -305,15 +305,46 @@ export default function EventBottomSheet() {
         </div>
 
         <div className="flex flex-col gap-[24px] px-[16px] pb-[20px]">
-          {/* Event card — Figma 241:757 (flat composite render) */}
-          <img
-            src="/images/event-card.png"
-            alt="조천읍민과 함께하는 출정식 · 5.21 목요일 오후 7시 · 조천 만세동산"
-            width={326}
-            height={300}
-            className="w-full rounded-[22px] object-cover"
+          {/* Event card — Figma 250:909/250:910. 인물 레이어가 Figma export
+              불가라 사진은 250:911 합성 렌더를 쓰되, 날짜는 라이브 텍스트로
+              올려 고해상도(레티나) 화면에서 또렷하게 보이도록 함. */}
+          <div
+            className="relative w-full overflow-hidden rounded-[22px] bg-[#0a1429]"
             style={{ aspectRatio: "326 / 300" }}
-          />
+          >
+            <img
+              src="/images/event-card.png"
+              alt="조천읍민과 함께하는 출정식 — 김덕홍 후보, 조천 만세동산"
+              width={326}
+              height={300}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            {/* 상단 가독성 그라데이션 — Figma 250:918 */}
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 h-[80px]"
+              style={{
+                background:
+                  "linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0))",
+              }}
+            />
+            {/* 날짜 — Figma 250:919 (라이브 텍스트, 비트맵 아님) */}
+            <div className="absolute left-[20px] top-[20px] flex flex-col gap-[8px]">
+              {["5.21 목요일, 오후 7시", "조천 만세동산"].map((line) => (
+                <p
+                  key={line}
+                  className="whitespace-nowrap font-extrabold text-white"
+                  style={{
+                    fontFamily: PRETENDARD,
+                    fontSize: "24px",
+                    letterSpacing: "-0.72px",
+                    lineHeight: "normal",
+                  }}
+                >
+                  {line}
+                </p>
+              ))}
+            </div>
+          </div>
 
           {/* Title row — Figma 242:809 */}
           <div className="flex items-center gap-[12px]">
