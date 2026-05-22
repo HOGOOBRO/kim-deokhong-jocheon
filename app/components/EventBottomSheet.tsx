@@ -79,6 +79,10 @@ export default function EventBottomSheet() {
 
   // body 스크롤 잠금 + SnapScroll 비활성 플래그 + Esc 닫기. (PC에선 미적용)
   useEffect(() => {
+    // 행사 종료 시엔 렌더가 null이라 시트를 닫을 UI가 없어 해제 트리거가 생기지
+    // 않음 → 잠금을 절대 걸지 않는다. (이 가드가 없으면 마감 후 모바일에서
+    // body가 overflow:hidden인 채로 영구 잠겨 페이지 스크롤이 막힌다.)
+    if (EVENT_OVER) return;
     if (!open) return;
     if (window.matchMedia(DESKTOP_MQ).matches) return;
     const root = document.documentElement;
