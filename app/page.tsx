@@ -5,6 +5,7 @@ import ScrollHint from "./components/ScrollHint";
 import SnapScroll from "./components/SnapScroll";
 import EventBottomSheet from "./components/EventBottomSheet";
 import SchedulePopup from "./components/SchedulePopup";
+import PolicyCarousel from "./components/PolicyCarousel";
 
 const imgHero = "/images/hero.png";
 const imgHeroMo = "/images/hero-mo.png";
@@ -196,9 +197,12 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── 01.5 Policy carousel (키비주얼 바로 아래) ── */}
+      <PolicyCarousel />
+
       {/* ── 02 Overview (yellow full-bleed bg) ── */}
       <section id="overview" className="bg-[#ffcd00] w-full overflow-hidden">
-        <div className="max-w-[1440px] mx-auto flex flex-col gap-8 md:gap-[60px] lg:gap-[180px] items-stretch md:items-center pt-[32px] md:pt-[100px] lg:pt-[160px] pb-8 md:pb-0">
+        <div className="max-w-[1440px] mx-auto flex flex-col gap-8 md:gap-[60px] lg:gap-[180px] items-stretch md:items-center pt-[24px] md:pt-[40px] lg:pt-[56px] pb-8 md:pb-0">
           {/* Text — mobile 24px no-explicit-breaks, desktop 40px with intentional breaks */}
           <div className="px-4 md:px-8 lg:px-0 py-6 md:py-0">
             {/* Mobile: single sentences per paragraph, let browser wrap */}
