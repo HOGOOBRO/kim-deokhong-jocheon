@@ -108,7 +108,7 @@ function PolicyCardView({
               marginBottom: 2,
             }}
           >
-            POLICY
+            정책
           </span>
           <span
             className="text-[32px] md:text-[38px]"
@@ -381,7 +381,7 @@ function PolicyModal({
                   color: "#9a9a9a",
                 }}
               >
-                POLICY {numStr}
+                정책 {numStr}
               </span>
               <button
                 ref={closeBtnRef}
@@ -631,7 +631,7 @@ export default function PolicyCarousel() {
                 background: "#1a1a1a",
               }}
             />
-            DEOKHONG · POLICY
+            정책 공약
           </div>
           <h2
             className="mt-[12px] mb-[6px] md:mt-[14px] md:mb-[8px] text-[28px] md:text-[44px] text-balance"
@@ -696,7 +696,7 @@ export default function PolicyCarousel() {
       {/* 스크롤러 (풀블리드: 좌측은 1200 콘텐츠 정렬, 우측은 화면 밖으로 흐름) */}
       <div
         ref={scrollerRef}
-        className="policy-scroller no-scrollbar flex snap-x snap-mandatory overflow-x-auto overflow-y-hidden touch-pan-x overscroll-x-contain mt-[24px] md:mt-[36px] gap-[14px] md:gap-[22px]"
+        className="policy-scroller no-scrollbar flex snap-x snap-mandatory overflow-x-auto overflow-y-hidden overscroll-x-contain mt-[24px] md:mt-[36px] gap-[14px] md:gap-[22px]"
         style={{ WebkitOverflowScrolling: "touch" }}
       >
         {POLICIES.map((p) => (
