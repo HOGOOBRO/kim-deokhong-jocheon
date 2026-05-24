@@ -23,8 +23,8 @@ export async function generateMetadata({
   const canonical = page > 1 ? `/news?page=${page}` : "/news";
   const title =
     page > 1
-      ? `보도자료 (${page}페이지) — 기호 5번 김덕홍`
-      : "보도자료 — 기호 5번 김덕홍";
+      ? `보도자료 (${page}페이지) — 조천읍 도의원 후보 김덕홍`
+      : "보도자료 — 조천읍 도의원 후보 김덕홍";
   const description = `조천읍 도의원 무소속 기호 5번 김덕홍 후보 관련 언론보도 및 캠페인 소식 — 총 ${total}건`;
 
   return {
@@ -36,7 +36,7 @@ export async function generateMetadata({
       locale: "ko_KR",
       url: `${SITE_URL}${canonical}`,
       siteName: "기호 5번 김덕홍",
-      title: "보도자료 — 기호 5번 김덕홍",
+      title: "보도자료 — 조천읍 도의원 후보 김덕홍",
       description,
       images: [
         {

@@ -39,7 +39,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const article = resolveArticle(slug);
-  if (!article) return { title: "보도자료를 찾을 수 없습니다 | 기호 5번 김덕홍" };
+  if (!article) return { title: "보도자료를 찾을 수 없습니다 | 조천읍 도의원 후보 김덕홍" };
 
   const path = articlePath(article);
   const url = `${SITE_URL}${path}`;
@@ -53,7 +53,7 @@ export async function generateMetadata({
     : DEFAULT_OG_IMAGE;
 
   return {
-    title: `${article.title} | 기호 5번 김덕홍`,
+    title: `${article.title} | 조천읍 도의원 후보 김덕홍`,
     description: article.lead,
     alternates: { canonical: path },
     openGraph: {
