@@ -40,10 +40,10 @@ export async function generateMetadata({
       description,
       images: [
         {
-          url: `${SITE_URL}/images/hero.png`,
-          width: 1681,
-          height: 936,
-          alt: "기호 5번 김덕홍 · 조천읍 도의원 후보",
+          url: `${SITE_URL}/images/news/01-pc.jpg`,
+          width: 2160,
+          height: 1080,
+          alt: "조천읍 도의원 후보 김덕홍 보도자료",
         },
       ],
     },

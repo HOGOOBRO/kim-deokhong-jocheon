@@ -13,12 +13,12 @@ import { SiteHeader, SiteFooter } from "@/app/news/Chrome";
 import ShareRow from "./ShareRow";
 
 const SITE_URL = "https://deokhong.com";
-// 키비주얼 없는 자료의 OG 폴백 이미지 (홈 히어로 재사용)
+// 키비주얼 없는 자료의 OG 폴백 (홈과 구분되도록 보도자료 대표 이미지 사용)
 const DEFAULT_OG_IMAGE = {
-  url: `${SITE_URL}/images/hero.png`,
-  width: 1681,
-  height: 936,
-  alt: "기호 5번 김덕홍 · 조천읍 도의원 후보",
+  url: `${SITE_URL}/images/news/01-pc.jpg`,
+  width: 2160,
+  height: 1080,
+  alt: "조천읍 도의원 후보 김덕홍 보도자료",
 };
 
 type Params = { slug: string };
