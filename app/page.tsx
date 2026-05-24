@@ -208,10 +208,10 @@ export default function Home() {
             {/* Mobile: vertical timeline w/ vertical dividers. Desktop: horizontal row */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between px-10 md:px-8 lg:px-[60px] py-0 md:py-[24px] lg:py-[32px] gap-6 md:gap-2 lg:gap-4">
               {[
-                { year: "2009", title: "절물자연휴양림 관리생태소장" },
-                { year: "2012", title: "한라산국립공원 탐방안내소관리팀장" },
-                { year: "2018", title: "아라동장" },
                 { year: "2022", title: "조천읍장" },
+                { year: "2018", title: "아라동장" },
+                { year: "2012", title: "한라산국립공원 탐방안내소관리팀장" },
+                { year: "2009", title: "절물자연휴양림 관리생태소장" },
               ].map((item, i) => (
                 <React.Fragment key={item.year}>
                   <div className="flex flex-col items-start text-[#1c1c1c] min-w-0">
