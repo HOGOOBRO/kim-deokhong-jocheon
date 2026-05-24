@@ -1,6 +1,6 @@
 import React from "react";
 import PolicySections from "./components/PolicySections";
-import PostsCarousel, { Post } from "./components/PostsCarousel";
+import RecentNews from "./components/RecentNews";
 import ScrollHint from "./components/ScrollHint";
 import SnapScroll from "./components/SnapScroll";
 import EventBottomSheet from "./components/EventBottomSheet";
@@ -11,49 +11,10 @@ const imgHero = "/images/hero.png";
 const imgHeroMo = "/images/hero-mo.png";
 const imgQuoteMo = "/images/quote2-mo.png";
 const imgQuotePc = "/images/quote2-pc.png";
-const imgPost1 = "/images/post1.png";
-const imgPost2 = "/images/post2.png";
-const imgPost3 = "/images/post3.png";
-const imgPost4 = "/images/post4.png";
 const SNS_LINKS = {
   instagram: "https://www.instagram.com/dukhong4jocheon?igsh=bm1lanYyeXd2OXJs",
   facebook: "https://www.facebook.com/share/18VzrpoQnn/?mibextid=wwXIfr",
 };
-
-const posts: Post[] = [
-  {
-    img: imgPost1,
-    imgH: 424,
-    category: "기록이 말합니다",
-    title: "절물, 전국 1위",
-    tags: ["#절물자연휴양림", "#진짜일꾼"],
-    url: "https://www.instagram.com/p/DYRldAPkxnM/?igsh=OGxqeHhoNXlhYmI0",
-  },
-  {
-    img: imgPost2,
-    imgH: 530,
-    category: "아침인사",
-    title: "비가 내리는 날에도\n거리에 선 이유",
-    tags: ["#말보다실천", "#출근길인사"],
-    url: "https://www.instagram.com/p/DYHEe-ak9Tl/?igsh=b2RqaXhnZHEzeTIy",
-  },
-  {
-    img: imgPost3,
-    imgH: 424,
-    category: "정책 소개",
-    title: "김덕홍이 청년에게\n드리는 3가지 약속",
-    tags: ["#청년정책", "#조천읍", "#살기좋은조천"],
-    url: "https://www.instagram.com/p/DYCMB0Bk9OF/?igsh=MXE4dDMzMHd0czZhYg==",
-  },
-  {
-    img: imgPost4,
-    imgH: 530,
-    category: "문안인사",
-    title: "가정의 달,\n김덕홍의 마음",
-    tags: ["#어버이날", "#어린이날", "#가정의달"],
-    url: "https://www.instagram.com/p/DX8rG42T5F2/?igsh=cmdqMnBjcm5jMzZn",
-  },
-];
 
 export default function Home() {
   return (
@@ -397,10 +358,8 @@ export default function Home() {
         <PolicySections />
       </div>
 
-      {/* ── 05 Posts Carousel ── */}
-      <div id="posts">
-        <PostsCarousel posts={posts} />
-      </div>
+      {/* ── 05 최근 보도자료 (구 인스타 섹션 자리) ── */}
+      <RecentNews />
 
       {/* ── 06 Footer (full-bleed bg) ── */}
       <footer id="footer" className="bg-[#f7f7f7] w-full">

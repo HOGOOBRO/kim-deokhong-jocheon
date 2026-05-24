@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# 키비주얼 원본 보관소(고화질 PNG) — 배포엔 public/images/news 최적화본만 사용
+/blog/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
