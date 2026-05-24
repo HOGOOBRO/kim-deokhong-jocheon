@@ -28,6 +28,11 @@ export const metadata: Metadata = {
       "naver-site-verification": "62da26393183899f2bb4df957d8a124116c08bbc",
     },
   },
+  appleWebApp: {
+    capable: true,
+    title: "김덕홍",
+    statusBarStyle: "default",
+  },
   openGraph: {
     type: "website",
     locale: "ko_KR",
