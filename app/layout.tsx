@@ -22,6 +22,11 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   alternates: {
     canonical: "/",
+    types: {
+      "application/rss+xml": [
+        { url: "/feed.xml", title: "조천읍 도의원 후보 기호 5번 김덕홍 — 소식" },
+      ],
+    },
   },
   verification: {
     other: {
