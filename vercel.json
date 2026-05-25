@@ -1,0 +1,44 @@
+{
+  "redirects": [
+    {
+      "source": "/kakao",
+      "destination": "https://deokhong.com/?utm_source=kakao&utm_medium=social&utm_campaign=jocheon2026&utm_content=openchat",
+      "permanent": false
+    },
+    {
+      "source": "/insta",
+      "destination": "https://deokhong.com/?utm_source=instagram&utm_medium=social&utm_campaign=jocheon2026&utm_content=profile",
+      "permanent": false
+    },
+    {
+      "source": "/insta-story",
+      "destination": "https://deokhong.com/?utm_source=instagram&utm_medium=social&utm_campaign=jocheon2026&utm_content=story",
+      "permanent": false
+    },
+    {
+      "source": "/insta-post",
+      "destination": "https://deokhong.com/?utm_source=instagram&utm_medium=social&utm_campaign=jocheon2026&utm_content=post",
+      "permanent": false
+    },
+    {
+      "source": "/facebook",
+      "destination": "https://deokhong.com/?utm_source=facebook&utm_medium=social&utm_campaign=jocheon2026&utm_content=profile",
+      "permanent": false
+    },
+    {
+      "source": "/facebook-story",
+      "destination": "https://deokhong.com/?utm_source=facebook&utm_medium=social&utm_campaign=jocheon2026&utm_content=story",
+      "permanent": false
+    },
+    {
+      "source": "/facebook-post",
+      "destination": "https://deokhong.com/?utm_source=facebook&utm_medium=social&utm_campaign=jocheon2026&utm_content=post",
+      "permanent": false
+    },
+    {
+      "source": "/text",
+      "destination": "https://deokhong.com/?utm_source=sms&utm_medium=sms&utm_campaign=jocheon2026&utm_content=bulk",
+      "permanent": false
+    }
+  ]
+}
