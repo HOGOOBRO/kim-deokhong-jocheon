@@ -9,48 +9,6 @@ const imgPolicy3Mo = "/images/policy3-mo.png";
 const imgPolicy4 = "/images/policy4.png";
 const imgPolicy4Mo = "/images/policy4.png";
 
-type IconKey = "policy1" | "policy2" | "policy3";
-
-const ICONS: Record<
-  IconKey,
-  { src: string; bg: string; inset: string }
-> = {
-  policy1: {
-    src: "/icons/icon-policy1.svg",
-    bg: "bg-[#16a34a]",
-    inset: "7.5% 23.87% -62.26% -10.56%",
-  },
-  policy2: {
-    src: "/icons/icon-policy2.svg",
-    bg: "bg-[#d97706]",
-    inset: "-26.94% 12.56% -14.58% 10.53%",
-  },
-  policy3: {
-    src: "/icons/icon-policy3.svg",
-    bg: "bg-[#2563eb]",
-    inset: "-43.75% 12.54% -30.5% 1.27%",
-  },
-};
-
-function PolicyIcon({ icon }: { icon: IconKey }) {
-  const cfg = ICONS[icon];
-  return (
-    <div
-      className={`${cfg.bg} h-[34px] w-[60px] md:h-[68px] md:w-[120px] lg:h-[80px] lg:w-[142px] rounded-[5px] md:rounded-[10px] lg:rounded-[12px] overflow-hidden shrink-0 relative`}
-    >
-      <div className="absolute" style={{ inset: cfg.inset }}>
-        <img
-          src={cfg.src}
-          alt=""
-          aria-hidden
-          className="block w-full h-full"
-          style={{ maxWidth: "none" }}
-        />
-      </div>
-    </div>
-  );
-}
-
 function Section01() {
   return (
     <div className="absolute top-1/2 -translate-y-1/2 left-1/2 md:left-4 lg:left-[60px] -translate-x-1/2 md:translate-x-0 w-[358px] md:w-[min(568px,85%)] flex flex-col gap-1 items-start">
@@ -60,21 +18,12 @@ function Section01() {
       >
         교통, 생활 인프라
       </p>
-      <div className="flex gap-[7.56px] md:gap-2 lg:gap-3 items-center flex-wrap">
-        <p
-          className="text-white font-semibold text-[32px] md:text-[44px] lg:text-[52px] leading-[1.25] whitespace-nowrap"
-          style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.02em" }}
-        >
-          생활문제를
-        </p>
-        <PolicyIcon icon="policy1" />
-        <p
-          className="text-white font-semibold text-[32px] md:text-[44px] lg:text-[52px] leading-[1.25] whitespace-nowrap"
-          style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.02em" }}
-        >
-          해결하는
-        </p>
-      </div>
+      <p
+        className="text-white font-semibold text-[32px] md:text-[44px] lg:text-[52px] leading-[1.25]"
+        style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.02em" }}
+      >
+        생활문제를 해결하는
+      </p>
       <p
         className="text-white font-semibold text-[32px] md:text-[44px] lg:text-[52px] leading-[1.25]"
         style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.02em" }}
@@ -94,21 +43,12 @@ function Section02() {
       >
         환경, 곶자왈 보전
       </p>
-      <div className="flex gap-[7.56px] md:gap-2 lg:gap-3 items-center flex-wrap justify-end">
-        <p
-          className="text-white font-semibold text-[32px] md:text-[44px] lg:text-[52px] leading-[1.25] whitespace-nowrap"
-          style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.02em" }}
-        >
-          다음
-        </p>
-        <PolicyIcon icon="policy2" />
-        <p
-          className="text-white font-semibold text-[32px] md:text-[44px] lg:text-[52px] leading-[1.25] whitespace-nowrap"
-          style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.02em" }}
-        >
-          세대에게
-        </p>
-      </div>
+      <p
+        className="text-white font-semibold text-[32px] md:text-[44px] lg:text-[52px] leading-[1.25] text-right"
+        style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.02em" }}
+      >
+        다음 세대에게
+      </p>
       <p
         className="text-white font-semibold text-[32px] md:text-[44px] lg:text-[52px] leading-[1.25] text-right"
         style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.02em" }}
@@ -128,15 +68,12 @@ function Section03() {
       >
         돌봄, 복지
       </p>
-      <div className="flex gap-[7.56px] md:gap-2 lg:gap-3 items-center flex-wrap justify-center">
-        <p
-          className="text-white font-semibold text-[32px] md:text-[40px] lg:text-[52px] leading-[1.25] whitespace-nowrap"
-          style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.02em" }}
-        >
-          어르신의 하루부터
-        </p>
-        <PolicyIcon icon="policy3" />
-      </div>
+      <p
+        className="text-white font-semibold text-[32px] md:text-[40px] lg:text-[52px] leading-[1.25] text-center"
+        style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.02em" }}
+      >
+        어르신의 하루부터
+      </p>
       <p
         className="text-white font-semibold text-[32px] md:text-[40px] lg:text-[52px] leading-[1.25] text-center"
         style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.02em" }}
