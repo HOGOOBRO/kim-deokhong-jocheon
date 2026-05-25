@@ -397,9 +397,16 @@ export default function SchedulePopup() {
       list.scrollTop = list.scrollHeight;
       return;
     }
-    // offsetTop 기반(레이아웃값) — 카드 fade/scale 트랜스폼 영향 안 받음.
-    const peek = compact ? 54 : 66; // 위 지난 일정 일부 노출량(px)
-    list.scrollTop = Math.max(0, target.offsetTop - peek);
+    // 오늘 위로 지난 일정 약 2개가 보이도록(행 높이 편차와 무관하게 '행 수' 기준).
+    // 그보다 더 위에 지난 일정이 있으면 살짝 더 걸쳐 "위로 더 있다"는 힌트.
+    // offsetTop 기반(레이아웃값)이라 카드 fade/scale 트랜스폼 영향 안 받음.
+    const PAST_VISIBLE = 2;
+    const rows = Array.from(list.children) as HTMLElement[];
+    const idx = rows.indexOf(target);
+    const anchorIdx = Math.max(0, idx - PAST_VISIBLE);
+    const anchor = rows[anchorIdx] ?? target;
+    const hint = anchorIdx > 0 ? (compact ? 16 : 20) : 0;
+    list.scrollTop = Math.max(0, anchor.offsetTop - hint);
   }, [open, compact, today]);
 
   if (CAMPAIGN_OVER) return null; // 캠페인 종료 후엔 아무것도 렌더 안 함
