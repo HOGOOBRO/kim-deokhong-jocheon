@@ -1,6 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type Ref,
+} from "react";
 import { SCHEDULE, type ScheduleRow } from "../data/schedule";
 
 /**
@@ -52,11 +59,13 @@ function Row({
   status,
   isUpcoming,
   compact,
+  rowRef,
 }: {
   row: ScheduleRow;
   status: RowStatus;
   isUpcoming: boolean;
   compact: boolean;
+  rowRef?: Ref<HTMLDivElement>;
 }) {
   const past = status === "past";
   const highlight = status === "today" || isUpcoming;
@@ -66,6 +75,7 @@ function Row({
 
   return (
     <div
+      ref={rowRef}
       style={{
         position: "relative",
         display: "grid",
@@ -231,6 +241,8 @@ export default function SchedulePopup() {
   const closeBtnRef = useRef<HTMLButtonElement>(null);
   const prevFocusRef = useRef<HTMLElement | null>(null);
   const closeTimer = useRef<number | null>(null);
+  const listRef = useRef<HTMLDivElement>(null); // 스크롤 영역
+  const highlightRef = useRef<HTMLDivElement>(null); // 오늘/다가오는 일정 행
 
   // 오늘(KST) 날짜 — 마운트 시 1회 확정. SSR/CSR 모두 timeZone 고정이라 결정적.
   const today = useMemo(() => kstTodayIso(), []);
@@ -371,6 +383,24 @@ export default function SchedulePopup() {
       prevFocusRef.current?.focus?.();
     };
   }, [open, close]);
+
+  // 열릴 때 스크롤 위치 보정: 오늘(또는 다가오는 일정)을 상단으로 끌어올려 가장 잘 보이게.
+  // 단, 위에 peek 만큼 여백을 둬 지난 일정이 일부 보이게 → "위로 더 있다"는 어포던스.
+  // (지난 일정은 삭제하지 않고 위로 스크롤되어 올라간 상태가 됨.)
+  useEffect(() => {
+    if (!open) return;
+    const list = listRef.current;
+    if (!list) return;
+    const target = highlightRef.current;
+    if (!target) {
+      // 오늘/다가오는 일정이 없으면(모두 지난 경우) 가장 최근 일정이 보이게 맨 아래로.
+      list.scrollTop = list.scrollHeight;
+      return;
+    }
+    // offsetTop 기반(레이아웃값) — 카드 fade/scale 트랜스폼 영향 안 받음.
+    const peek = compact ? 54 : 66; // 위 지난 일정 일부 노출량(px)
+    list.scrollTop = Math.max(0, target.offsetTop - peek);
+  }, [open, compact, today]);
 
   if (CAMPAIGN_OVER) return null; // 캠페인 종료 후엔 아무것도 렌더 안 함
 
@@ -603,7 +633,9 @@ export default function SchedulePopup() {
 
         {/* 일정 리스트 (스크롤 영역) */}
         <div
+          ref={listRef}
           style={{
+            position: "relative", // 행 offsetTop 기준이 이 컨테이너가 되도록
             flex: 1,
             overflowY: "auto",
             WebkitOverflowScrolling: "touch",
@@ -622,6 +654,7 @@ export default function SchedulePopup() {
                   ? "today"
                   : "future";
             const isUpcoming = !todayHasEntry && row.date === upcomingDate;
+            const highlight = status === "today" || isUpcoming;
             return (
               <Row
                 key={row.date}
@@ -629,6 +662,7 @@ export default function SchedulePopup() {
                 status={status}
                 isUpcoming={isUpcoming}
                 compact={compact}
+                rowRef={highlight ? highlightRef : undefined}
               />
             );
           })}
