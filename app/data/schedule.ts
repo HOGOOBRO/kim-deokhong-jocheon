@@ -80,7 +80,7 @@ export const SCHEDULE: ScheduleRow[] = [
     label: "5/26",
     dow: "화",
     items: [
-      { text: "대흘2리", place: "못동산 앞", time: "18:00" },
+      { text: "대흘2리", place: "리사무소 앞", time: "18:00" },
       { text: "와흘리", place: "회전교차로", time: "19:00" },
     ],
   },
