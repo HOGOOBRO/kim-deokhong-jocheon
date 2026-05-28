@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { articlePath, getAllArticles } from "@/app/data/news";
+import { articlePath, getAllArticles, getFeaturedArticle } from "@/app/data/news";
 import { SiteHeader, SiteFooter } from "./Chrome";
 import NewsListClient from "./NewsListClient";
 
@@ -20,6 +20,9 @@ export async function generateMetadata({
   const sp = await searchParams;
   const page = parsePage(sp);
   const total = getAllArticles().length;
+  // 공유(카카오톡 등) og:image = 가장 최근 기사(featured) 키비주얼 — 새 글 추가 시 자동 갱신.
+  const featured = getFeaturedArticle();
+  const shareImage = `${SITE_URL}${featured.heroPc ?? "/images/news/01-pc.jpg"}`;
   const canonical = page > 1 ? `/news?page=${page}` : "/news";
   const title =
     page > 1
@@ -40,12 +43,18 @@ export async function generateMetadata({
       description,
       images: [
         {
-          url: `${SITE_URL}/images/news/01-pc.jpg`,
+          url: shareImage,
           width: 2160,
           height: 1080,
           alt: "조천읍 도의원 후보 김덕홍 보도자료",
         },
       ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "보도자료 — 조천읍 도의원 후보 김덕홍",
+      description,
+      images: [shareImage],
     },
   };
 }
