@@ -8,7 +8,7 @@ const GA_MEASUREMENT_ID = "G-ETEGPL34NQ";
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "600", "700"],
 });
 
 const SITE_URL = "https://deokhong.com";

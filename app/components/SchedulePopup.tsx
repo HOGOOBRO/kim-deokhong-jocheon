@@ -9,6 +9,7 @@ import {
   type Ref,
 } from "react";
 import { SCHEDULE, type ScheduleRow } from "../data/schedule";
+import FinalDayImmersive, { FINAL_DAY_ISO } from "./FinalDayImmersive";
 
 /**
  * 유세일정 팝업 — 홈 진입 시 1회 자동 노출되는 중앙 모달 (PC + 모바일 공통).
@@ -35,6 +36,10 @@ const CAMPAIGN_END_MS = Date.parse("2026-06-03T00:00:00+09:00");
 // 모듈 로드(=페이지 로드) 시점 1회 평가. 종료 후엔 팝업도 FAB도 미표시.
 const CAMPAIGN_OVER = Date.now() >= CAMPAIGN_END_MS;
 const OPEN_DELAY_MS = 300;
+// 선거운동 막바지: 총력유세 D-2 ~ 당일(2026-05-31 ≤ today ≤ 2026-06-02)에는
+// 일정 리스트 대신 풀블리드 "총력유세" 팝업(FinalDayImmersive)으로 분기한다.
+// today는 KST "YYYY-MM-DD"라 문자열 비교가 곧 날짜 비교.
+const FINAL_STRETCH_START_ISO = "2026-05-31";
 const EXIT_MS = 150;
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -246,6 +251,9 @@ export default function SchedulePopup() {
 
   // 오늘(KST) 날짜 — 마운트 시 1회 확정. SSR/CSR 모두 timeZone 고정이라 결정적.
   const today = useMemo(() => kstTodayIso(), []);
+  // 막바지면 일정 리스트 대신 풀블리드 총력유세 팝업으로 분기.
+  const finalStretch =
+    today >= FINAL_STRETCH_START_ISO && today <= FINAL_DAY_ISO;
   const { todayHasEntry, upcomingDate } = useMemo(() => {
     const has = SCHEDULE.some((r) => r.date === today);
     let upcoming: string | null = null;
@@ -483,28 +491,55 @@ export default function SchedulePopup() {
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-labelledby="schedule-popup-title"
+        {...(finalStretch
+          ? { "aria-label": "총력유세 안내" }
+          : { "aria-labelledby": "schedule-popup-title" })}
         className={closing ? undefined : "popup-card-anim"}
-        style={{
-          width: compact ? "100%" : 480,
-          maxWidth: "100%",
-          maxHeight: compact ? "92vh" : "min(720px, calc(100vh - 48px))",
-          background: "#fff",
-          borderRadius: compact ? 18 : 22,
-          overflow: "hidden",
-          boxShadow:
-            "0 30px 80px -20px rgba(0,0,0,0.35), 0 8px 24px -8px rgba(0,0,0,0.18)",
-          fontFamily: PRETENDARD,
-          color: "#1a1a1a",
-          display: "flex",
-          flexDirection: "column",
-          opacity: closing ? 0 : undefined,
-          transform: closing ? "scale(0.98)" : undefined,
-          transition: closing
-            ? `opacity ${EXIT_MS}ms ease-in, transform ${EXIT_MS}ms ease-in`
-            : undefined,
-        }}
+        style={
+          finalStretch
+            ? {
+                // 풀블리드 카드는 자체 bg/radius/shadow/높이를 갖는다.
+                // 래퍼는 위치/크기만 잡는 투명 컨테이너.
+                width: compact ? "100%" : 960,
+                maxWidth: "100%",
+                fontFamily: PRETENDARD,
+                opacity: closing ? 0 : undefined,
+                transform: closing ? "scale(0.98)" : undefined,
+                transition: closing
+                  ? `opacity ${EXIT_MS}ms ease-in, transform ${EXIT_MS}ms ease-in`
+                  : undefined,
+              }
+            : {
+                width: compact ? "100%" : 480,
+                maxWidth: "100%",
+                maxHeight: compact ? "92vh" : "min(720px, calc(100vh - 48px))",
+                background: "#fff",
+                borderRadius: compact ? 18 : 22,
+                overflow: "hidden",
+                boxShadow:
+                  "0 30px 80px -20px rgba(0,0,0,0.35), 0 8px 24px -8px rgba(0,0,0,0.18)",
+                fontFamily: PRETENDARD,
+                color: "#1a1a1a",
+                display: "flex",
+                flexDirection: "column",
+                opacity: closing ? 0 : undefined,
+                transform: closing ? "scale(0.98)" : undefined,
+                transition: closing
+                  ? `opacity ${EXIT_MS}ms ease-in, transform ${EXIT_MS}ms ease-in`
+                  : undefined,
+              }
+        }
       >
+        {finalStretch ? (
+          <FinalDayImmersive
+            compact={compact}
+            today={today}
+            onClose={close}
+            onHideToday={hideForToday}
+            closeBtnRef={closeBtnRef}
+          />
+        ) : (
+          <>
         {/* 헤더 */}
         <div
           style={{
@@ -717,6 +752,8 @@ export default function SchedulePopup() {
             오늘 하루 보지 않기
           </button>
         </div>
+          </>
+        )}
       </div>
     </div>
   );
