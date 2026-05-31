@@ -42,3 +42,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 카운트다운 종료 후 되돌릴 원본 키비주얼 백업
+/.keyvisual-backup/
