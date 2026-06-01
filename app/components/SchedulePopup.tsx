@@ -16,7 +16,7 @@ import FinalDayImmersive, { FINAL_DAY_ISO } from "./FinalDayImmersive";
  * 디자인 핸드오프: design_handoff_schedule_popup (옐로 #FFD400 / 잉크 #1a1a1a).
  *
  * 동작
- * - 진입 후 300ms 뒤 fade-in. open=false에서 시작 → SSR엔 아무것도 안 그려져 하이드레이션 안전.
+ * - 진입 즉시(다음 틱) 0.2s fade-in. open=false에서 시작 → SSR엔 아무것도 안 그려져 하이드레이션 안전.
  * - "오늘 하루 보지 않기": localStorage로 24시간 숨김.
  * - 캠페인 종료(2026-06-03 00:00 KST) 이후 자동 비표시.
  * - 오늘(KST) 일정이 있으면 그 행을 "● 오늘"로 하이라이트, 없으면 가장 가까운 미래 1개를 "● 다가오는 일정".
@@ -35,7 +35,9 @@ const HIDE_KEY = "deokhong_popup_hidden_until";
 const CAMPAIGN_END_MS = Date.parse("2026-06-03T00:00:00+09:00");
 // 모듈 로드(=페이지 로드) 시점 1회 평가. 종료 후엔 팝업도 FAB도 미표시.
 const CAMPAIGN_OVER = Date.now() >= CAMPAIGN_END_MS;
-const OPEN_DELAY_MS = 300;
+// 진입 즉시 오픈(다음 틱). setTimeout으로 감싸는 건 set-state-in-effect 규칙 회피용이라
+// 0이어도 effect 동기 호출이 아니라 안전. 부드러운 등장은 0.2s CSS 페이드인이 담당.
+const OPEN_DELAY_MS = 0;
 // 선거운동 막바지: 총력유세 D-2 ~ 당일(2026-05-31 ≤ today ≤ 2026-06-02)에는
 // 일정 리스트 대신 풀블리드 "총력유세" 팝업(FinalDayImmersive)으로 분기한다.
 // today는 KST "YYYY-MM-DD"라 문자열 비교가 곧 날짜 비교.
