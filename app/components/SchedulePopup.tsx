@@ -20,7 +20,7 @@ import FinalDayImmersive, { FINAL_DAY_ISO } from "./FinalDayImmersive";
  * - "오늘 하루 보지 않기": localStorage로 24시간 숨김.
  * - 캠페인 종료(2026-06-03 00:00 KST) 이후 자동 비표시.
  * - 오늘(KST) 일정이 있으면 그 행을 "● 오늘"로 하이라이트, 없으면 가장 가까운 미래 1개를 "● 다가오는 일정".
- * - 닫기: X · 배경 클릭 · ESC · 푸터 버튼.
+ * - 닫기: 팝업 어디든 탭(배경/카드/리스트/X 전부) · ESC · 푸터 버튼. (어르신 배려)
  *
  * 스크롤 잠금 불변식 (중요 — EventBottomSheet 누수 버그 재발 방지):
  *   open=true가 되는 경로는 진입 게이트 effect 1곳뿐이고, open=true면 다이얼로그가 "항상" 렌더된다.
@@ -469,10 +469,10 @@ export default function SchedulePopup() {
 
   return (
     <div
-      // 배경(스크림) — 클릭 시 닫힘. 카드 클릭은 버블되어도 target≠배경이라 무시.
-      onClick={(e) => {
-        if (e.target === e.currentTarget) close();
-      }}
+      // 어디를 탭해도 닫힘 — 배경·카드·일정리스트·X 모두. (닫기 버튼을 못 찾는 어르신 배려.)
+      // 카드/버튼 클릭은 스크림으로 버블되어 여기서 close()로 수렴한다.
+      // 스크롤 제스처는 click이 아니라 touchmove라 영향 없음(목록은 그대로 스크롤 가능).
+      onClick={close}
       className={closing ? undefined : "popup-scrim-anim"}
       style={{
         position: "fixed",
