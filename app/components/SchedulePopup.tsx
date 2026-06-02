@@ -32,7 +32,8 @@ const PRETENDARD =
   '"Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif';
 const MOBILE_MQ = "(max-width: 767px)";
 const HIDE_KEY = "deokhong_popup_hidden_until";
-const CAMPAIGN_END_MS = Date.parse("2026-06-03T00:00:00+09:00");
+// 유세일정 팝업/FAB 운영 종료(2026-06-02). 기존 자동만료(6/3 00:00)를 앞당겨 즉시 내림.
+const CAMPAIGN_END_MS = Date.parse("2026-06-02T00:00:00+09:00");
 // 모듈 로드(=페이지 로드) 시점 1회 평가. 종료 후엔 팝업도 FAB도 미표시.
 const CAMPAIGN_OVER = Date.now() >= CAMPAIGN_END_MS;
 // 진입 즉시 오픈(다음 틱). setTimeout으로 감싸는 건 set-state-in-effect 규칙 회피용이라
