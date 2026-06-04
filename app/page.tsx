@@ -1,14 +1,14 @@
 import React from "react";
 import PolicySections from "./components/PolicySections";
 import RecentNews from "./components/RecentNews";
-import HeroCountdown from "./components/HeroCountdown";
+import ScrollHint from "./components/ScrollHint";
 import SnapScroll from "./components/SnapScroll";
 import EventBottomSheet from "./components/EventBottomSheet";
 import SchedulePopup from "./components/SchedulePopup";
 import PolicyCarousel from "./components/PolicyCarousel";
 
-// 인물+하이라이트 합성 키비주얼 (Figma 355:512/352:455, PC·MO 동일 단일 이미지)
-const imgKv = "/images/hero-kv.png";
+const imgHero = "/images/hero.png";
+const imgHeroMo = "/images/hero-mo.png";
 const imgQuoteMo = "/images/quote2-mo.png";
 const imgQuotePc = "/images/quote2-pc.png";
 const SNS_LINKS = {
@@ -22,119 +22,139 @@ export default function Home() {
       <SnapScroll />
       <EventBottomSheet />
       <SchedulePopup />
-      {/* ── 01 Hero / Key Visual (Figma 355:509 PC / 352:415 MO) ──
-          PC: 모든 요소를 1440 중앙정렬 박스 안에 배치. 텍스트/카운트다운은
-          left-4 sm:left-8 lg:left-[60px] 로 사이트 그리드에 정렬(절대배치라
-          부모 padding 무시→유틸로 직접 들여씀). 가로=min(100vw,1440px) 비례,
-          세로=vh(1080). "5"=2117px(355:511). 하이라이트는 인물 PNG에 포함. */}
+      {/* ── 01 Hero / Key Visual ── */}
       <section
         id="hero"
-        className="relative w-full h-screen min-h-[640px] overflow-hidden bg-[#1c1c1c] snap-section"
+        className="relative w-full h-screen min-h-[640px] overflow-hidden bg-black snap-section"
       >
-        <h1 className="sr-only">기호 5번 김덕홍, 한번 써 봅서! — 조천읍 도의원 후보</h1>
-
-        {/* ===== Desktop (>=768px) ===== */}
-        <div className="hidden md:block absolute inset-0 overflow-hidden">
-          {/* (A) 풀블리드 배경 — 거대 "5"는 viewport 폭(100vw) 비례라 와이드 모니터에서도 커짐.
-              인물은 1440 그리드 우측에 맞춰 배치(좌우 중앙정렬 보정 포함). */}
-          <span
-            className="absolute select-none pointer-events-none font-bold leading-none"
-            style={{
-              left: "70vw",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-              fontFamily: "Pretendard, sans-serif",
-              fontSize: "117.6vw",
-              color: "#fcd100",
-              opacity: 0.3,
-              whiteSpace: "nowrap",
-            }}
-          >
-            5
-          </span>
+        {/* Image: mobile vs desktop (Figma uses different photos) */}
+        <picture>
+          <source media="(min-width: 768px)" srcSet={imgHero} />
           <img
-            src={imgKv}
-            alt=""
-            aria-hidden="true"
-            className="absolute max-w-none object-contain pointer-events-none"
-            style={{ left: "calc(0.44444 * min(100vw, 1440px) + (100vw - min(100vw, 1440px)) / 2)", top: "14.259vh", width: "calc(0.74175 * min(100vw, 1440px))", height: "95.093vh" }}
+            src={imgHeroMo}
+            alt="김덕홍 후보"
+            className="absolute inset-0 w-full h-full object-cover object-center md:object-[73%_center]"
           />
+        </picture>
 
-          {/* (B) 콘텐츠 — 사이트 1440 그리드 */}
-          <div className="relative mx-auto h-full w-full max-w-[1440px]">
-            <div className="absolute left-4 sm:left-8 lg:left-[60px]" style={{ top: "5.185vh" }}>
-              <p className="font-bold" style={{ fontFamily: "Pretendard, sans-serif", fontSize: "calc(0.04167 * min(100vw, 1440px))", letterSpacing: "-0.03em", lineHeight: 1.3, color: "#fcd100", whiteSpace: "nowrap" }}>
-                전) 조천읍장 · 38년 행정 전문가!
-              </p>
-              <p className="font-bold text-white" style={{ fontFamily: "Pretendard, sans-serif", fontSize: "calc(0.05556 * min(100vw, 1440px))", letterSpacing: "-0.03em", lineHeight: 1.3, marginTop: "1.852vh", whiteSpace: "nowrap" }}>
-                기호 5번 김덕홍,
-                <br />
-                한번 써 봅서!
+        {/* Mobile: top gradient (Figma 192:2329 — 266px black/50 fade) */}
+        <div className="md:hidden absolute inset-x-0 top-0 h-[266px] bg-gradient-to-b from-black/50 to-transparent pointer-events-none" />
+        {/* Desktop: left-side gradient */}
+        <div className="hidden md:block absolute inset-y-0 left-0 w-[72.5%] bg-gradient-to-r from-black/60 to-transparent pointer-events-none" />
+
+        {/* 1440 content container */}
+        <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[1440px]">
+          {/* Mobile caption — centered 32px (Figma 194:2836) */}
+          <div className="md:hidden absolute top-[40px] left-1/2 -translate-x-1/2 w-[min(358px,calc(100%-32px))] text-center">
+            <p
+              className="text-white font-bold opacity-90"
+              style={{
+                fontFamily: "Pretendard, sans-serif",
+                fontSize: "32px",
+                letterSpacing: "-0.02em",
+                lineHeight: "1.6",
+              }}
+            >
+              말보다 실천 !<br />
+              조천읍을 <span className="text-[#fcd100]">확</span> 바꾸겠습니다.
+            </p>
+          </div>
+          {/* Desktop caption — left-aligned 60px */}
+          <div className="hidden md:block absolute left-4 sm:left-8 lg:left-[60px] top-5 sm:top-8 lg:top-[40px] w-[min(648px,90%)]">
+            <p
+              className="text-white font-bold leading-[1.6] opacity-90"
+              style={{
+                fontFamily: "Pretendard, sans-serif",
+                fontSize: "clamp(24px, 4.17vw, 60px)",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              말보다실천 !<br />
+              조천읍을 확 바꾸겠습니다.
+            </p>
+          </div>
+
+          {/* Mobile "5" + 김덕홍 — Figma 192:2322 (left:16, top:631, gap-1, "5":160, 김덕홍:88) */}
+          <div className="md:hidden absolute left-4 bottom-[53px] flex items-center gap-1">
+            <p
+              className="text-[#fcd100] font-bold leading-none"
+              style={{
+                fontFamily: "Pretendard, sans-serif",
+                fontSize: "160px",
+                letterSpacing: "-0.05em",
+              }}
+            >
+              5
+            </p>
+            <div className="flex flex-col gap-1 items-start">
+              <div className="px-[6px]">
+                <p
+                  className="text-white font-bold whitespace-nowrap"
+                  style={{
+                    fontFamily: "Pretendard, sans-serif",
+                    fontSize: "20px",
+                    letterSpacing: "-0.02em",
+                    lineHeight: "1.25",
+                  }}
+                >
+                  준비된 <span className="text-[#fcd100]">진짜 일꾼</span>, 기호 5번
+                </p>
+              </div>
+              <p
+                className="text-white font-bold whitespace-nowrap"
+                style={{
+                  fontFamily: "Pretendard, sans-serif",
+                  fontSize: "88px",
+                  letterSpacing: "-0.05em",
+                  lineHeight: "normal",
+                }}
+              >
+                김덕홍
               </p>
             </div>
-
-            <div className="absolute left-4 sm:left-8 lg:left-[60px]" style={{ bottom: "5.556vh" }}>
-              <p className="font-bold" style={{ fontFamily: "Pretendard, sans-serif", fontSize: "calc(0.01667 * min(100vw, 1440px))", letterSpacing: "-0.03em", lineHeight: 1.3, color: "#dddddd", whiteSpace: "nowrap", marginBottom: "0.556vh" }}>
-                <span className="font-bold" style={{ color: "#ffffff" }}>조천을 바꿀 선택까지 남은 시간</span><span style={{ fontWeight: 400, color: "#dddddd" }}> ㅡ 전국동시지방선거</span>
+          </div>
+          {/* Desktop "5" + 김덕홍 */}
+          <div className="hidden md:flex absolute left-4 sm:left-8 lg:left-[60px] items-center gap-2 lg:gap-[10px] bottom-[100px] sm:bottom-[110px] lg:bottom-[120px]">
+            <p
+              className="text-[#fcd100] font-bold leading-none"
+              style={{
+                fontFamily: "Pretendard, sans-serif",
+                fontSize: "clamp(80px, 22vw, 320px)",
+                letterSpacing: "-0.05em",
+              }}
+            >
+              5
+            </p>
+            <div className="flex flex-col gap-1 lg:gap-[10px]">
+              <div className="px-1 sm:px-3">
+                <p
+                  className="text-white font-bold whitespace-nowrap"
+                  style={{
+                    fontFamily: "Pretendard, sans-serif",
+                    fontSize: "clamp(14px, 3.3vw, 48px)",
+                    letterSpacing: "-0.02em",
+                    lineHeight: "1.25",
+                  }}
+                >
+                  준비된 <span className="text-[#fcd100]">진짜 일꾼</span>, 기호 5번
+                </p>
+              </div>
+              <p
+                className="text-white font-bold whitespace-nowrap"
+                style={{
+                  fontFamily: "Pretendard, sans-serif",
+                  fontSize: "clamp(50px, 14vw, 200px)",
+                  letterSpacing: "-0.05em",
+                  lineHeight: "normal",
+                }}
+              >
+                김덕홍
               </p>
-              <HeroCountdown
-                digitSize="calc(0.11111 * min(100vw, 1440px))"
-                colonSize="calc(0.02917 * min(100vw, 1440px))"
-                labelSize="calc(0.02778 * min(100vw, 1440px))"
-                gap="calc(0.01042 * min(100vw, 1440px))"
-                labelGap="0.741vh"
-              />
             </div>
           </div>
-        </div>
 
-        {/* ===== Mobile (<768px) — 포스터 390x844, cover ===== */}
-        <div
-          className="md:hidden absolute left-0 top-0 overflow-hidden"
-          style={{ aspectRatio: "390 / 844", width: "max(100vw, 46.209vh)", containerType: "size" }}
-        >
-          <span
-            className="absolute select-none pointer-events-none font-bold"
-            style={{
-              left: "-10.513cqw",
-              top: "-4.147cqh",
-              fontFamily: "Pretendard, sans-serif",
-              fontSize: "181.825cqw",
-              lineHeight: 1.8,
-              color: "#fcd100",
-              opacity: 0.3,
-              whiteSpace: "nowrap",
-            }}
-          >
-            5
-          </span>
-          <img
-            src={imgKv}
-            alt=""
-            aria-hidden="true"
-            className="absolute max-w-none object-contain pointer-events-none"
-            style={{ left: "4.103cqw", top: "47.038cqh", width: "132.543cqw", height: "58.902cqh" }}
-          />
-          <div className="absolute" style={{ left: "4.103cqw", top: "2.370cqh", right: "4.103cqw" }}>
-            <p className="font-bold" style={{ fontFamily: "Pretendard, sans-serif", fontSize: "6.154cqw", letterSpacing: "-0.03em", lineHeight: 1.3, color: "#fcd100", whiteSpace: "nowrap" }}>
-              전) 조천읍장 · 38년 행정 전문가!
-            </p>
-            <p className="font-bold text-white" style={{ fontFamily: "Pretendard, sans-serif", fontSize: "12.308cqw", letterSpacing: "-0.03em", lineHeight: 1.3, marginTop: "1.422cqh", whiteSpace: "nowrap" }}>
-              기호 5번 김덕홍,
-              <br />
-              한번 써 봅서!
-            </p>
-            <p className="font-bold" style={{ fontFamily: "Pretendard, sans-serif", fontSize: "4.103cqw", letterSpacing: "-0.03em", lineHeight: 1.3, color: "#dddddd", whiteSpace: "nowrap", marginTop: "4.739cqh", marginBottom: "0.474cqh" }}>
-              <span className="font-bold" style={{ color: "#ffffff" }}>조천을 바꿀 선택까지 남은 시간</span><span style={{ fontWeight: 400, color: "#dddddd" }}> ㅡ 전국동시지방선거</span>
-            </p>
-            <HeroCountdown
-              digitSize="16.410cqw"
-              colonSize="10.769cqw"
-              labelSize="3.077cqw"
-              gap="2.051cqw"
-              labelGap="0.948cqh"
-            />
-          </div>
+          {/* Scroll hint at bottom center */}
+          <ScrollHint />
         </div>
       </section>
 
