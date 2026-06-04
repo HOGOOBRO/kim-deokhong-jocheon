@@ -506,7 +506,7 @@ function PolicyModal({
             className="text-[12px] md:text-[13px]"
             style={{ fontWeight: 600, color: "#5a5a5a", letterSpacing: "-0.02em" }}
           >
-            기호 5번 김덕홍 · 무소속
+            조천읍 도의원 당선인 김덕홍 · 무소속
           </div>
           <button
             type="button"
@@ -637,7 +637,7 @@ export default function PolicyCarousel() {
             className="mt-[12px] mb-[6px] md:mt-[14px] md:mb-[8px] text-[28px] md:text-[44px] text-balance"
             style={{ fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.1 }}
           >
-            기호 5번 김덕홍이
+            김덕홍이
             <br />
             약속하는 6대 정책
           </h2>

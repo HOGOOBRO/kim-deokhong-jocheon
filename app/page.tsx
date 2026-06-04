@@ -32,7 +32,7 @@ export default function Home() {
           <source media="(min-width: 768px)" srcSet={imgHero} />
           <img
             src={imgHeroMo}
-            alt="김덕홍 후보"
+            alt="김덕홍 당선인"
             className="absolute inset-0 w-full h-full object-cover object-center md:object-[73%_center]"
           />
         </picture>
@@ -69,88 +69,64 @@ export default function Home() {
                 letterSpacing: "-0.02em",
               }}
             >
-              말보다실천 !<br />
-              조천읍을 확 바꾸겠습니다.
+              말보다 실천 !<br />
+              조천읍을 <span className="text-[#fcd100]">확</span> 바꾸겠습니다.
             </p>
           </div>
 
-          {/* Mobile "5" + 김덕홍 — Figma 192:2322 (left:16, top:631, gap-1, "5":160, 김덕홍:88) */}
-          <div className="md:hidden absolute left-4 bottom-[53px] flex items-center gap-1">
-            <p
-              className="text-[#fcd100] font-bold leading-none"
-              style={{
-                fontFamily: "Pretendard, sans-serif",
-                fontSize: "160px",
-                letterSpacing: "-0.05em",
-              }}
-            >
-              5
-            </p>
-            <div className="flex flex-col gap-1 items-start">
-              <div className="px-[6px]">
-                <p
-                  className="text-white font-bold whitespace-nowrap"
-                  style={{
-                    fontFamily: "Pretendard, sans-serif",
-                    fontSize: "20px",
-                    letterSpacing: "-0.02em",
-                    lineHeight: "1.25",
-                  }}
-                >
-                  준비된 <span className="text-[#fcd100]">진짜 일꾼</span>, 기호 5번
-                </p>
-              </div>
+          {/* Mobile: 당선인 라벨 + 김덕홍 (Figma 355:553 — "5" 마크 제거, 라벨 전체 노랑) */}
+          <div className="md:hidden absolute left-4 bottom-[53px] flex flex-col items-start gap-1">
+            <div className="px-[6px]">
               <p
-                className="text-white font-bold whitespace-nowrap"
+                className="text-[#fcd100] font-bold whitespace-nowrap"
                 style={{
                   fontFamily: "Pretendard, sans-serif",
-                  fontSize: "88px",
-                  letterSpacing: "-0.05em",
-                  lineHeight: "normal",
+                  fontSize: "32px",
+                  letterSpacing: "-0.02em",
+                  lineHeight: "1.25",
                 }}
               >
-                김덕홍
+                조천읍 도의원 당선인
               </p>
             </div>
+            <p
+              className="text-white font-bold whitespace-nowrap"
+              style={{
+                fontFamily: "Pretendard, sans-serif",
+                fontSize: "min(108px, 28vw)",
+                letterSpacing: "-0.05em",
+                lineHeight: "normal",
+              }}
+            >
+              김덕홍
+            </p>
           </div>
-          {/* Desktop "5" + 김덕홍 */}
-          <div className="hidden md:flex absolute left-4 sm:left-8 lg:left-[60px] items-center gap-2 lg:gap-[10px] bottom-[100px] sm:bottom-[110px] lg:bottom-[120px]">
-            <p
-              className="text-[#fcd100] font-bold leading-none"
-              style={{
-                fontFamily: "Pretendard, sans-serif",
-                fontSize: "clamp(80px, 22vw, 320px)",
-                letterSpacing: "-0.05em",
-              }}
-            >
-              5
-            </p>
-            <div className="flex flex-col gap-1 lg:gap-[10px]">
-              <div className="px-1 sm:px-3">
-                <p
-                  className="text-white font-bold whitespace-nowrap"
-                  style={{
-                    fontFamily: "Pretendard, sans-serif",
-                    fontSize: "clamp(14px, 3.3vw, 48px)",
-                    letterSpacing: "-0.02em",
-                    lineHeight: "1.25",
-                  }}
-                >
-                  준비된 <span className="text-[#fcd100]">진짜 일꾼</span>, 기호 5번
-                </p>
-              </div>
+          {/* Desktop: 당선인 라벨 + 김덕홍 (Figma 355:553 — "5" 마크 제거, 라벨 전체 노랑 60px, 이름 210px) */}
+          <div className="hidden md:flex flex-col items-start gap-1 lg:gap-[10px] absolute left-4 sm:left-8 lg:left-[60px] bottom-[100px] sm:bottom-[110px] lg:bottom-[120px]">
+            <div className="px-1 sm:px-3">
               <p
-                className="text-white font-bold whitespace-nowrap"
+                className="text-[#fcd100] font-bold whitespace-nowrap"
                 style={{
                   fontFamily: "Pretendard, sans-serif",
-                  fontSize: "clamp(50px, 14vw, 200px)",
-                  letterSpacing: "-0.05em",
-                  lineHeight: "normal",
+                  fontSize: "clamp(28px, 4.17vw, 60px)",
+                  letterSpacing: "-0.02em",
+                  lineHeight: "1.25",
                 }}
               >
-                김덕홍
+                조천읍 도의원 당선인
               </p>
             </div>
+            <p
+              className="text-white font-bold whitespace-nowrap"
+              style={{
+                fontFamily: "Pretendard, sans-serif",
+                fontSize: "clamp(64px, 14.58vw, 210px)",
+                letterSpacing: "-0.05em",
+                lineHeight: "normal",
+              }}
+            >
+              김덕홍
+            </p>
           </div>
 
           {/* Scroll hint at bottom center */}
@@ -208,6 +184,7 @@ export default function Home() {
             {/* Mobile: vertical timeline w/ vertical dividers. Desktop: horizontal row */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between px-10 md:px-8 lg:px-[60px] py-0 md:py-[24px] lg:py-[32px] gap-6 md:gap-2 lg:gap-4">
               {[
+                { year: "2026", title: "조천읍 제주도의원" },
                 { year: "2020", title: "조천읍장" },
                 { year: "2018", title: "아라동장" },
                 { year: "2012", title: "한라산국립공원 탐방안내소관리팀장" },
@@ -231,7 +208,7 @@ export default function Home() {
                       {item.year}
                     </p>
                   </div>
-                  {i < 3 && (
+                  {i < 4 && (
                     <div className="w-px h-[32px] md:h-[60px] lg:h-[71px] bg-[#1c1c1c]/30 shrink-0" />
                   )}
                 </React.Fragment>
@@ -377,13 +354,13 @@ export default function Home() {
                 className="font-bold leading-[2.4]"
                 style={{ fontFamily: "Pretendard, sans-serif" }}
               >
-                기호 5번 김덕홍
+                김덕홍
               </p>
               <p
                 className="leading-[1.6]"
                 style={{ fontFamily: "Pretendard, sans-serif" }}
               >
-                무소속 조천읍 도의원 후보
+                무소속 조천읍 도의원 당선인
               </p>
             </div>
             <p

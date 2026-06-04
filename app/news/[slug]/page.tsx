@@ -18,7 +18,7 @@ const DEFAULT_OG_IMAGE = {
   url: `${SITE_URL}/images/news/01-pc.jpg`,
   width: 2160,
   height: 1080,
-  alt: "조천읍 도의원 후보 김덕홍 보도자료",
+  alt: "조천읍 도의원 당선인 김덕홍 보도자료",
 };
 
 type Params = { slug: string };
@@ -39,7 +39,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const article = resolveArticle(slug);
-  if (!article) return { title: "보도자료를 찾을 수 없습니다 | 조천읍 도의원 후보 김덕홍" };
+  if (!article) return { title: "보도자료를 찾을 수 없습니다 | 조천읍 도의원 당선인 김덕홍" };
 
   const path = articlePath(article);
   const url = `${SITE_URL}${path}`;
@@ -53,14 +53,14 @@ export async function generateMetadata({
     : DEFAULT_OG_IMAGE;
 
   return {
-    title: `${article.title} | 조천읍 도의원 후보 김덕홍`,
+    title: `${article.title} | 조천읍 도의원 당선인 김덕홍`,
     description: article.lead,
     alternates: { canonical: path },
     openGraph: {
       type: "article",
       locale: "ko_KR",
       url,
-      siteName: "기호 5번 김덕홍",
+      siteName: "조천읍 도의원 당선인 김덕홍",
       title: article.title,
       description: article.lead,
       publishedTime: `${article.date}T09:00:00+09:00`,
@@ -170,7 +170,7 @@ export default async function NewsArticlePage({
         author: { "@type": "Organization", name: "김덕홍 캠페인" },
         publisher: {
           "@type": "Organization",
-          name: "기호 5번 김덕홍",
+          name: "조천읍 도의원 당선인 김덕홍",
           logo: { "@type": "ImageObject", url: `${SITE_URL}/icon.png` },
         },
         image: shareImage,

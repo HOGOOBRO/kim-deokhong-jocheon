@@ -50,7 +50,7 @@ export default function RecentNews() {
           <div>
             <div className="flex items-center gap-1.5 text-[11px] md:text-[12px] font-bold tracking-[0.02em] text-[#9a9a9a] mb-2.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#FFD400]" />
-              기호 5번 김덕홍
+              조천읍 도의원 당선인 김덕홍
             </div>
             <h2 className="m-0 text-[28px] md:text-[48px] font-bold tracking-[-0.04em] leading-[1.1] text-[#1a1a1a]">
               최근 보도자료

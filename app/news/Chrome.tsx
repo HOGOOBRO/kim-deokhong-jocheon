@@ -30,11 +30,11 @@ export function SiteFooter() {
     <footer className="mt-16 md:mt-[90px] bg-[#1a1a1a] text-white px-5 pt-10 pb-7 md:px-8 md:pt-[52px] md:pb-9">
       <div className="max-w-[1200px] mx-auto">
         <div className="flex items-center gap-2.5 mb-3.5">
-          <span className="w-7 h-7 bg-[#FFD400] text-[#1a1a1a] rounded-full flex items-center justify-center font-bold text-[14px]">
-            5
+          <span className="w-7 h-7 bg-[#FFD400] text-[#1a1a1a] rounded-full flex items-center justify-center font-bold text-[10px] tracking-[-0.04em] leading-none">
+            조천
           </span>
           <span className="font-bold text-[15px] tracking-[-0.02em]">
-            기호 5번 김덕홍 · 조천읍 도의원 후보
+            김덕홍 · 조천읍 도의원 당선인
           </span>
         </div>
         <div className="text-[12px] md:text-[13px] leading-[1.65] text-white/55">
