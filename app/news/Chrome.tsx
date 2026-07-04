@@ -34,7 +34,7 @@ export function SiteFooter() {
             조천
           </span>
           <span className="font-bold text-[15px] tracking-[-0.02em]">
-            김덕홍 · 조천읍 도의원
+            김덕홍 · 제주특별자치도 조천읍 도의원
           </span>
         </div>
         <div className="text-[12px] md:text-[13px] leading-[1.65] text-white/55">

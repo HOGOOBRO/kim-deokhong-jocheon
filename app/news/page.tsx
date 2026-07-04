@@ -26,9 +26,9 @@ export async function generateMetadata({
   const canonical = page > 1 ? `/news?page=${page}` : "/news";
   const title =
     page > 1
-      ? `보도자료 (${page}페이지) — 조천읍 도의원 김덕홍`
-      : "보도자료 — 조천읍 도의원 김덕홍";
-  const description = `조천읍 도의원 김덕홍(무소속) 관련 언론보도 및 캠페인 소식 — 총 ${total}건`;
+      ? `보도자료 (${page}페이지) — 제주특별자치도 조천읍 도의원 김덕홍`
+      : "보도자료 — 제주특별자치도 조천읍 도의원 김덕홍";
+  const description = `제주특별자치도 조천읍 도의원 김덕홍 관련 언론보도 및 캠페인 소식 — 총 ${total}건`;
 
   return {
     title,
@@ -38,21 +38,21 @@ export async function generateMetadata({
       type: "website",
       locale: "ko_KR",
       url: `${SITE_URL}${canonical}`,
-      siteName: "조천읍 도의원 김덕홍",
-      title: "보도자료 — 조천읍 도의원 김덕홍",
+      siteName: "제주특별자치도 조천읍 도의원 김덕홍",
+      title: "보도자료 — 제주특별자치도 조천읍 도의원 김덕홍",
       description,
       images: [
         {
           url: shareImage,
           width: 2160,
           height: 1080,
-          alt: "조천읍 도의원 김덕홍 보도자료",
+          alt: "제주특별자치도 조천읍 도의원 김덕홍 보도자료",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: "보도자료 — 조천읍 도의원 김덕홍",
+      title: "보도자료 — 제주특별자치도 조천읍 도의원 김덕홍",
       description,
       images: [shareImage],
     },
@@ -96,7 +96,7 @@ export default async function NewsListPage({
       <div className="max-w-[1600px] mx-auto px-5 pt-8 pb-7 md:px-[60px] md:pt-20 md:pb-16 border-b border-[#eaeaea]">
         <div className="flex items-center gap-1.5 text-[11px] md:text-[12px] font-bold tracking-[0.02em] text-[#9a9a9a] mb-3">
           <span className="w-1.5 h-1.5 rounded-full bg-[#FFD400]" />
-          조천읍 도의원 김덕홍
+          제주특별자치도 조천읍 도의원 김덕홍
         </div>
         <h1 className="m-0 text-[32px] md:text-[64px] font-bold tracking-[-0.045em] leading-[1.05] text-[#1a1a1a]">
           보도자료

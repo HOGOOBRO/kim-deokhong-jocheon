@@ -12,9 +12,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const SITE_URL = "https://deokhong.com";
-const SITE_TITLE = "조천읍 도의원 김덕홍 — 말보다 실천, 조천을 바꾸겠습니다";
+const SITE_TITLE = "제주특별자치도 조천읍 도의원 김덕홍 — 말보다 실천, 조천을 바꾸겠습니다";
 const SITE_DESCRIPTION =
-  "38년 공직 경험, 현장에서 배운 행정으로 조천읍을 확 바꾸겠습니다. 조천읍 도의원 김덕홍(무소속).";
+  "38년 공직 경험, 현장에서 배운 행정으로 조천읍을 확 바꾸겠습니다. 제주특별자치도 조천읍 도의원 김덕홍.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: "/",
     types: {
       "application/rss+xml": [
-        { url: "/feed.xml", title: "조천읍 도의원 김덕홍 — 소식" },
+        { url: "/feed.xml", title: "제주특별자치도 조천읍 도의원 김덕홍 — 소식" },
       ],
     },
   },
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ko_KR",
     url: SITE_URL,
-    siteName: "조천읍 도의원 김덕홍",
+    siteName: "제주특별자치도 조천읍 도의원 김덕홍",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     images: [
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
         url: "/images/hero.png",
         width: 1681,
         height: 936,
-        alt: "조천읍 도의원 김덕홍",
+        alt: "제주특별자치도 조천읍 도의원 김덕홍",
       },
     ],
   },
@@ -69,14 +69,14 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
       url: SITE_URL,
-      name: "조천읍 도의원 김덕홍",
+      name: "제주특별자치도 조천읍 도의원 김덕홍",
       inLanguage: "ko-KR",
     },
     {
       "@type": "Person",
       "@id": `${SITE_URL}/#person`,
       name: "김덕홍",
-      jobTitle: "조천읍 도의원",
+      jobTitle: "제주특별자치도 조천읍 도의원",
       description: SITE_DESCRIPTION,
       url: SITE_URL,
       image: `${SITE_URL}/images/hero.png`,

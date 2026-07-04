@@ -506,7 +506,7 @@ function PolicyModal({
             className="text-[12px] md:text-[13px]"
             style={{ fontWeight: 600, color: "#5a5a5a", letterSpacing: "-0.02em" }}
           >
-            조천읍 도의원 김덕홍 · 무소속
+            제주특별자치도 조천읍 도의원 김덕홍
           </div>
           <button
             type="button"

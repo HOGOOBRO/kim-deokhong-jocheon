@@ -86,7 +86,7 @@ export default function Home() {
                   lineHeight: "1.25",
                 }}
               >
-                조천읍 도의원
+                제주특별자치도 조천읍 도의원
               </p>
             </div>
             <p
@@ -113,7 +113,7 @@ export default function Home() {
                   lineHeight: "1.25",
                 }}
               >
-                조천읍 도의원
+                제주특별자치도 조천읍 도의원
               </p>
             </div>
             <p
@@ -360,7 +360,7 @@ export default function Home() {
                 className="leading-[1.6]"
                 style={{ fontFamily: "Pretendard, sans-serif" }}
               >
-                무소속 조천읍 도의원
+                제주특별자치도 조천읍 도의원
               </p>
             </div>
             <p
