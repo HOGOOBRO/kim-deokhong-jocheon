@@ -74,14 +74,14 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Mobile: 직함 라벨 + 김덕홍 (Figma 355:553 — "5" 마크 제거, 라벨 전체 노랑) */}
+          {/* Mobile: 직함 라벨 24px + 김덕홍 114px (제주특별자치도 확장에 맞춰 축소) */}
           <div className="md:hidden absolute left-4 bottom-[53px] flex flex-col items-start gap-1">
             <div className="px-[6px]">
               <p
                 className="text-[#fcd100] font-bold whitespace-nowrap"
                 style={{
                   fontFamily: "Pretendard, sans-serif",
-                  fontSize: "32px",
+                  fontSize: "24px",
                   letterSpacing: "-0.02em",
                   lineHeight: "1.25",
                 }}
@@ -93,7 +93,7 @@ export default function Home() {
               className="text-white font-bold whitespace-nowrap"
               style={{
                 fontFamily: "Pretendard, sans-serif",
-                fontSize: "min(108px, 28vw)",
+                fontSize: "min(114px, 30.4vw)",
                 letterSpacing: "-0.05em",
                 lineHeight: "normal",
               }}
@@ -101,14 +101,14 @@ export default function Home() {
               김덕홍
             </p>
           </div>
-          {/* Desktop: 직함 라벨 + 김덕홍 (Figma 355:553 — "5" 마크 제거, 라벨 전체 노랑 60px, 이름 210px) */}
+          {/* Desktop: 직함 라벨 44px + 김덕홍 210px (제주특별자치도 확장에 맞춰 라벨 축소) */}
           <div className="hidden md:flex flex-col items-start gap-1 lg:gap-[10px] absolute left-4 sm:left-8 lg:left-[60px] bottom-[100px] sm:bottom-[110px] lg:bottom-[120px]">
             <div className="px-1 sm:px-3">
               <p
                 className="text-[#fcd100] font-bold whitespace-nowrap"
                 style={{
                   fontFamily: "Pretendard, sans-serif",
-                  fontSize: "clamp(28px, 4.17vw, 60px)",
+                  fontSize: "clamp(24px, 3.06vw, 44px)",
                   letterSpacing: "-0.02em",
                   lineHeight: "1.25",
                 }}
