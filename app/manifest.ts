@@ -4,10 +4,10 @@ import type { MetadataRoute } from "next";
 // Next가 /manifest.webmanifest 로 생성하고 <link rel="manifest"> 를 자동 주입.
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "김덕홍 · 조천읍 도의원 당선인",
+    name: "김덕홍 · 조천읍 도의원",
     short_name: "김덕홍",
     description:
-      "조천읍 도의원 당선인 김덕홍 — 말보다 실천, 조천을 바꾸겠습니다.",
+      "조천읍 도의원 김덕홍 — 말보다 실천, 조천을 바꾸겠습니다.",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

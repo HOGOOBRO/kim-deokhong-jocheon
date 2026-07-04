@@ -32,7 +32,7 @@ export default function Home() {
           <source media="(min-width: 768px)" srcSet={imgHero} />
           <img
             src={imgHeroMo}
-            alt="김덕홍 당선인"
+            alt="김덕홍 도의원"
             className="absolute inset-0 w-full h-full object-cover object-center md:object-[73%_center]"
           />
         </picture>
@@ -74,7 +74,7 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Mobile: 당선인 라벨 + 김덕홍 (Figma 355:553 — "5" 마크 제거, 라벨 전체 노랑) */}
+          {/* Mobile: 직함 라벨 + 김덕홍 (Figma 355:553 — "5" 마크 제거, 라벨 전체 노랑) */}
           <div className="md:hidden absolute left-4 bottom-[53px] flex flex-col items-start gap-1">
             <div className="px-[6px]">
               <p
@@ -86,7 +86,7 @@ export default function Home() {
                   lineHeight: "1.25",
                 }}
               >
-                조천읍 도의원 당선인
+                조천읍 도의원
               </p>
             </div>
             <p
@@ -101,7 +101,7 @@ export default function Home() {
               김덕홍
             </p>
           </div>
-          {/* Desktop: 당선인 라벨 + 김덕홍 (Figma 355:553 — "5" 마크 제거, 라벨 전체 노랑 60px, 이름 210px) */}
+          {/* Desktop: 직함 라벨 + 김덕홍 (Figma 355:553 — "5" 마크 제거, 라벨 전체 노랑 60px, 이름 210px) */}
           <div className="hidden md:flex flex-col items-start gap-1 lg:gap-[10px] absolute left-4 sm:left-8 lg:left-[60px] bottom-[100px] sm:bottom-[110px] lg:bottom-[120px]">
             <div className="px-1 sm:px-3">
               <p
@@ -113,7 +113,7 @@ export default function Home() {
                   lineHeight: "1.25",
                 }}
               >
-                조천읍 도의원 당선인
+                조천읍 도의원
               </p>
             </div>
             <p
@@ -360,7 +360,7 @@ export default function Home() {
                 className="leading-[1.6]"
                 style={{ fontFamily: "Pretendard, sans-serif" }}
               >
-                무소속 조천읍 도의원 당선인
+                무소속 조천읍 도의원
               </p>
             </div>
             <p
