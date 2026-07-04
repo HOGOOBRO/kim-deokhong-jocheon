@@ -6,7 +6,7 @@ const imgPolicy2 = "/images/policy2.png";
 const imgPolicy2Mo = "/images/policy2-mo.png";
 const imgPolicy3 = "/images/policy3.png";
 const imgPolicy3Mo = "/images/policy3-mo.png";
-const imgPolicy4 = "/images/policy4.png";
+const imgPolicy4 = "/images/policy4-pc.png"; // 원본 3컷 스트립(policy4.png)의 마지막 컷만 크롭한 PC용
 const imgPolicy4Mo = "/images/policy4.png";
 
 function Section01() {
@@ -121,8 +121,8 @@ const SECTIONS = [
   { img: imgPolicy1, imgMo: imgPolicy1, objClass: "object-center", content: <Section01 /> },
   { img: imgPolicy2, imgMo: imgPolicy2Mo, objClass: "object-center", content: <Section02 /> },
   { img: imgPolicy3, imgMo: imgPolicy3Mo, objClass: "object-center", content: <Section03 /> },
-  // Policy 4: mobile centered, desktop bottom-anchored (Figma 209:3351 — image bottom edge at section bottom)
-  { img: imgPolicy4, imgMo: imgPolicy4Mo, objClass: "object-center md:object-bottom", content: <Section04 /> },
+  // Policy 4: mobile은 3컷 스트립 전체, desktop은 마지막 컷 크롭본을 상단 고정(인물 머리 잘림 방지)
+  { img: imgPolicy4, imgMo: imgPolicy4Mo, objClass: "object-center md:object-top", content: <Section04 /> },
 ];
 
 export default function PolicySections() {
