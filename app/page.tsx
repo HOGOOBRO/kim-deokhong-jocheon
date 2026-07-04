@@ -367,7 +367,7 @@ export default function Home() {
               className="text-[12px] lg:text-[14px] leading-[1.6]"
               style={{ fontFamily: "Pretendard, sans-serif" }}
             >
-              © 2026 김덕홍 선거사무소.<br />
+              © 2026 김덕홍 의원실.<br />
               All rights reserved.
             </p>
           </div>
