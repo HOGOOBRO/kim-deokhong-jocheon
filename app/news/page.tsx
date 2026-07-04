@@ -28,7 +28,7 @@ export async function generateMetadata({
     page > 1
       ? `보도자료 (${page}페이지) — 제주특별자치도 조천읍 도의원 김덕홍`
       : "보도자료 — 제주특별자치도 조천읍 도의원 김덕홍";
-  const description = `제주특별자치도 조천읍 도의원 김덕홍 관련 언론보도 및 캠페인 소식 — 총 ${total}건`;
+  const description = `제주특별자치도 조천읍 도의원 김덕홍 관련 언론보도 및 의정 소식 — 총 ${total}건`;
 
   return {
     title,
@@ -102,7 +102,7 @@ export default async function NewsListPage({
           보도자료
         </h1>
         <p className="mt-3 md:mt-4 mb-0 text-[13px] md:text-[15px] font-semibold text-[#5a5a5a] tracking-[-0.01em]">
-          김덕홍 도의원 관련 언론보도 및 캠페인 소식 — 총{" "}
+          김덕홍 도의원 관련 언론보도 및 의정 소식 — 총{" "}
           <strong className="text-[#1a1a1a] font-bold">{articles.length}건</strong>
         </p>
       </div>
