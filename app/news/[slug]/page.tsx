@@ -167,7 +167,7 @@ export default async function NewsArticlePage({
         headline: article.title,
         datePublished: `${article.date}T09:00:00+09:00`,
         dateModified: `${article.date}T09:00:00+09:00`,
-        author: { "@type": "Organization", name: "김덕홍 캠페인" },
+        author: { "@type": "Organization", name: "김덕홍 의원실" },
         publisher: {
           "@type": "Organization",
           name: "제주특별자치도 조천읍 도의원 김덕홍",

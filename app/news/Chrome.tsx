@@ -7,8 +7,8 @@ export function SiteHeader() {
     <header className="sticky top-0 z-10 bg-white border-b border-[#eaeaea]">
       <div className="max-w-[1200px] mx-auto px-5 py-3 md:px-8 md:py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5 no-underline">
-          <span className="w-7 h-7 md:w-8 md:h-8 bg-[#FFD400] text-[#1a1a1a] rounded-full flex items-center justify-center font-bold text-[14px] md:text-[16px]">
-            5
+          <span className="w-7 h-7 md:w-8 md:h-8 bg-[#FFD400] text-[#1a1a1a] rounded-full flex items-center justify-center font-bold text-[10px] md:text-[11px] tracking-[-0.04em] leading-none">
+            조천
           </span>
           <span className="font-bold text-[15px] md:text-[17px] text-[#1a1a1a] tracking-[-0.025em]">
             김덕홍
@@ -38,8 +38,8 @@ export function SiteFooter() {
           </span>
         </div>
         <div className="text-[12px] md:text-[13px] leading-[1.65] text-white/55">
-          제주시 조천읍 · 캠페인 사무실
-          <br />© 2026 김덕홍 캠페인.
+          제주시 조천읍
+          <br />© 2026 김덕홍 의원실.
         </div>
       </div>
     </footer>
