@@ -222,7 +222,7 @@ export default function Home() {
       {/* Mobile (Figma 209:3317): quote + bottom CTA. Desktop (Figma 209:3385): CTA only. */}
       <section
         id="quote"
-        className="relative w-full overflow-hidden bg-black h-screen min-h-[640px] md:h-[800px] md:min-h-0"
+        className="relative w-full overflow-hidden bg-black h-screen min-h-[640px]"
       >
         {/* Mobile bg + 40% overlay */}
         <img
