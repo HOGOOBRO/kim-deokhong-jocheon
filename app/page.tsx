@@ -4,10 +4,13 @@
 import Link from "next/link";
 import { articlePath, getAllArticles, getRecentDistinct } from "@/app/data/news";
 
+// 현장 기록 2장은 기존 소스의 무표식 실사진으로 교체 (2026-08-12 Theo 지시).
+// 마누스 zip의 fieldwork·senior-center 사본은 각각 policy1.png·news/24-pc.jpg와
+// 동일 파일(md5 일치)이라 제거.
 const photos = {
   council: "/images/dukhong-council-session.jpg",
-  field: "/images/dukhong-community-fieldwork.png",
-  visit: "/images/dukhong-senior-center-visit.jpg",
+  sea: "/images/news/20-pc.jpg",
+  village: "/images/quote2-pc.png",
 };
 
 const SNS_LINKS = {
@@ -265,15 +268,18 @@ export default function Home() {
           </div>
           <div className="record-gallery" aria-label="현장 활동 사진">
             <figure>
-              <img src={photos.field} alt="제주 해안 마을에서 주민들과 활동하는 모습" />
-              <figcaption>장소 · 조천 해안 마을</figcaption>
+              <img
+                src={photos.sea}
+                alt="해안 포구에서 해녀들과 소라 선별 작업을 함께하는 김덕홍 의원"
+              />
+              <figcaption>현장 · 해녀 작업 포구</figcaption>
             </figure>
             <figure>
               <img
-                src={photos.visit}
-                alt="경로당을 방문해 주민들과 대화하는 김덕홍 의원"
+                src={photos.village}
+                alt="마을 마당에서 강아지들과 어울리는 김덕홍 의원"
               />
-              <figcaption>장소 · 조천읍 경로당</figcaption>
+              <figcaption>현장 · 마을의 반려가족</figcaption>
             </figure>
           </div>
           <div className="records-list">
