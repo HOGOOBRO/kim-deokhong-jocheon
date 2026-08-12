@@ -8,7 +8,9 @@ import { articlePath, getAllArticles, getRecentDistinct } from "@/app/data/news"
 // 마누스 zip의 fieldwork·senior-center 사본은 각각 policy1.png·news/24-pc.jpg와
 // 동일 파일(md5 일치)이라 제거.
 const photos = {
-  council: "/images/dukhong-council-session.jpg",
+  // 고화질본(원본 4268px는 docs/renewal/assets-original/ 보관, 웹용 1800px 사용).
+  // 기존 저해상 dukhong-council-session.jpg는 그대로 별도 보관.
+  council: "/images/dukhong-council-session-hq.jpg",
   sea: "/images/news/20-pc.jpg",
   village: "/images/quote2-pc.png",
 };
