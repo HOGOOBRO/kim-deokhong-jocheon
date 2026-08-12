@@ -148,15 +148,11 @@ body {
 .rn .hero-keyvisual figcaption { display: flex; align-items: baseline; gap: 12px; padding: 14px 2px 0; }
 .rn .hero-keyvisual figcaption strong { font-family: var(--serif); font-size: 21px; font-weight: 600; letter-spacing: -0.06em; }
 .rn .hero-keyvisual figcaption span { color: var(--ink-soft); font-size: 13px; letter-spacing: -0.02em; }
-.rn .scroll-callout { position: absolute; left: clamp(20px, 4vw, 64px); bottom: 32px; display: flex; align-items: center; gap: 10px; color: var(--ink-soft); font-size: 13px; letter-spacing: -0.01em; }
-.rn .scroll-callout span { display: block; width: 42px; height: 1px; background: var(--ink-soft); }
 
 .rn .statement, .rn .priorities, .rn .records, .rn .closing { padding: clamp(86px, 10vw, 158px) var(--page-x); }
 .rn .section-label { display: flex; align-items: center; gap: 10px; color: var(--ink-soft); }
 .rn .section-label span { color: var(--accent); }
 .rn .section-label::after { content: ""; width: 30px; height: 1px; background: var(--line-dark); }
-.rn .archive-note { margin: 12px 0 0; color: var(--ink-soft); font-size: 13.5px; letter-spacing: 0; }
-.rn .archive-note::before { content: ""; display: inline-block; width: 5px; height: 5px; margin: 0 7px 1px 0; background: var(--accent); }
 .rn .statement { background: var(--paper); border-top: 1px solid var(--line); }
 .rn .statement-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); align-items: start; margin-top: 68px; }
 .rn .statement-grid h2 { grid-column: 1 / span 7; }
@@ -175,7 +171,6 @@ body {
 .rn .manifesto { position: relative; min-height: 620px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: end; column-gap: clamp(16px, 2vw, 28px); padding: clamp(75px, 9vw, 138px) var(--page-x); background: var(--paper-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .rn .manifesto > div { grid-column: 2 / span 6; }
 .rn .manifesto h2 { max-width: 650px; margin: 17px 0 0; font-size: clamp(42px, 5.6vw, 86px); line-height: 1.1; }
-.rn .manifesto-note { color: var(--ink-soft); }
 .rn .manifesto-copy { grid-column: 9 / span 3; max-width: 300px; margin: 0 0 9px; color: var(--ink-soft); font-size: 16px; line-height: 1.82; letter-spacing: -0.04em; }
 
 .rn .priorities { background: var(--paper); }
@@ -183,16 +178,27 @@ body {
 .rn .priorities-title-row h2 { grid-column: 1 / span 7; }
 .rn .priorities-title-row p { grid-column: 9 / span 4; max-width: 360px; margin: 0 0 7px; color: var(--ink-soft); font-size: 15px; line-height: 1.8; letter-spacing: -0.04em; }
 .rn .priority-list { border-top: 1px solid var(--line-dark); }
-.rn .priority-item { display: grid; grid-template-columns: 70px 165px 1fr 34px; gap: 12px; align-items: start; padding: 27px 0; border-bottom: 1px solid var(--line); transition: padding 0.2s cubic-bezier(0.23, 1, 0.32, 1), background 0.2s ease; }
-.rn .priority-item:hover { padding-left: 12px; padding-right: 12px; background: var(--paper-soft); }
-.rn .priority-number { font-family: var(--mono); font-size: 12px; letter-spacing: 0.05em; }
-.rn .priority-label { font-size: 12.5px; letter-spacing: -0.01em; }
-.rn .priority-number { color: var(--accent); }
-.rn .priority-label { color: var(--ink-soft); }
+.rn .priority-item { border-bottom: 1px solid var(--line); }
+.rn .priority-item summary { display: grid; grid-template-columns: 70px 165px 1fr 34px; gap: 12px; align-items: start; padding: 27px 12px; cursor: pointer; list-style: none; transition: background 0.2s ease; }
+.rn .priority-item summary::-webkit-details-marker { display: none; }
+.rn .priority-item summary:hover, .rn .priority-item[open] summary { background: var(--paper-soft); }
+.rn .priority-number { color: var(--accent); font-family: var(--mono); font-size: 12px; letter-spacing: 0.05em; }
+.rn .priority-label { color: var(--ink-soft); font-size: 12.5px; letter-spacing: -0.01em; }
 .rn .priority-item h3 { margin: -4px 0 8px; font-size: 23px; line-height: 1.4; }
-.rn .priority-item p { max-width: 570px; margin: 0; color: var(--ink-soft); font-size: 14.5px; line-height: 1.7; letter-spacing: -0.03em; }
-.rn .priority-icon { justify-self: end; color: var(--ink-soft); transition: color 0.18s ease, transform 0.18s cubic-bezier(0.23, 1, 0.32, 1); }
-.rn .priority-item:hover .priority-icon { color: var(--accent); transform: translate(3px, -3px); }
+.rn .priority-item summary p { max-width: 570px; margin: 0; color: var(--ink-soft); font-size: 14.5px; line-height: 1.7; letter-spacing: -0.03em; }
+.rn .priority-icon { justify-self: end; color: var(--ink-soft); transition: color 0.18s ease, transform 0.22s cubic-bezier(0.23, 1, 0.32, 1); }
+.rn .priority-item summary:hover .priority-icon { color: var(--accent); }
+.rn .priority-item[open] .priority-icon { color: var(--accent); transform: rotate(180deg); }
+.rn .priority-detail { display: grid; grid-template-columns: 70px 165px 1fr 34px; gap: 12px; padding: 0 12px; background: var(--paper-soft); }
+.rn .priority-detail-inner { grid-column: 3; max-width: 640px; padding: 2px 0 34px; }
+.rn .priority-detail-heading { margin: 0 0 12px; color: var(--accent); font-family: var(--mono); font-size: 12px; letter-spacing: 0.05em; }
+.rn .priority-detail-inner ul { margin: 0; padding: 0; list-style: none; }
+.rn .priority-detail-inner > ul > li { position: relative; margin: 0 0 10px; padding-left: 16px; font-size: 15.5px; line-height: 1.65; letter-spacing: -0.03em; }
+.rn .priority-detail-inner > ul > li::before { content: ""; position: absolute; left: 0; top: 11px; width: 7px; height: 2px; background: var(--accent); }
+.rn .priority-detail-inner ul ul { margin-top: 6px; }
+.rn .priority-detail-inner ul ul li { position: relative; margin: 0 0 4px; padding-left: 13px; color: var(--ink-soft); font-size: 14px; line-height: 1.65; letter-spacing: -0.02em; }
+.rn .priority-detail-inner ul ul li::before { content: ""; position: absolute; left: 0; top: 10px; width: 4px; height: 1px; background: var(--line-dark); }
+.rn .priority-closing { margin: 18px 0 0; padding-top: 14px; border-top: 1px solid var(--line); font-size: 15.5px; font-weight: 700; line-height: 1.6; letter-spacing: -0.03em; }
 
 .rn .records { position: relative; background: #ebede7; }
 .rn .records-rail { display: flex; align-items: center; gap: 16px; margin: 0 0 70px; color: var(--ink-soft); font-size: 12.5px; letter-spacing: 0.02em; }
@@ -247,7 +253,6 @@ body {
   .rn .hero-keyvisual img { aspect-ratio: 1 / 1.02; object-position: center 36%; }
   .rn .hero-keyvisual figcaption { padding-top: 11px; }
   .rn .hero-keyvisual figcaption strong { font-size: 19px; }
-  .rn .scroll-callout { position: relative; left: 12px; bottom: auto; margin-top: 12px; }
   .rn .statement, .rn .priorities, .rn .records, .rn .closing { padding: 90px 20px; }
   .rn .statement-grid, .rn .priorities-title-row, .rn .records-title-row { grid-template-columns: 1fr; gap: 27px; margin-top: 42px; }
   .rn .statement-grid h2, .rn .statement-copy, .rn .priorities-title-row h2, .rn .priorities-title-row p, .rn .records-title-row h2, .rn .records-title-row p { grid-column: 1; }
@@ -264,12 +269,13 @@ body {
   .rn .manifesto-copy { grid-column: 1; max-width: 320px; font-size: 15px; }
   .rn .priorities-title-row { margin: 35px 0 42px; }
   .rn .priorities-title-row p { margin: 0; }
-  .rn .priority-item { grid-template-columns: 38px 1fr 28px; padding: 22px 0; }
-  .rn .priority-item:hover { padding-left: 0; padding-right: 0; }
+  .rn .priority-item summary { grid-template-columns: 38px 1fr 28px; padding: 22px 8px; }
   .rn .priority-label { grid-column: 2; }
-  .rn .priority-item > div { grid-column: 2; }
+  .rn .priority-item summary > div { grid-column: 2; }
   .rn .priority-item h3 { margin: 6px 0 7px; font-size: 20px; }
   .rn .priority-icon { grid-column: 3; grid-row: 1 / span 2; align-self: center; }
+  .rn .priority-detail { grid-template-columns: 38px 1fr 28px; padding: 0 8px; }
+  .rn .priority-detail-inner { grid-column: 2; padding-bottom: 28px; }
   .rn .records-rail { margin-bottom: 44px; }
   .rn .records-title-row { margin: 35px 0 42px; }
   .rn .record-gallery { grid-template-columns: 1fr; gap: 24px; margin-bottom: 45px; }

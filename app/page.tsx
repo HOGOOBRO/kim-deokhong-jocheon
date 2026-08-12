@@ -3,6 +3,7 @@
 // 구조·디자인은 리뉴얼 시안 기준. 활동 기록은 정적 예시 대신 실제 보도자료 연동.
 import Link from "next/link";
 import { articlePath, getAllArticles, getRecentDistinct } from "@/app/data/news";
+import { POLICIES } from "@/app/data/policies";
 
 // 현장 기록 2장은 기존 소스의 무표식 실사진으로 교체 (2026-08-12 Theo 지시).
 // 마누스 zip의 fieldwork·senior-center 사본은 각각 policy1.png·news/24-pc.jpg와
@@ -20,15 +21,16 @@ const SNS_LINKS = {
   facebook: "https://www.facebook.com/share/18VzrpoQnn/?mibextid=wwXIfr",
 };
 
-// 6개 의정 과제 — 명칭·설명 모두 원본 6대 정책 원문(제목·부제) 그대로, 분야 라벨만 리뉴얼 시안.
-const priorities: [string, string, string, string][] = [
-  ["01", "지역의 기반", "1차 산업 경쟁력 강화", "지역경제의 기반을 더욱 튼튼히"],
-  ["02", "지역의 활력", "체류형 관광 및 지역브랜드 강화", "머무는 관광도시 조천읍"],
-  ["03", "소통의 방식", "주민 참여형 소통 강화", "주민과 함께 현안 해결"],
-  ["04", "생활의 기준", "교통·안전·생활 인프라 확충", "더 안전하고 더 편리한 조천읍"],
-  ["05", "보전의 기준", "자연환경보전 및 관리 강화", "자연은 지키고, 미래 세대의 자산으로"],
-  ["06", "함께 사는 일", "맞춤형 보건·복지 서비스 확대", "모두가 함께 살아가는 따뜻한 조천읍"],
-];
+// 6개 의정 과제 — 명칭·요약·추진 과제 전부 원본 단일 소스(app/data/policies.ts).
+// 분야 라벨만 리뉴얼 시안.
+const priorityLabels: Record<number, string> = {
+  1: "지역의 기반",
+  2: "지역의 활력",
+  3: "소통의 방식",
+  4: "생활의 기준",
+  5: "보전의 기준",
+  6: "함께 사는 일",
+};
 
 const career: [string, string][] = [
   ["2026—", "제주특별자치도 조천읍\n도의원"],
@@ -54,6 +56,25 @@ function ArrowUpRight({ size, className }: { size: number; className?: string })
     >
       <path d="M7 7h10v10" />
       <path d="M7 17 17 7" />
+    </svg>
+  );
+}
+
+function ChevronDown({ size, className }: { size: number; className?: string }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" />
     </svg>
   );
 }
@@ -147,14 +168,10 @@ export default function Home() {
               </figcaption>
             </figure>
           </div>
-          <a className="scroll-callout" href="#about">
-            아래로 내려주세요 <span />
-          </a>
         </section>
 
         <section id="about" className="statement" aria-labelledby="statement-title">
           <SectionLabel number="01">소개</SectionLabel>
-          <p className="archive-note">지역: 조천읍 · 기록 연도: 2026년</p>
           <div className="statement-grid">
             <h2 id="statement-title">
               작은 불편도
@@ -163,16 +180,16 @@ export default function Home() {
               <br />
               의정활동<span className="accent-dot">.</span>
             </h2>
+            {/* 소개 카피는 원본 사이트 문장 그대로 (2026-08-12 Theo: 카피도 원본 우선) */}
             <div className="statement-copy">
               <p className="lead">
-                38년의 행정 경험은 주민 가까이에서 문제를 듣고, 해법을 함께 찾는
-                시간으로 쌓였습니다.
+                38년 공직 경험, 행정은 책상이 아니라 현장에서 배웠습니다.
               </p>
               <p>
-                절물자연휴양림과 한라산국립공원, 아라동과 조천읍까지. 현장을 직접
-                확인하고 관계 기관과 방법을 찾는 과정을 이어왔습니다. 의정활동의
-                출발점 역시 조천의 생활 현장입니다.
+                절물자연휴양림, 한라산국립공원, 아라동, 조천읍까지. 주민 가까이에서
+                듣고, 직접 해결해 왔습니다.
               </p>
+              <p>이제 그 경험을 조천의 변화로 이어가겠습니다.</p>
               <a href="#priorities" className="plain-link">
                 의정 과제 살펴보기 <ArrowDownRight size={17} />
               </a>
@@ -198,7 +215,6 @@ export default function Home() {
         <section className="manifesto" aria-labelledby="manifesto-title">
           <div>
             <p className="hero-kicker">의정활동의 원칙</p>
-            <p className="archive-note manifesto-note">지역: 조천읍 · 현장 중심</p>
             <h2 id="manifesto-title">
               조천의 일은,
               <br />
@@ -215,7 +231,6 @@ export default function Home() {
 
         <section id="priorities" className="priorities" aria-labelledby="priorities-title">
           <SectionLabel number="02">의정 과제</SectionLabel>
-          <p className="archive-note">기록 구분: 정책 과제 · 대상 지역: 조천읍</p>
           <div className="priorities-title-row">
             <h2 id="priorities-title">
               지금의 생활을
@@ -226,17 +241,42 @@ export default function Home() {
               필요한지, 우선순위를 두고 꾸준히 살피겠습니다.
             </p>
           </div>
+          {/* 클릭 시 원본 '자세히 보기' 상세(추진 과제)가 펼쳐지는 아코디언 */}
           <div className="priority-list">
-            {priorities.map(([number, label, title, description]) => (
-              <article className="priority-item" key={number}>
-                <span className="priority-number">{number}</span>
-                <span className="priority-label">분야 · {label}</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{description}</p>
+            {POLICIES.map((p) => (
+              <details className="priority-item" key={p.n}>
+                <summary>
+                  <span className="priority-number">{String(p.n).padStart(2, "0")}</span>
+                  <span className="priority-label">분야 · {priorityLabels[p.n]}</span>
+                  <div>
+                    <h3>{p.title}</h3>
+                    <p>{p.summary}</p>
+                  </div>
+                  <ChevronDown className="priority-icon" size={19} />
+                </summary>
+                <div className="priority-detail">
+                  <div className="priority-detail-inner">
+                    <p className="priority-detail-heading">추진 과제</p>
+                    <ul>
+                      {p.bullets.map((b) =>
+                        typeof b === "string" ? (
+                          <li key={b}>{b}</li>
+                        ) : (
+                          <li key={b.head}>
+                            {b.head}
+                            <ul>
+                              {b.sub.map((s) => (
+                                <li key={s}>{s}</li>
+                              ))}
+                            </ul>
+                          </li>
+                        )
+                      )}
+                    </ul>
+                    <p className="priority-closing">{p.closing}</p>
+                  </div>
                 </div>
-                <ArrowUpRight className="priority-icon" size={19} />
-              </article>
+              </details>
             ))}
           </div>
         </section>
@@ -247,7 +287,6 @@ export default function Home() {
             <i />
           </div>
           <SectionLabel number="03">현장 기록</SectionLabel>
-          <p className="archive-note">기록 구분: 현장 활동 · 갱신: 2026년</p>
           <div className="records-title-row">
             <h2 id="records-title">
               현장의 목소리를
@@ -292,7 +331,6 @@ export default function Home() {
 
         <section className="closing" aria-labelledby="closing-title">
           <SectionLabel number="04">조천에 드리는 말씀</SectionLabel>
-          <p className="archive-note">역할: 제주특별자치도 조천읍 도의원</p>
           <h2 id="closing-title">
             주민 가까이에서,
             <br />
