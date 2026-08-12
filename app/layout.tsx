@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
 const GA_MEASUREMENT_ID = "G-ETEGPL34NQ";
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-});
+// next/font(JetBrains Mono)는 제거함 — 빌드 시점에 Google Fonts를 받아오는데
+// 그 요청이 실패하면 배포 전체가 깨진다(2026-08-12 실제 실패). 현재 화면에서는
+// 쓰지 않고 캠페인 컴포넌트에만 var(--font-jetbrains-mono) 참조가 남아 있으며,
+// 미정의 시 monospace로 폴백된다. 재사용 시 CDN link 방식으로 되살릴 것.
 
 const SITE_URL = "https://deokhong.com";
 const SITE_TITLE = "제주특별자치도 조천읍 도의원 김덕홍 | 현장에서 듣고, 의정으로 답합니다";
@@ -96,7 +94,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={jetbrainsMono.variable}>
+    <html lang="ko">
       <head>
         <link
           rel="stylesheet"
