@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&display=swap" />
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html { background:#888; }
+  body { display:flex; justify-content:center; align-items:center; height:100vh; }
+  .og { width: 1200px; height: 630px; overflow: hidden; background: #fcfcf9;
+         font-family: Pretendard, sans-serif; display: grid; grid-template-columns: 1fr 468px; }
+  .left { padding: 62px 0 58px 68px; display: flex; flex-direction: column; justify-content: space-between; }
+  .mark { position: relative; display: block; width: 34px; height: 31px;
+          background: linear-gradient(90deg, #222522 0 43%, transparent 43% 57%, #222522 57%);
+          clip-path: polygon(0 0, 43% 0, 43% 22%, 100% 22%, 100% 100%, 57% 100%, 57% 78%, 0 78%); }
+  .brand { display: flex; align-items: center; gap: 12px; font-size: 17px; font-weight: 700; letter-spacing: -0.05em; color: #222522; }
+  .brand i { display: block; width: 18px; height: 1px; background: #d96f24; }
+  h1 { font-family: "Noto Serif KR", serif; font-weight: 600; font-size: 66px; line-height: 1.16;
+       letter-spacing: -0.075em; color: #222522; word-break: keep-all; }
+  h1 .dot { color: #d96f24; }
+  .name { display: flex; align-items: baseline; gap: 12px; }
+  .name strong { font-family: "Noto Serif KR", serif; font-size: 30px; font-weight: 600; letter-spacing: -0.06em; color: #222522; }
+  .name span { font-size: 16px; color: #5f645e; letter-spacing: -0.02em; }
+  .right { position: relative; }
+  .right img { width: 100%; height: 100%; object-fit: cover; object-position: center 38%; display: block; }
+</style>
+</head>
+<body>
+<div class="og">
+  <div class="left">
+    <div class="brand"><span class="mark"></span>김덕홍<i></i>제주특별자치도의회</div>
+    <h1>현장에서 듣고,<br />의정으로 답합니다<span class="dot">.</span></h1>
+    <div class="name">
+      <strong>김덕홍</strong>
+      <span>제주특별자치도 조천읍 도의원</span>
+    </div>
+  </div>
+  <div class="right"><img src="http://localhost:3000/images/dukhong-council-session-hq.jpg" alt="" /></div>
+</div>
+</body>
+</html>

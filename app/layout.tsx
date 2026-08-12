@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: "/images/hero.png",
-        width: 1681,
-        height: 936,
+        url: "/images/og-home.jpg",
+        width: 1200,
+        height: 630,
         alt: "제주특별자치도 조천읍 도의원 김덕홍",
       },
     ],
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/images/hero.png"],
+    images: ["/images/og-home.jpg"],
   },
 };
 
@@ -79,7 +79,7 @@ const jsonLd = {
       jobTitle: "제주특별자치도 조천읍 도의원",
       description: SITE_DESCRIPTION,
       url: SITE_URL,
-      image: `${SITE_URL}/images/hero.png`,
+      image: `${SITE_URL}/images/og-home.jpg`,
       address: {
         "@type": "PostalAddress",
         addressRegion: "제주특별자치도",
