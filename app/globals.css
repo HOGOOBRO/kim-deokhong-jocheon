@@ -123,9 +123,8 @@ body {
 .rn .site-header { position: sticky; top: 0; z-index: 30; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 74px; padding: 0 var(--page-x); border-bottom: 1px solid var(--line); background: rgba(252, 252, 249, 0.94); backdrop-filter: blur(14px); }
 .rn .wordmark { display: flex; align-items: center; gap: 8px; width: fit-content; font-size: 12px; font-weight: 700; letter-spacing: -0.06em; }
 .rn .wordmark i { display: inline-block; width: 15px; height: 1px; background: var(--accent); }
+/* ㄷㅎ 심볼: 엇갈린 먹색 블록 두 개 (파비콘과 동일, 귤빛 정사각 없음) */
 .rn .basalt-mark { position: relative; display: inline-block; width: 25px; height: 23px; flex: 0 0 25px; background: linear-gradient(90deg, var(--ink) 0 43%, transparent 43% 57%, var(--ink) 57%); clip-path: polygon(0 0, 43% 0, 43% 22%, 100% 22%, 100% 100%, 57% 100%, 57% 78%, 0 78%); }
-.rn .basalt-mark::before { content: ""; position: absolute; width: 6px; height: 6px; right: 0; top: 0; background: var(--accent); }
-.rn .basalt-mark i { position: absolute; display: block; width: 6px; height: 6px; left: 0; bottom: 0; background: var(--accent); }
 .rn .site-header nav { display: flex; align-items: center; gap: clamp(18px, 3vw, 44px); }
 .rn .site-header nav a, .rn .header-link { font-size: 12px; font-weight: 700; letter-spacing: -0.05em; transition: color 0.16s ease; }
 .rn .site-header nav a:hover { color: var(--accent); }
@@ -133,11 +132,13 @@ body {
 .rn .header-link:hover { color: var(--accent); border-color: var(--accent); }
 
 .rn .hero { position: relative; min-height: calc(100vh - 74px); padding: 29px var(--page-x) 36px; background: var(--paper); }
-.rn .hero-topline { display: flex; justify-content: space-between; gap: 20px; padding-bottom: 26px; border-bottom: 1px solid var(--line); color: var(--ink-soft); font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; }
+/* 헤더 보더와 이중선이 되지 않도록 자체 보더 없음 */
+.rn .hero-topline { display: flex; justify-content: space-between; gap: 20px; color: var(--ink-soft); font-size: 12.5px; letter-spacing: 0; }
 .rn .hero-topline p { margin: 0; }
 .rn .hero-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); align-items: end; max-width: 1440px; min-height: calc(100vh - 180px); margin: 0 auto; }
 .rn .hero-intro { grid-column: 1 / span 7; align-self: center; max-width: 730px; margin: 0; padding: 20px 0 82px; }
-.rn .hero-kicker, .rn .section-label { margin: 0; color: var(--accent); font-family: var(--mono); font-size: 13px; letter-spacing: 0.07em; }
+/* 한글 라벨은 Pretendard(모노는 한글 글립이 없어 자간이 벌어짐), 숫자만 모노 */
+.rn .hero-kicker, .rn .section-label { margin: 0; color: var(--accent); font-size: 13px; font-weight: 600; letter-spacing: 0.01em; }
 .rn h1, .rn h2, .rn h3 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.085em; }
 .rn .hero h1 { margin: 18px 0 22px; font-size: clamp(46px, 6.8vw, 106px); line-height: 1.08; white-space: nowrap; }
 .rn .hero h1 > span { display: block; }
@@ -151,7 +152,7 @@ body {
 
 .rn .statement, .rn .priorities, .rn .records, .rn .closing { padding: clamp(86px, 10vw, 158px) var(--page-x); }
 .rn .section-label { display: flex; align-items: center; gap: 10px; color: var(--ink-soft); }
-.rn .section-label span { color: var(--accent); }
+.rn .section-label span { color: var(--accent); font-family: var(--mono); letter-spacing: 0.05em; }
 .rn .section-label::after { content: ""; width: 30px; height: 1px; background: var(--line-dark); }
 .rn .statement { background: var(--paper); border-top: 1px solid var(--line); }
 .rn .statement-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); align-items: start; margin-top: 68px; }
@@ -244,7 +245,7 @@ body {
   .rn .wordmark { font-size: 11px; }
   .rn .header-link { font-size: 11px; }
   .rn .hero { min-height: auto; padding: 22px 20px 28px; }
-  .rn .hero-topline { padding-bottom: 18px; font-size: 10px; }
+  .rn .hero-topline { font-size: 11.5px; }
   .rn .hero-grid { display: block; min-height: 0; margin: 0; }
   .rn .hero-intro { margin: 0; padding: 58px 0 32px 12px; }
   .rn .hero h1 { margin: 15px 0 17px; font-size: clamp(39px, 10.8vw, 50px); line-height: 1.12; white-space: normal; }

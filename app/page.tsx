@@ -120,9 +120,7 @@ export default function Home() {
     <div className="rn">
       <header className="site-header">
         <a href="#top" className="wordmark" aria-label="덕홍닷컴 첫 화면">
-          <span className="basalt-mark" aria-hidden="true">
-            <i />
-          </span>
+          <span className="basalt-mark" aria-hidden="true" />
           <span>김덕홍</span>
           <i />
           <span>제주특별자치도의회</span>
@@ -345,9 +343,7 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="footer-brand">
-          <span className="basalt-mark" aria-hidden="true">
-            <i />
-          </span>
+          <span className="basalt-mark" aria-hidden="true" />
           <div>
             <strong>김덕홍</strong>
             <span>제주특별자치도 조천읍 도의원</span>
