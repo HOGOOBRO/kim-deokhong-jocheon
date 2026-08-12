@@ -33,7 +33,7 @@ const priorityLabels: Record<number, string> = {
 };
 
 const career: [string, string][] = [
-  ["2026—", "제주특별자치도 조천읍\n도의원"],
+  ["2026", "제주특별자치도 조천읍\n도의원"],
   ["2020", "조천읍장"],
   ["2018", "아라동장"],
   ["2012", "한라산국립공원\n탐방안내소관리팀장"],
@@ -141,11 +141,11 @@ export default function Home() {
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-topline">
             <p>제주특별자치도의회</p>
-            <p>조천읍 · 2026년</p>
+            <p>조천읍, 2026년</p>
           </div>
           <div className="hero-grid">
             <div className="hero-intro">
-              <p className="hero-kicker">현장 기록 · 의정 활동</p>
+              <p className="hero-kicker">조천읍 의정활동 기록</p>
               <h1 id="hero-title">
                 <span>현장에서 듣고,</span>
                 <span>
@@ -247,7 +247,7 @@ export default function Home() {
               <details className="priority-item" key={p.n}>
                 <summary>
                   <span className="priority-number">{String(p.n).padStart(2, "0")}</span>
-                  <span className="priority-label">분야 · {priorityLabels[p.n]}</span>
+                  <span className="priority-label">{priorityLabels[p.n]}</span>
                   <div>
                     <h3>{p.title}</h3>
                     <p>{p.summary}</p>
@@ -301,14 +301,14 @@ export default function Home() {
                 src={photos.sea}
                 alt="해안 포구에서 해녀들과 소라 선별 작업을 함께하는 김덕홍 의원"
               />
-              <figcaption>현장 · 해녀 작업 포구</figcaption>
+              <figcaption>해녀 작업 포구에서</figcaption>
             </figure>
             <figure>
               <img
                 src={photos.village}
                 alt="마을 마당에서 강아지들과 어울리는 김덕홍 의원"
               />
-              <figcaption>현장 · 마을의 반려가족</figcaption>
+              <figcaption>마을의 반려가족과</figcaption>
             </figure>
           </div>
           <div className="records-list">
