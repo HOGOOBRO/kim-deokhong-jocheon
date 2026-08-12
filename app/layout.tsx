@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Mono, JetBrains_Mono, Noto_Serif_KR } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
@@ -11,10 +11,23 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "600", "700"],
 });
 
+// 리뉴얼 홈 타이포 — 헤드라인 세리프(공적 기록물 무게), 메타데이터 모노(기록성).
+const notoSerifKr = Noto_Serif_KR({
+  variable: "--font-noto-serif-kr",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+});
+
 const SITE_URL = "https://deokhong.com";
-const SITE_TITLE = "제주특별자치도 조천읍 도의원 김덕홍 — 말보다 실천, 조천을 바꾸겠습니다";
+const SITE_TITLE = "제주특별자치도 조천읍 도의원 김덕홍 | 현장에서 듣고, 의정으로 답합니다";
 const SITE_DESCRIPTION =
-  "38년 공직 경험, 현장에서 배운 행정으로 조천읍을 확 바꾸겠습니다. 제주특별자치도 조천읍 도의원 김덕홍.";
+  "38년 공직 경험으로 조천의 현장을 직접 살피고, 의정으로 답합니다. 제주특별자치도 조천읍 도의원 김덕홍의 의정활동과 보도 기록.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -24,7 +37,7 @@ export const metadata: Metadata = {
     canonical: "/",
     types: {
       "application/rss+xml": [
-        { url: "/feed.xml", title: "제주특별자치도 조천읍 도의원 김덕홍 — 소식" },
+        { url: "/feed.xml", title: "제주특별자치도 조천읍 도의원 김덕홍 소식" },
       ],
     },
   },
@@ -96,7 +109,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={jetbrainsMono.variable}>
+    <html
+      lang="ko"
+      className={`${jetbrainsMono.variable} ${notoSerifKr.variable} ${plexMono.variable}`}
+    >
       <head>
         <link
           rel="stylesheet"

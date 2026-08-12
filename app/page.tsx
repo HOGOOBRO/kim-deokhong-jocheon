@@ -1,392 +1,339 @@
-import React from "react";
-import PolicySections from "./components/PolicySections";
-import RecentNews from "./components/RecentNews";
-import ScrollHint from "./components/ScrollHint";
-import SnapScroll from "./components/SnapScroll";
-import EventBottomSheet from "./components/EventBottomSheet";
-import SchedulePopup from "./components/SchedulePopup";
-import PolicyCarousel from "./components/PolicyCarousel";
+// 리뉴얼 홈 — 화이트 에디토리얼 현장 기록 (디자인 원칙: docs/renewal/ideas.md)
+// 캠페인 구조에서 의정활동 기록 사이트로 전환. 사실관계·정책 명칭은 원본 기준,
+// 구조·디자인은 리뉴얼 시안 기준. 활동 기록은 정적 예시 대신 실제 보도자료 연동.
+import Link from "next/link";
+import { articlePath, getAllArticles, getRecentDistinct } from "@/app/data/news";
 
-const imgHero = "/images/hero.png";
-const imgHeroMo = "/images/hero-mo.png";
-const imgQuoteMo = "/images/quote2-mo.png";
-const imgQuotePc = "/images/quote2-pc.png";
+const photos = {
+  council: "/images/dukhong-council-session.jpg",
+  field: "/images/dukhong-community-fieldwork.png",
+  visit: "/images/dukhong-senior-center-visit.jpg",
+};
+
 const SNS_LINKS = {
   instagram: "https://www.instagram.com/dukhong4jocheon?igsh=bm1lanYyeXd2OXJs",
   facebook: "https://www.facebook.com/share/18VzrpoQnn/?mibextid=wwXIfr",
 };
 
-export default function Home() {
+// 6개 의정 과제 — 명칭은 원본 6대 정책 원문 그대로, 분야 라벨·설명은 리뉴얼 시안.
+const priorities: [string, string, string, string][] = [
+  ["01", "지역의 기반", "1차 산업 경쟁력 강화", "로컬푸드와 청년 정착, 농·어업의 지속 가능성을 살핍니다."],
+  ["02", "지역의 활력", "체류형 관광 및 지역브랜드 강화", "자연과 역사, 마을의 고유함이 지역의 힘이 되게 합니다."],
+  ["03", "소통의 방식", "주민 참여형 소통 강화", "현장의 의견이 검토와 실행으로 이어지는 통로를 넓힙니다."],
+  ["04", "생활의 기준", "교통·안전·생활 인프라 확충", "주차·보행·대중교통 등 일상의 불편을 우선 살핍니다."],
+  ["05", "보전의 기준", "자연환경보전 및 관리 강화", "곶자왈과 습지, 수질과 마을의 삶을 함께 지켜갑니다."],
+  ["06", "함께 사는 일", "맞춤형 보건·복지 서비스 확대", "어르신부터 아이와 청년까지, 모두의 일상을 살핍니다."],
+];
+
+const career: [string, string][] = [
+  ["2026—", "제주특별자치도 조천읍\n도의원"],
+  ["2020", "조천읍장"],
+  ["2018", "아라동장"],
+  ["2012", "한라산국립공원\n탐방안내소관리팀장"],
+  ["2009", "절물자연휴양림\n관리생태소장"],
+];
+
+function ArrowUpRight({ size, className }: { size: number; className?: string }) {
   return (
-    <main className="w-full bg-white">
-      <SnapScroll />
-      <EventBottomSheet />
-      <SchedulePopup />
-      {/* ── 01 Hero / Key Visual ── */}
-      <section
-        id="hero"
-        className="relative w-full h-screen min-h-[640px] overflow-hidden bg-black snap-section"
-      >
-        {/* Image: mobile vs desktop (Figma uses different photos) */}
-        <picture>
-          <source media="(min-width: 768px)" srcSet={imgHero} />
-          <img
-            src={imgHeroMo}
-            alt="김덕홍 도의원"
-            className="absolute inset-0 w-full h-full object-cover object-center md:object-[73%_center]"
-          />
-        </picture>
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M7 7h10v10" />
+      <path d="M7 17 17 7" />
+    </svg>
+  );
+}
 
-        {/* Mobile: top gradient (Figma 192:2329 — 266px black/50 fade) */}
-        <div className="md:hidden absolute inset-x-0 top-0 h-[266px] bg-gradient-to-b from-black/50 to-transparent pointer-events-none" />
-        {/* Desktop: left-side gradient */}
-        <div className="hidden md:block absolute inset-y-0 left-0 w-[72.5%] bg-gradient-to-r from-black/60 to-transparent pointer-events-none" />
+function ArrowDownRight({ size }: { size: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M7 7l10 10" />
+      <path d="M17 7v10H7" />
+    </svg>
+  );
+}
 
-        {/* 1440 content container */}
-        <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[1440px]">
-          {/* Mobile caption — centered 32px (Figma 194:2836) */}
-          <div className="md:hidden absolute top-[40px] left-1/2 -translate-x-1/2 w-[min(358px,calc(100%-32px))] text-center">
-            <p
-              className="text-white font-bold opacity-90"
-              style={{
-                fontFamily: "Pretendard, sans-serif",
-                fontSize: "32px",
-                letterSpacing: "-0.02em",
-                lineHeight: "1.6",
-              }}
-            >
-              말보다 실천 !<br />
-              조천읍을 <span className="text-[#fcd100]">확</span> 바꾸겠습니다.
-            </p>
+function SectionLabel({ number, children }: { number: string; children: string }) {
+  return (
+    <p className="section-label">
+      <span>{number}</span>
+      {children}
+    </p>
+  );
+}
+
+function fmt(iso: string): string {
+  const [y, m, d] = iso.split("-");
+  return `${y}.${m}.${d}`;
+}
+
+export default function Home() {
+  const all = getAllArticles();
+  const recent = getRecentDistinct(3);
+
+  return (
+    <div className="rn">
+      <header className="site-header">
+        <a href="#top" className="wordmark" aria-label="덕홍닷컴 첫 화면">
+          <span className="basalt-mark" aria-hidden="true">
+            <i />
+          </span>
+          <span>김덕홍</span>
+          <i />
+          <span>제주특별자치도의회</span>
+        </a>
+        <nav aria-label="주요 메뉴">
+          <a href="#about">소개</a>
+          <a href="#priorities">의정 과제</a>
+          <a href="#records">활동 기록</a>
+        </nav>
+        <Link href="/news" className="header-link">
+          보도자료 <ArrowUpRight size={15} />
+        </Link>
+      </header>
+
+      <main id="top">
+        <section className="hero" aria-labelledby="hero-title">
+          <div className="hero-topline">
+            <p>제주특별자치도의회</p>
+            <p>조천읍 · 2026년</p>
           </div>
-          {/* Desktop caption — left-aligned 60px */}
-          <div className="hidden md:block absolute left-4 sm:left-8 lg:left-[60px] top-5 sm:top-8 lg:top-[40px] w-[min(648px,90%)]">
-            <p
-              className="text-white font-bold leading-[1.6] opacity-90"
-              style={{
-                fontFamily: "Pretendard, sans-serif",
-                fontSize: "clamp(24px, 4.17vw, 60px)",
-                letterSpacing: "-0.02em",
-              }}
-            >
-              말보다 실천 !<br />
-              조천읍을 <span className="text-[#fcd100]">확</span> 바꾸겠습니다.
-            </p>
-          </div>
-
-          {/* Mobile: 직함 라벨 24px + 김덕홍 114px (제주특별자치도 확장에 맞춰 축소) */}
-          <div className="md:hidden absolute left-4 bottom-[53px] flex flex-col items-start gap-1">
-            <div className="px-[6px]">
-              <p
-                className="text-[#fcd100] font-bold whitespace-nowrap"
-                style={{
-                  fontFamily: "Pretendard, sans-serif",
-                  fontSize: "24px",
-                  letterSpacing: "-0.02em",
-                  lineHeight: "1.25",
-                }}
-              >
-                제주특별자치도 조천읍 도의원
+          <div className="hero-grid">
+            <div className="hero-intro">
+              <p className="hero-kicker">현장 기록 · 의정 활동</p>
+              <h1 id="hero-title">
+                <span>현장에서 듣고,</span>
+                <span>
+                  의정으로 답합니다<span className="accent-dot">.</span>
+                </span>
+              </h1>
+              <p className="hero-deck">
+                조천의 오늘을 직접 살피고, 주민의 일상이 조금 더 나아지는 방향을 함께
+                찾겠습니다.
               </p>
             </div>
-            <p
-              className="text-white font-bold whitespace-nowrap"
-              style={{
-                fontFamily: "Pretendard, sans-serif",
-                fontSize: "min(114px, 30.4vw)",
-                letterSpacing: "-0.05em",
-                lineHeight: "normal",
-              }}
-            >
-              김덕홍
-            </p>
-          </div>
-          {/* Desktop: 직함 라벨 44px + 김덕홍 210px (제주특별자치도 확장에 맞춰 라벨 축소) */}
-          <div className="hidden md:flex flex-col items-start gap-1 lg:gap-[10px] absolute left-4 sm:left-8 lg:left-[60px] bottom-[100px] sm:bottom-[110px] lg:bottom-[120px]">
-            <div className="px-1 sm:px-3">
-              <p
-                className="text-[#fcd100] font-bold whitespace-nowrap"
-                style={{
-                  fontFamily: "Pretendard, sans-serif",
-                  fontSize: "clamp(24px, 3.06vw, 44px)",
-                  letterSpacing: "-0.02em",
-                  lineHeight: "1.25",
-                }}
-              >
-                제주특별자치도 조천읍 도의원
-              </p>
-            </div>
-            <p
-              className="text-white font-bold whitespace-nowrap"
-              style={{
-                fontFamily: "Pretendard, sans-serif",
-                fontSize: "clamp(64px, 14.58vw, 210px)",
-                letterSpacing: "-0.05em",
-                lineHeight: "normal",
-              }}
-            >
-              김덕홍
-            </p>
-          </div>
-
-          {/* Scroll hint at bottom center */}
-          <ScrollHint />
-        </div>
-      </section>
-
-      {/* ── 01.5 Policy carousel (키비주얼 바로 아래) ── */}
-      <PolicyCarousel />
-
-      {/* ── 02 Overview (yellow full-bleed bg) ── */}
-      <section id="overview" className="bg-[#ffcd00] w-full overflow-hidden">
-        <div className="max-w-[1440px] mx-auto flex flex-col gap-8 md:gap-[60px] lg:gap-[180px] items-stretch md:items-center pt-[24px] md:pt-[40px] lg:pt-[56px] pb-8 md:pb-0">
-          {/* Text — mobile 24px no-explicit-breaks, desktop 40px with intentional breaks */}
-          <div className="px-4 md:px-8 lg:px-0 py-6 md:py-0">
-            {/* Mobile: single sentences per paragraph, let browser wrap */}
-            <div
-              className="md:hidden font-bold text-[#1c1c1c] w-full text-[24px] flex flex-col gap-[1.6em]"
-              style={{
-                fontFamily: "Pretendard, sans-serif",
-                letterSpacing: "-0.02em",
-                lineHeight: "1.6",
-              }}
-            >
-              <p>38년 공직 경험, 행정은 책상이 아니라 현장에서 배웠습니다.</p>
-              <p>절물자연휴양림, 한라산국립공원, 아라동, 조천읍까지. 주민 가까이에서 듣고, 직접 해결해 왔습니다.</p>
-              <p>이제 그 경험을 조천의 변화로 이어가겠습니다.</p>
-            </div>
-            {/* Desktop: explicit line breaks for visual layout */}
-            <p
-              className="hidden md:block font-bold text-[#1c1c1c] w-full lg:w-[870px] whitespace-pre-wrap text-[clamp(18px,2.8vw,40px)]"
-              style={{
-                fontFamily: "Pretendard, sans-serif",
-                letterSpacing: "-0.02em",
-                lineHeight: "1.6",
-              }}
-            >
-              38년 공직 경험,{"\n"}
-              행정은 책상이 아니라 현장에서 배웠습니다.{"\n"}
-              {"​"}{"\n"}
-              절물자연휴양림, 한라산국립공원, 아라동, 조천읍까지.{"\n"}
-              주민 가까이에서 듣고, 직접 해결해 왔습니다.{"\n"}
-              {"​"}{"\n"}
-              이제 그 경험을 조천의 변화로 이어가겠습니다.
-            </p>
-          </div>
-
-          {/* Mobile divider (Figma 205:3261 — within content x:16, w:358) */}
-          <div className="md:hidden h-[1px] mx-4 bg-[#1c1c1c]/20" />
-
-          {/* Career timeline */}
-          <div className="w-full">
-            {/* Desktop divider */}
-            <div className="hidden md:block h-[1px] bg-[#1c1c1c]/20 mx-[10px]" />
-            {/* Mobile: vertical timeline w/ vertical dividers. Desktop: horizontal row */}
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between px-10 md:px-8 lg:px-[60px] py-0 md:py-[24px] lg:py-[32px] gap-6 md:gap-2 lg:gap-4">
-              {[
-                { year: "2026", title: "조천읍 제주도의원" },
-                { year: "2020", title: "조천읍장" },
-                { year: "2018", title: "아라동장" },
-                { year: "2012", title: "한라산국립공원 탐방안내소관리팀장" },
-                { year: "2009", title: "절물자연휴양림 관리생태소장" },
-              ].map((item, i) => (
-                <React.Fragment key={item.year}>
-                  <div className="flex flex-col items-start text-[#1c1c1c] min-w-0">
-                    <p
-                      className="font-bold leading-[1.5] w-full text-[16px] md:text-[12px] lg:text-[14px]"
-                      style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.01em" }}
-                    >
-                      {item.title}
-                    </p>
-                    <p
-                      className="font-bold text-[32px] lg:text-[40px] leading-[1.25] w-full"
-                      style={{
-                        fontFamily: "var(--font-jetbrains-mono), monospace",
-                        letterSpacing: "-0.02em",
-                      }}
-                    >
-                      {item.year}
-                    </p>
-                  </div>
-                  {i < 4 && (
-                    <div className="w-px h-[32px] md:h-[60px] lg:h-[71px] bg-[#1c1c1c]/30 shrink-0" />
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 03 Quote ── */}
-      {/* Mobile (Figma 209:3317): quote + bottom CTA. Desktop (Figma 209:3385): CTA only. */}
-      <section
-        id="quote"
-        className="relative w-full overflow-hidden bg-black h-screen min-h-[640px]"
-      >
-        {/* Mobile bg + 40% overlay */}
-        <img
-          src={imgQuoteMo}
-          alt=""
-          aria-hidden
-          className="md:hidden absolute inset-0 w-full h-full object-cover object-center"
-        />
-        <div className="md:hidden absolute inset-0 bg-black/40" />
-        {/* Desktop bg at 80% opacity (Figma 209:3386 — image opacity-80, bg-black behind) */}
-        <img
-          src={imgQuotePc}
-          alt=""
-          aria-hidden
-          className="hidden md:block absolute inset-0 w-full h-full object-cover object-center opacity-80"
-        />
-
-        <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-[1440px]">
-          {/* Mobile: quote text top (Figma 209:3319) */}
-          <div className="md:hidden absolute left-4 top-[32px] w-[358px] flex flex-col gap-6 text-white">
-            <div className="flex flex-col gap-3 font-bold">
-              <p
-                className="text-[24px]"
-                style={{
-                  fontFamily: "Pretendard, sans-serif",
-                  letterSpacing: "-0.02em",
-                  lineHeight: "1.3",
-                }}
-              >
-                &ldquo;같이 일할 땐 힘들었죠&rdquo;
-              </p>
-              <div
-                className="opacity-70 text-[14px]"
-                style={{
-                  fontFamily: "Pretendard, sans-serif",
-                  letterSpacing: "-0.02em",
-                  lineHeight: "1.6",
-                }}
-              >
-                <p>적당히 넘어가는 걸 못 봤습니다.</p>
-                <p>현장은 직접 봐야 했고, 주민 이야기도 끝까지 들어야 했습니다.</p>
-                <p>그래도, 결과는 늘 만들어내던 사람이었어요.</p>
+            <figure className="hero-keyvisual">
+              <div className="keyvisual-meta">
+                <span>대표 의정활동 사진</span>
+                <span>2026년 · 조천읍</span>
               </div>
+              <img
+                src={photos.council}
+                alt="제주특별자치도의회 회의에서 발언하는 김덕홍 의원"
+              />
+              <figcaption>
+                <span>제주특별자치도 조천읍 도의원</span>
+                <strong>김덕홍</strong>
+              </figcaption>
+            </figure>
+          </div>
+          <a className="scroll-callout" href="#about">
+            아래로 보기 <span />
+          </a>
+        </section>
+
+        <section id="about" className="statement" aria-labelledby="statement-title">
+          <SectionLabel number="01">소개</SectionLabel>
+          <p className="archive-note">지역: 조천읍 · 기록 연도: 2026년</p>
+          <div className="statement-grid">
+            <h2 id="statement-title">
+              작은 불편도
+              <br />
+              그냥 지나치지 않는
+              <br />
+              의정활동<span className="accent-dot">.</span>
+            </h2>
+            <div className="statement-copy">
+              <p className="lead">
+                38년의 행정 경험은 주민 가까이에서 문제를 듣고, 해법을 함께 찾는
+                시간으로 쌓였습니다.
+              </p>
+              <p>
+                절물자연휴양림과 한라산국립공원, 아라동과 조천읍까지. 현장을 직접
+                확인하고 관계 기관과 방법을 찾는 과정을 이어왔습니다. 의정활동의
+                출발점 역시 조천의 생활 현장입니다.
+              </p>
+              <a href="#priorities" className="plain-link">
+                의정 과제 살펴보기 <ArrowDownRight size={17} />
+              </a>
             </div>
-            <p
-              className="text-[12px] font-bold"
-              style={{
-                fontFamily: "Pretendard, sans-serif",
-                letterSpacing: "-0.02em",
-                lineHeight: "1.5",
-              }}
-            >
-              - 前 제주시 공직 동료
+          </div>
+          <div className="career-strip" aria-label="주요 공직 경력">
+            {career.map(([year, title]) => (
+              <div key={year}>
+                <small>{year}</small>
+                <strong>
+                  {title.split("\n").map((line, i) => (
+                    <span key={line}>
+                      {i > 0 && <br />}
+                      {line}
+                    </span>
+                  ))}
+                </strong>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="manifesto" aria-labelledby="manifesto-title">
+          <p className="vertical-meta">현장에서 의정으로</p>
+          <div>
+            <p className="hero-kicker">의정활동의 원칙</p>
+            <p className="archive-note manifesto-note">지역: 조천읍 · 현장 중심</p>
+            <h2 id="manifesto-title">
+              조천의 일은,
+              <br />
+              조천의 자리에서
+              <br />
+              풀어가겠습니다<span className="accent-dot">.</span>
+            </h2>
+          </div>
+          <p className="manifesto-copy">
+            큰 변화보다 먼저 일상의 불편을 살핍니다. 주민이 직접 느끼는 문제를 정책의
+            언어로 바꾸고, 실행의 과정을 투명하게 기록하겠습니다.
+          </p>
+        </section>
+
+        <section id="priorities" className="priorities" aria-labelledby="priorities-title">
+          <div className="section-head">
+            <SectionLabel number="02">의정 과제</SectionLabel>
+            <p>
+              조천의 현장에서
+              <br />
+              계속 살피는 과제
             </p>
           </div>
-
-          {/* Mobile: bottom CTA (Figma 213:3417 — x:49 y:666 w:292 h:130 → 48px from section bottom) */}
-          <div className="md:hidden absolute left-1/2 -translate-x-1/2 bottom-[48px] w-[292px] flex flex-col gap-4 items-center">
-            <p
-              className="text-white font-bold text-[32px] text-center"
-              style={{
-                fontFamily: "Pretendard, sans-serif",
-                letterSpacing: "-0.02em",
-                lineHeight: "1.25",
-              }}
-            >
-              덕홍과 읍민이
-              <br />
-              함께 그리는 조천의 미래
+          <p className="archive-note">기록 구분: 정책 과제 · 대상 지역: 조천읍</p>
+          <div className="priorities-title-row">
+            <h2 id="priorities-title">
+              지금의 생활을
+              <br />더 단단하게.
+            </h2>
+            <p>
+              분야별 과제는 서로 연결되어 있습니다. 지역의 일상에 어떤 변화가
+              필요한지, 우선순위를 두고 꾸준히 살피겠습니다.
             </p>
-            <a
-              href="#policies"
-              className="bg-white text-[#1c1c1c] text-[12px] font-bold px-3 py-2 rounded-full hover:bg-[#ddd] transition-colors whitespace-nowrap"
-              style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.01em" }}
-            >
-              자세히보기
-            </a>
           </div>
+          <div className="priority-list">
+            {priorities.map(([number, label, title, description]) => (
+              <article className="priority-item" key={number}>
+                <span className="priority-number">{number}</span>
+                <span className="priority-label">분야 · {label}</span>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </div>
+                <ArrowUpRight className="priority-icon" size={19} />
+              </article>
+            ))}
+          </div>
+        </section>
 
-          {/* Desktop: centered CTA (Figma 209:3387 — top:50%+161 w:760) */}
-          <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] flex-col gap-6 items-center"
-            style={{ top: "calc(50% + 161px)" }}
-          >
-            <p
-              className="text-white font-bold text-center whitespace-nowrap"
-              style={{
-                fontFamily: "Pretendard, sans-serif",
-                fontSize: "clamp(40px, 5vw, 72px)",
-                letterSpacing: "-0.02em",
-                lineHeight: "1.25",
-              }}
-            >
-              덕홍과 읍민이
+        <section id="records" className="records" aria-labelledby="records-title">
+          <div className="records-rail" aria-hidden="true">
+            <span>활동 기록</span>
+            <i />
+          </div>
+          <SectionLabel number="03">현장 기록</SectionLabel>
+          <p className="archive-note">기록 구분: 현장 활동 · 갱신: 2026년</p>
+          <div className="records-title-row">
+            <h2 id="records-title">
+              현장의 목소리를
               <br />
-              함께 그리는 조천의 미래
-            </p>
-            <a
-              href="#policies"
-              className="bg-white text-[#1c1c1c] text-[16px] px-6 py-3 rounded-full hover:bg-[#ddd] transition-colors whitespace-nowrap"
-              style={{ fontFamily: "Pretendard, sans-serif", letterSpacing: "-0.01em" }}
-            >
-              자세히보기
-            </a>
+              남깁니다<span className="accent-dot">.</span>
+            </h2>
+            <p>의정활동의 과정과 현장에서 들은 이야기를 차곡차곡 기록하겠습니다.</p>
+          </div>
+          <div className="record-gallery" aria-label="현장 활동 사진">
+            <figure>
+              <img src={photos.field} alt="제주 해안 마을에서 주민들과 활동하는 모습" />
+              <figcaption>장소 · 조천 해안 마을</figcaption>
+            </figure>
+            <figure>
+              <img
+                src={photos.visit}
+                alt="경로당을 방문해 주민들과 대화하는 김덕홍 의원"
+              />
+              <figcaption>장소 · 조천읍 경로당</figcaption>
+            </figure>
+          </div>
+          <div className="records-list">
+            {recent.map((a, i) => (
+              <Link className="record-item" key={a.id} href={articlePath(a)}>
+                <span className="record-index">{String(i + 1).padStart(2, "0")}</span>
+                <div className="record-type">
+                  <span>{a.category}</span>
+                  <time dateTime={a.date}>{fmt(a.date)}</time>
+                </div>
+                <h3>{a.title}</h3>
+                <ArrowUpRight className="record-arrow" size={19} />
+              </Link>
+            ))}
+          </div>
+          <Link href="/news" className="records-more">
+            보도자료 전체 {all.length}건 보기 <ArrowUpRight size={15} />
+          </Link>
+        </section>
+
+        <section className="closing" aria-labelledby="closing-title">
+          <SectionLabel number="04">조천에 드리는 말씀</SectionLabel>
+          <p className="archive-note">역할: 제주특별자치도 조천읍 도의원</p>
+          <h2 id="closing-title">
+            주민 가까이에서,
+            <br />
+            책임 있게 답하겠습니다.
+          </h2>
+          <p className="closing-copy">말보다 실천으로, 조천읍의 변화를 만들겠습니다.</p>
+          <a href="#top" className="closing-link">
+            첫 화면으로 <ArrowUpRight size={18} />
+          </a>
+        </section>
+      </main>
+
+      <footer className="site-footer">
+        <div className="footer-brand">
+          <span className="basalt-mark" aria-hidden="true">
+            <i />
+          </span>
+          <div>
+            <strong>김덕홍</strong>
+            <span>제주특별자치도 조천읍 도의원</span>
           </div>
         </div>
-      </section>
-
-      {/* ── 04 Policy Sections (full-bleed sticky scroll snap) ── */}
-      <div id="policies">
-        <PolicySections />
-      </div>
-
-      {/* ── 05 최근 보도자료 (구 인스타 섹션 자리) ── */}
-      <RecentNews />
-
-      {/* ── 06 Footer (full-bleed bg) ── */}
-      <footer id="footer" className="bg-[#f7f7f7] w-full">
-        <div className="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-start justify-between px-4 sm:px-8 lg:px-[60px] py-[60px] lg:py-[80px] gap-8 sm:gap-4">
-          <div className="flex flex-col gap-[12px] lg:gap-[15px] text-[#1c1c1c] w-full sm:w-auto lg:w-[764px]">
-            <p
-              className="text-[14px] lg:text-[16px] leading-[1.6]"
-              style={{ fontFamily: "Pretendard, sans-serif" }}
-            >
-              말보다 실천으로,<br />
-              조천읍의 변화를 만들겠습니다.
-            </p>
-            <div className="flex flex-wrap gap-2 items-center text-[14px] lg:text-[16px]">
-              <p
-                className="font-bold leading-[2.4]"
-                style={{ fontFamily: "Pretendard, sans-serif" }}
-              >
-                김덕홍
-              </p>
-              <p
-                className="leading-[1.6]"
-                style={{ fontFamily: "Pretendard, sans-serif" }}
-              >
-                제주특별자치도 조천읍 도의원
-              </p>
-            </div>
-            <p
-              className="text-[12px] lg:text-[14px] leading-[1.6]"
-              style={{ fontFamily: "Pretendard, sans-serif" }}
-            >
-              © 2026 김덕홍 의원실.<br />
-              All rights reserved.
-            </p>
-          </div>
-
-          {/* Social icons — IG + FB only */}
-          <div className="flex gap-4 items-start">
+        <p>현장에서 듣고, 의정으로 답합니다.</p>
+        <div className="footer-side">
+          <div className="footer-sns">
             <a
               href={SNS_LINKS.instagram}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="인스타그램으로 이동"
-              className="bg-[#555] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#333] transition-colors"
             >
               <svg
-                width="20"
-                height="20"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="white"
+                stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -402,21 +349,15 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="페이스북으로 이동"
-              className="bg-[#555] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#333] transition-colors"
             >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="white"
-                aria-hidden="true"
-              >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M13.5 21v-7.5h2.55l.38-2.95H13.5V8.7c0-.85.24-1.43 1.45-1.43h1.55V4.63c-.27-.04-1.19-.12-2.27-.12-2.24 0-3.78 1.37-3.78 3.88v2.16H7.9v2.95h2.55V21h3.05z" />
               </svg>
             </a>
           </div>
+          <small>© 2026 김덕홍 의원실. All rights reserved.</small>
         </div>
       </footer>
-    </main>
+    </div>
   );
 }

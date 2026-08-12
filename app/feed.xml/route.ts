@@ -37,7 +37,7 @@ export function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <title>제주특별자치도 조천읍 도의원 김덕홍 — 소식</title>
+    <title>제주특별자치도 조천읍 도의원 김덕홍 소식</title>
     <link>${SITE_URL}/news</link>
     <atom:link href="${FEED_URL}" rel="self" type="application/rss+xml" />
     <description>제주특별자치도 조천읍 도의원 김덕홍의 보도자료·언론보도 최신 소식</description>
