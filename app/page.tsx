@@ -148,7 +148,7 @@ export default function Home() {
             </figure>
           </div>
           <a className="scroll-callout" href="#about">
-            아래로 보기 <span />
+            아래로 내려주세요 <span />
           </a>
         </section>
 
@@ -196,7 +196,6 @@ export default function Home() {
         </section>
 
         <section className="manifesto" aria-labelledby="manifesto-title">
-          <p className="vertical-meta">현장에서 의정으로</p>
           <div>
             <p className="hero-kicker">의정활동의 원칙</p>
             <p className="archive-note manifesto-note">지역: 조천읍 · 현장 중심</p>
@@ -215,14 +214,7 @@ export default function Home() {
         </section>
 
         <section id="priorities" className="priorities" aria-labelledby="priorities-title">
-          <div className="section-head">
-            <SectionLabel number="02">의정 과제</SectionLabel>
-            <p>
-              조천의 현장에서
-              <br />
-              계속 살피는 과제
-            </p>
-          </div>
+          <SectionLabel number="02">의정 과제</SectionLabel>
           <p className="archive-note">기록 구분: 정책 과제 · 대상 지역: 조천읍</p>
           <div className="priorities-title-row">
             <h2 id="priorities-title">
