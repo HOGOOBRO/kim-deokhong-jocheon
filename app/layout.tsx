@@ -12,9 +12,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const SITE_URL = "https://deokhong.com";
-const SITE_TITLE = "제주특별자치도 조천읍 도의원 김덕홍 — 말보다 실천, 조천을 바꾸겠습니다";
+const SITE_TITLE = "제주특별자치도 조천읍 도의원 김덕홍 | 현장에서 듣고, 의정으로 답합니다";
 const SITE_DESCRIPTION =
-  "38년 공직 경험, 현장에서 배운 행정으로 조천읍을 확 바꾸겠습니다. 제주특별자치도 조천읍 도의원 김덕홍.";
+  "38년 공직 경험으로 조천의 현장을 직접 살피고, 의정으로 답합니다. 제주특별자치도 조천읍 도의원 김덕홍의 의정활동과 보도 기록.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: "/",
     types: {
       "application/rss+xml": [
-        { url: "/feed.xml", title: "제주특별자치도 조천읍 도의원 김덕홍 — 소식" },
+        { url: "/feed.xml", title: "제주특별자치도 조천읍 도의원 김덕홍 소식" },
       ],
     },
   },
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: "/images/hero.png",
-        width: 1681,
-        height: 936,
+        url: "/images/og-home.jpg",
+        width: 1200,
+        height: 630,
         alt: "제주특별자치도 조천읍 도의원 김덕홍",
       },
     ],
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/images/hero.png"],
+    images: ["/images/og-home.jpg"],
   },
 };
 
@@ -79,7 +79,7 @@ const jsonLd = {
       jobTitle: "제주특별자치도 조천읍 도의원",
       description: SITE_DESCRIPTION,
       url: SITE_URL,
-      image: `${SITE_URL}/images/hero.png`,
+      image: `${SITE_URL}/images/og-home.jpg`,
       address: {
         "@type": "PostalAddress",
         addressRegion: "제주특별자치도",
@@ -101,6 +101,13 @@ export default function RootLayout({
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+        />
+        {/* 리뉴얼 홈 타이포 — 한글 세리프(next/font는 한글 서브셋 미제공이라 CDN 사용) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+KR:wght@500;600;700&display=swap"
         />
       </head>
       <body>
