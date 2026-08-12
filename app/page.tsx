@@ -135,17 +135,13 @@ export default function Home() {
               </p>
             </div>
             <figure className="hero-keyvisual">
-              <div className="keyvisual-meta">
-                <span>대표 의정활동 사진</span>
-                <span>2026년 · 조천읍</span>
-              </div>
               <img
                 src={photos.council}
                 alt="제주특별자치도의회 회의에서 발언하는 김덕홍 의원"
               />
               <figcaption>
-                <span>제주특별자치도 조천읍 도의원</span>
                 <strong>김덕홍</strong>
+                <span>제주특별자치도 조천읍 도의원</span>
               </figcaption>
             </figure>
           </div>

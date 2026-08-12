@@ -144,13 +144,11 @@ body {
 .rn .hero h1 > span { display: block; }
 .rn .accent-dot { color: var(--accent); }
 .rn .hero-deck { max-width: 365px; margin: 0; color: var(--ink-soft); font-size: 15px; line-height: 1.75; letter-spacing: -0.05em; }
-.rn .hero-keyvisual { grid-column: 8 / span 5; position: relative; width: 100%; max-width: 555px; margin: 0 0 34px auto; border: 1px solid var(--ink); background: var(--paper); }
-.rn .hero-keyvisual::before { content: ""; position: absolute; z-index: 2; top: -8px; right: -8px; width: 48%; height: 8px; background: var(--accent); }
-.rn .hero-keyvisual img { display: block; width: 100%; aspect-ratio: 1 / 1.08; object-fit: cover; object-position: center 42%; border: 8px solid var(--paper); }
-.rn .keyvisual-meta { position: absolute; z-index: 3; top: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; gap: 10px; color: white; font-family: var(--mono); font-size: 8px; letter-spacing: 0.07em; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.65); }
-.rn .hero-keyvisual figcaption { position: absolute; z-index: 3; left: 25px; bottom: 23px; display: flex; flex-direction: column; color: white; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75); }
-.rn .hero-keyvisual figcaption span { font-family: var(--mono); font-size: 8px; letter-spacing: 0.06em; }
-.rn .hero-keyvisual figcaption strong { margin-top: 5px; font-family: var(--serif); font-size: clamp(26px, 3vw, 44px); letter-spacing: -0.1em; }
+.rn .hero-keyvisual { grid-column: 8 / span 5; width: 100%; max-width: 555px; margin: 0 0 34px auto; }
+.rn .hero-keyvisual img { display: block; width: 100%; aspect-ratio: 1 / 1.08; object-fit: cover; object-position: center 42%; }
+.rn .hero-keyvisual figcaption { display: flex; align-items: baseline; gap: 12px; padding: 14px 2px 0; }
+.rn .hero-keyvisual figcaption strong { font-family: var(--serif); font-size: 21px; font-weight: 600; letter-spacing: -0.06em; }
+.rn .hero-keyvisual figcaption span { color: var(--ink-soft); font-size: 13px; letter-spacing: -0.02em; }
 .rn .scroll-callout { position: absolute; left: clamp(20px, 4vw, 64px); bottom: 32px; display: flex; align-items: center; gap: 10px; color: var(--ink-soft); font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; }
 .rn .scroll-callout span { display: block; width: 42px; height: 1px; background: var(--ink-soft); }
 
@@ -251,10 +249,9 @@ body {
   .rn .hero h1 { margin: 15px 0 17px; font-size: clamp(39px, 10.8vw, 50px); line-height: 1.12; white-space: normal; }
   .rn .hero-deck { max-width: 285px; font-size: 13px; }
   .rn .hero-keyvisual { width: calc(100% - 12px); max-width: none; margin: 0 0 0 12px; }
-  .rn .hero-keyvisual img { aspect-ratio: 1 / 1.02; border-width: 5px; object-position: center 36%; }
-  .rn .keyvisual-meta { top: 12px; left: 12px; right: 12px; font-size: 6.5px; }
-  .rn .hero-keyvisual figcaption { left: 17px; bottom: 15px; }
-  .rn .hero-keyvisual figcaption strong { font-size: 30px; }
+  .rn .hero-keyvisual img { aspect-ratio: 1 / 1.02; object-position: center 36%; }
+  .rn .hero-keyvisual figcaption { padding-top: 11px; }
+  .rn .hero-keyvisual figcaption strong { font-size: 19px; }
   .rn .scroll-callout { position: relative; left: 12px; bottom: auto; margin-top: 12px; }
   .rn .statement, .rn .priorities, .rn .records, .rn .closing { padding: 90px 20px; }
   .rn .statement-grid, .rn .priorities-title-row, .rn .records-title-row { grid-template-columns: 1fr; gap: 27px; margin-top: 42px; }
