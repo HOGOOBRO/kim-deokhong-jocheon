@@ -101,7 +101,6 @@ body {
 .rn {
   --paper: #fcfcf9;
   --paper-soft: #f4f4f0;
-  --paper-warm: #f3efe8;
   --ink: #222522;
   --ink-soft: #5f645e;
   --line: #d9dad3;
@@ -170,10 +169,6 @@ body {
 .rn .career-strip small { color: var(--accent); font-family: var(--mono); font-size: 14px; letter-spacing: 0.04em; }
 .rn .career-strip strong { font-size: 15px; line-height: 1.55; letter-spacing: -0.03em; }
 
-.rn .manifesto { position: relative; min-height: 620px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: end; column-gap: clamp(16px, 2vw, 28px); padding: clamp(75px, 9vw, 138px) var(--page-x); background: var(--paper-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.rn .manifesto > div { grid-column: 2 / span 6; }
-.rn .manifesto h2 { max-width: 650px; margin: 17px 0 0; font-size: clamp(42px, 5.6vw, 86px); line-height: 1.1; }
-.rn .manifesto-copy { grid-column: 9 / span 3; max-width: 300px; margin: 0 0 9px; color: var(--ink-soft); font-size: 16px; line-height: 1.82; letter-spacing: -0.04em; }
 
 .rn .priorities { background: var(--paper); }
 .rn .priorities-title-row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 28px); margin: 54px 0 56px; align-items: end; }
@@ -265,10 +260,6 @@ body {
   .rn .career-strip > div { min-height: 94px; padding: 13px 10px; border-top: 1px solid var(--line); }
   .rn .career-strip > div:first-child { border-top: 0; }
   .rn .career-strip > div:nth-child(3), .rn .career-strip > div:nth-child(5) { padding-left: 0; border-left: 0; }
-  .rn .manifesto { min-height: 535px; grid-template-columns: 1fr; gap: 18px; padding: 78px 20px; }
-  .rn .manifesto > div { grid-column: 1; }
-  .rn .manifesto h2 { font-size: clamp(39px, 10.8vw, 57px); }
-  .rn .manifesto-copy { grid-column: 1; max-width: 320px; font-size: 15px; }
   .rn .priorities-title-row { margin: 35px 0 42px; }
   .rn .priorities-title-row p { margin: 0; }
   .rn .priority-item summary { grid-template-columns: 38px 1fr 28px; padding: 22px 8px; }

@@ -210,23 +210,6 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="manifesto" aria-labelledby="manifesto-title">
-          <div>
-            <p className="hero-kicker">의정활동의 원칙</p>
-            <h2 id="manifesto-title">
-              조천의 일은,
-              <br />
-              조천의 자리에서
-              <br />
-              풀어가겠습니다<span className="accent-dot">.</span>
-            </h2>
-          </div>
-          <p className="manifesto-copy">
-            큰 변화보다 먼저 일상의 불편을 살핍니다. 주민이 직접 느끼는 문제를 정책의
-            언어로 바꾸고, 실행의 과정을 투명하게 기록하겠습니다.
-          </p>
-        </section>
-
         <section id="priorities" className="priorities" aria-labelledby="priorities-title">
           <SectionLabel number="02">의정 과제</SectionLabel>
           <div className="priorities-title-row">
