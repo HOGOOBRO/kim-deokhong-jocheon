@@ -28,8 +28,8 @@ export interface Article {
 
 export const NEWS: Article[] = [
   // ── 8월 지역 행사 참석 3건 (뉴스N제주 2026-08-12 보도) ──
-  // 원문에 현장 사진이 없어(공식 인물사진 206x277뿐) 인물사진 기반 키비주얼을 히어로로 사용.
-  // 행사 현장 사진 확보되면 25/26/27-pc.jpg, -mo.jpg 만 교체하면 됨.
+  // 원문에 현장 사진이 없어 사이트 키비주얼(dukhong-council-session-hq.jpg, OG 이미지와 같은 사진)을
+  // 히어로 규격으로 잘라 씀. 행사 현장 사진 확보되면 25/26/27-pc.jpg, -mo.jpg 만 교체하면 됨.
   {
     id: 25,
     slug: "construction-industry-roundtable",
@@ -42,7 +42,7 @@ export const NEWS: Article[] = [
     sourceUrl: "https://www.newsnjeju.com/news/articleView.html?idxno=296099",
     heroPc: "/images/news/25-pc.jpg",
     heroMo: "/images/news/25-mo.jpg",
-    heroAlt: "김덕홍 제주특별자치도의회 의원",
+    heroAlt: "제주도의회에서 발언하는 김덕홍 의원",
     hasHero: true,
     body: [
       {
@@ -80,7 +80,7 @@ export const NEWS: Article[] = [
     sourceUrl: "https://www.newsnjeju.com/news/articleView.html?idxno=296098",
     heroPc: "/images/news/26-pc.jpg",
     heroMo: "/images/news/26-mo.jpg",
-    heroAlt: "김덕홍 제주특별자치도의회 의원",
+    heroAlt: "제주도의회에서 발언하는 김덕홍 의원",
     hasHero: true,
     body: [
       {
@@ -122,7 +122,7 @@ export const NEWS: Article[] = [
     sourceUrl: "https://www.newsnjeju.com/news/articleView.html?idxno=296097",
     heroPc: "/images/news/27-pc.jpg",
     heroMo: "/images/news/27-mo.jpg",
-    heroAlt: "김덕홍 제주특별자치도의회 의원",
+    heroAlt: "제주도의회에서 발언하는 김덕홍 의원",
     hasHero: true,
     body: [
       {
