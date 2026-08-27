@@ -96,6 +96,17 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
+        {/* 첫 화면 제목 세리프는 자가 호스팅 서브셋을 미리 받는다.
+            CDN 폰트는 CSS 70KB를 받아 해석한 뒤 폰트 조각을 다시 받는 구조라
+            그 사이 제목이 대체 고딕으로 그려졌다가 세리프로 바뀌는 게 보인다.
+            글자 파일은 scripts/build-hero-font.sh로 생성. */}
+        <link
+          rel="preload"
+          href="/fonts/noto-serif-kr-hero-600.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
